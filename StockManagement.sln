@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagement", "StockManagement\StockManagement.csproj", "{F25D3DF1-87C0-4EA3-9451-56A8FC56545F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagementTest", "StockManagementTest\StockManagementTest.csproj", "{C25A3724-AF46-423D-8FFF-A404E0BD86F6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F25D3DF1-87C0-4EA3-9451-56A8FC56545F} = {F25D3DF1-87C0-4EA3-9451-56A8FC56545F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F25D3DF1-87C0-4EA3-9451-56A8FC56545F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25D3DF1-87C0-4EA3-9451-56A8FC56545F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25D3DF1-87C0-4EA3-9451-56A8FC56545F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25D3DF1-87C0-4EA3-9451-56A8FC56545F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C25A3724-AF46-423D-8FFF-A404E0BD86F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C25A3724-AF46-423D-8FFF-A404E0BD86F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C25A3724-AF46-423D-8FFF-A404E0BD86F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C25A3724-AF46-423D-8FFF-A404E0BD86F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02D59FF2-851D-40B1-8D73-9CE971797579}
+	EndGlobalSection
+EndGlobal

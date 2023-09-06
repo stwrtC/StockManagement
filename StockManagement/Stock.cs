@@ -7,26 +7,21 @@ using System.Threading.Tasks;
 
 namespace StockManagement
 {
-    public class Stock
+    public abstract class Stock
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string ItemType { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
+        public int? Id { get; }
+        public string? Name { get; set; }
+        public int Quantity { get; set; } = 0;
+        public decimal? Price { get; set; }
 
-        private static int UUID = 0;
-        public Stock(string name, string itemType, int stockAmount, decimal price) { 
+        private static int UUID = 1;
+        public Stock(string name, int stockAmount, decimal price)
+        {
             Name = name;
-            ItemType = itemType;
             Quantity = stockAmount;
             Price = price;
-
             Id = UUID++;
-        
         }
-
-
 
 
 

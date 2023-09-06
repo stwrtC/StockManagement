@@ -1,93 +1,155 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StockManagement
+﻿namespace StockManagement
 {
-    internal class CRUD_Stock
+    public class CRUD_Stock
     {
-        public static void AddStock(List<Stock> stocks)
+        public static GPURepository gpuRepository = new GPURepository();
+        public static LaptopRepository laptopRepository = new LaptopRepository();
+        
+        
+
+        // Create
+        public static void AddLaptop()
+        {
+
+            Console.WriteLine("Input Name");
+            string? name = Console.ReadLine();
+            Console.WriteLine("Input Stock Quantity");
+            int quantity = int.Parse(Console.ReadLine());
+            Console.WriteLine("Input Price");
+            decimal price = decimal.Parse(Console.ReadLine()) + 'm';
+            Console.WriteLine("Input screen size in inches");
+            decimal screen = decimal.Parse(Console.ReadLine()) + 'm';
+            Console.WriteLine("Input RAM in GB");
+            int ram = int.Parse(Console.ReadLine());
+            Console.WriteLine("Input storage size in GB");
+            int storage = int.Parse(Console.ReadLine());
+
+            Laptop newLaptop = new Laptop(name, quantity, price, screen, ram, storage);
+            var x = laptopRepository.Add(newLaptop);
+            Console.WriteLine($"Laptop {x.Name} has been added with an ID of {x.Id}.");
+
+        }
+        public static void AddGPU()
         {
             Console.WriteLine("Input Name");
+            string? name = Console.ReadLine();
+            Console.WriteLine("Input Stock Quantity");
+            int quantity = int.Parse(Console.ReadLine());
+            Console.WriteLine("Input Price");
+            decimal price = decimal.Parse(Console.ReadLine()) + 'm';
+            Console.WriteLine("Input VRAM in GB");
+            int vram = int.Parse(Console.ReadLine());
+            Console.WriteLine("Input cuda cores");
+            int cuda = int.Parse(Console.ReadLine());
+
+            GPU newGPU = new GPU(name, quantity, price, vram, cuda);
+            var x = gpuRepository.Add(newGPU);
+            Console.WriteLine($"GPU {x.Name} has been added with an ID of {x.Id}.");
+
+        }
+
+        // Read
+        public static void ViewStock()
+        {
+            foreach (Laptop x in laptopRepository.GetAll())
+            {
+                Console.WriteLine($"ID: {x.Id}, Type: {nameof(Laptop)}, Name: {x.Name}, Ram: {x.Ram}GB, Storage: {x.Storage}GB, Screen Size: {x.ScreenSize}, Price: {x.Price}, Quantity: {x.Quantity}");
+            }
+            foreach (GPU y in gpuRepository.GetAll())
+            {
+                Console.WriteLine($"ID: {y.Id}, Type: {nameof(GPU)}, Name: {y.Name}, VRam: {y.Vram}GB, Cuda: {y.Cuda}, Price: {y.Price}, Quantity: {y.Quantity}");
+            }
+
+
+        }
+
+        public static void GetGPU()
+        {
+            Console.WriteLine("Please input the ID of the stock you would like to view");
+            int id = int.Parse(Console.ReadLine());
+            var item = gpuRepository.GetById(id);
+            Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
+        }
+        public static void GetLaptop()
+        {
+            Console.WriteLine("Please input the ID of the stock you would like to view");
+            int id = int.Parse(Console.ReadLine());
+            var item = laptopRepository.GetById( id);
+            Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
+
+        }
+
+        //Update
+        public static void UpdateGPU()
+        {
+            Console.WriteLine("Please input the ID of the stock you would like to update");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Input new value when prompted, leave input blank to keep original value.");
+            Console.WriteLine("Input Name");
             string name = Console.ReadLine();
-            Console.WriteLine("Input Item Type");
-            string type = Console.ReadLine();
             Console.WriteLine("Input Stock Quantity");
             int quantity = int.Parse(Console.ReadLine());
             Console.WriteLine("Input Price");
             decimal price = decimal.Parse(Console.ReadLine());
+            Console.WriteLine("Input VRAM in GB");
+            int vram = int.Parse(Console.ReadLine());
+            Console.WriteLine("Input cuda cores");
+            int cuda = int.Parse(Console.ReadLine());
 
-            Stock newStock = new Stock(name, type, quantity, price);
-            stocks.Add(newStock);
-            Console.WriteLine($"Stock {newStock.Name} has been added with an ID of {newStock.Id}.");
+            GPU newGPU = new GPU(name, quantity, price, vram, cuda);
+            var item = gpuRepository.Update( id, newGPU);
+            Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
+
+
         }
-
-        public static void ViewStock(List<Stock> stocks)
+        public static void UpdateLaptop()
         {
-            foreach (Stock stock in stocks)
-            {
-                Console.WriteLine($"ID: {stock.Id}, ProductName: {stock.Name}, ProductType: {stock.ItemType}," +
-                    $" Quantity: {stock.Quantity}, Price: {stock.Price}");
-            }
-        }
-
-        public static void DeleteStock(List<Stock> stocks)
-        {
-            ViewStock(stocks);
-            Console.WriteLine("Please input the ID of the stock you would like to remove");
-            int id = int.Parse(Console.ReadLine());
-            foreach (Stock stock in stocks)
-            {
-                if (stock.Id.Equals(id))
-                {
-                    stocks.RemoveAt(stocks.IndexOf(stock));
-                    Console.WriteLine("Successfully removed item");
-                    ViewStock(stocks);
-                    break;
-                }
-            }
-        }
-
-        public static void UpdateStock(List<Stock> stocks)
-        {
-            ViewStock(stocks);
             Console.WriteLine("Please input the ID of the stock you would like to update");
             int id = int.Parse(Console.ReadLine());
-            foreach (Stock stock in stocks)
-            {
-                if (stock.Id.Equals(id))
-                {
-                    Console.WriteLine($"ID: {stock.Id}, ProductName: {stock.Name}, ProductType: {stock.ItemType}," +
-                                        $" Quantity: {stock.Quantity}, Price: {stock.Price}");
+            Console.WriteLine("Please input the ID of the stock you would like to update");
+            Console.WriteLine("Input Name");
+            string name = Console.ReadLine();
+            Console.WriteLine("Input Stock Quantity");
+            int quantity = int.Parse(Console.ReadLine());
+            Console.WriteLine("Input Price");
+            decimal price = decimal.Parse(Console.ReadLine()) + 'm';
+            Console.WriteLine("Input screen size in inches");
+            decimal screen = decimal.Parse(Console.ReadLine()) + 'm';
+            Console.WriteLine("Input RAM in GB");
+            int ram = int.Parse(Console.ReadLine());
+            Console.WriteLine("Input storage size in GB");
+            int storage = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Input new value when prompted, leave input blank to keep original value.");
-                    Console.WriteLine("Input Name");
-                    string name = Console.ReadLine();
-                    if(name != null) { stock.Name = name; }
-                    Console.WriteLine("Input Item Type");
-                    string type = Console.ReadLine();
-                    if (type != null) { stock.ItemType = type; }
-                    Console.WriteLine("Input Stock Quantity");
-                    string quantity = Console.ReadLine();
-                    if (quantity != null) { stock.Quantity = int.Parse(quantity); }
-                    Console.WriteLine("Input Price");
-                    string price = Console.ReadLine();
-                    if (price != null) { stock.Price = int.Parse(price); }
-
-                    Console.WriteLine($"ID: {stock.Id}, ProductName: {stock.Name}, ProductType: {stock.ItemType}," +
-                    $" Quantity: {stock.Quantity}, Price: {stock.Price}");
-
-
-
-                    break;
-                }
-            }
-
+            Laptop newLaptop = new Laptop(name, quantity, price, screen, ram, storage);
+            var item = laptopRepository.Update( id, newLaptop);
+            Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
 
         }
+
+
+        //Delete
+        public static void DeleteLaptop()
+        {
+            Console.WriteLine("Please input the ID of the stock you would like to remove");
+            int? id = int.Parse(Console.ReadLine());
+            if(id == null)
+            {
+                DeleteLaptop();
+            }
+
+            laptopRepository.Delete(id);
+        }
+        public static void DeleteGPU()
+        {
+            Console.WriteLine("Please input the ID of the stock you would like to remove");
+            int? id = int.Parse(Console.ReadLine());
+            if (id == null)
+            {
+                DeleteGPU();
+            }
+            gpuRepository.Delete(id);
+        }
+
 
     }
 }

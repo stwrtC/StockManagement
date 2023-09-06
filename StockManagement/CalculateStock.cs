@@ -8,12 +8,27 @@ namespace StockManagement
 {
     public class CalculateStock
     {
-        public int CalcLaptop(List<Stock> stocks)
+        public int CalcLaptop(List<Laptop> laptops)
         {
             int TotalStock = 0;
-            foreach(Stock st in stocks)
+
+            foreach (Stock st in laptops)
             {
-                if (st.ItemType.Equals("Laptop"))
+                if (st is Laptop)
+                {
+                    TotalStock += st.Quantity;
+
+                }
+            }
+            return TotalStock;
+        }
+
+        public int CalcGPU(List<GPU> gpus)
+        {
+            int TotalStock = 0;
+            foreach (Stock st in gpus)
+            {
+                if (st is GPU)
                 {
                     TotalStock += st.Quantity;
                 }
@@ -21,37 +36,21 @@ namespace StockManagement
             return TotalStock;
         }
 
-        public int CalcGPU(List<Stock> stocks)
+        public decimal? LaptopValue(List<Laptop> laptops)
         {
-            int TotalStock = 0;
-            foreach (Stock st in stocks)
+            decimal? totalValue = 0;
+            foreach (Stock st in laptops)
             {
-                if (st.ItemType.Equals("GPU"))
-                {
-                    TotalStock += st.Quantity;
-                }
-            }
-            return TotalStock;
-        }
-
-        public decimal LaptopValue(List<Stock> stocks)
-        {
-            decimal totalValue = 0;
-            foreach (Stock st in stocks)
-            {
-                if (st.ItemType.Equals("Laptop"))
-                {
-                    totalValue += st.Price;
-                }
+                totalValue += st.Price;
             }
             return totalValue;
         }
-        public decimal GPUValue(List<Stock> stocks)
+        public decimal? GPUValue(List<GPU> gpus)
         {
-            decimal totalValue = 0;
-            foreach (Stock st in stocks)
+            decimal? totalValue = 0;
+            foreach (Stock st in gpus)
             {
-                if (st.ItemType.Equals("GPU"))
+                if (st is GPU)
                 {
                     totalValue += st.Price;
                 }
@@ -64,8 +63,8 @@ namespace StockManagement
         {
             switch (TotalStock)
             {
-                case int n when (n>=1 && n<6):
-                    Console.WriteLine("Low Stock");                    
+                case int n when (n >= 1 && n < 6):
+                    Console.WriteLine("Low Stock");
                     break;
                 case int n when (n >= 6 && n < 12):
                     Console.WriteLine("Medium Stock");

@@ -12,7 +12,6 @@ namespace StockManagement
     {
         T? GetById( int? id);
         List<T> GetAll();
-        int? GetIdByName(string name);
         T Add( T item);
         T Update( int? id, T stock);
         void Delete( int? id);

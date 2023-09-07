@@ -7,8 +7,9 @@ namespace StockManagement_Test
 
         public static GPURepository gpuRepository = new GPURepository();
         public static LaptopRepository laptopRepository = new LaptopRepository();
+        public static Search search = new Search();
 
-        
+
 
         [SetUp]
         public void Setup()
@@ -17,6 +18,8 @@ namespace StockManagement_Test
             gpuRepository.getGPUs().Add(new GPU("Nvidia GTX 950", 5, 209.99m, 2, 768));
             laptopRepository.getLaptops().Add(new Laptop("Chromebook", 5, 199, 17, 32, 512));
             gpuRepository.getGPUs().Add(new GPU("GTX1660", 1, 209.99m, 6, 1408));
+
+
 
         }
         // Create
@@ -57,33 +60,39 @@ namespace StockManagement_Test
         public void GetIdByName()
         {
             // Arrange
+            List<Laptop> laptops = CRUD_Stock.laptopRepository.getLaptops();
+            Laptop newLaptop = (new Laptop("Chromebook", 5, 199, 17, 32, 512));          
+            var newId = CRUD_Stock.laptopRepository.Add(newLaptop).Id;
             string name = "Chromebook";
             // Act
-            int? id = laptopRepository.GetIdByName(name);
+            List<int?> result = search.GetLaptopIdsByName(name);
             // Assert
-            Assert.That(laptopRepository.getLaptops().Any(x => x.Id == id));
+            Assert.That(result, Does.Contain(newId));
         }
         // Update
         [Test]
         public void Update()
         {
             // Arrange
-            int? id = gpuRepository.GetIdByName("GTX1660");
+            GPU newGPU = new GPU("GTX1660", 1, 209.99m, 6, 1408);
+            var newId = gpuRepository.Add(newGPU).Id;
+
             GPU updated = new GPU("Nvidia GTX 1660", 5, 209.99m, 6, 1408);
             // Act
-            var result = gpuRepository.Update(id, updated);
+            var result = gpuRepository.Update(newId, updated);
             // Assert
-            Assert.That(result.Id, Is.EqualTo(gpuRepository.GetIdByName(updated.Name)));
+            Assert.That(result.Id, Is.EqualTo(newId));
         }
         [Test]
         public void Delete()
-        {   
+        {
             // Arrange
-            int? id = gpuRepository.GetIdByName("Nvidia RTX 4090 Ti");
+            GPU newGPU = new GPU("Nvidia GTX 1080", 1, 329.99m, 8, 2560);
+            var newId = gpuRepository.Add(newGPU).Id;
             // Act
-            gpuRepository.Delete(id);
+            gpuRepository.Delete(newId);
             // Assert
-            Assert.That(gpuRepository.getGPUs().Any(x => x.Id != id));
+            Assert.That(gpuRepository.getGPUs().Any(x => x.Id != newId));
         }
 
 

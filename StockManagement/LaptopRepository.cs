@@ -42,15 +42,6 @@
             return laptops.FirstOrDefault(x => x.Id == id);
         }
 
-        public int? GetIdByName(string? name)
-        {
-            if (String.IsNullOrEmpty(name) == false)
-            {
-                Laptop item = laptops.FirstOrDefault(x => x.Name == name);
-                return item.Id;
-            }
-            return null;
-        }
 
         public Laptop Update( int? id, Laptop newStock)
         {

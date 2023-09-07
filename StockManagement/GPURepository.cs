@@ -26,7 +26,7 @@ namespace StockManagement
                 throw new ArgumentNullException(nameof(item));
             }
             gpus.Add(item);
-            return GetById((int)item.Id);
+            return GetById(item.Id);
         }
 
         public void Delete( int? id)
@@ -48,15 +48,6 @@ namespace StockManagement
             return gpus.FirstOrDefault(x => x.Id == id);
         }
 
-        public int? GetIdByName(string? name)
-        {
-            if (String.IsNullOrEmpty(name) == false)
-            {
-                GPU item = gpus.FirstOrDefault(x => x.Name == name);
-                return item.Id;
-            }
-            return null;
-        }
 
         public GPU Update( int? id, GPU newStock)
         {

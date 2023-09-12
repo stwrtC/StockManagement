@@ -17,5 +17,10 @@ namespace StockManagement
             }
             return null;
         }
+
+        public bool IDExists<T>(List<T> stock, int id) where T : Stock
+        {
+            return stock.Where(x => x.Id == id).Any();
+        }
     }
 }

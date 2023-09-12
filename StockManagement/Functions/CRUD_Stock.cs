@@ -5,8 +5,9 @@
         
         public static GPURepository gpuRepository = new GPURepository();
         public static LaptopRepository laptopRepository = new LaptopRepository();
-        
-        
+        public static Search search = new Search();
+
+
 
         // Create
         public static void AddLaptop()
@@ -68,33 +69,31 @@
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine());
-            var item = gpuRepository.GetById(id);
-            if (item != null)
+            if (search.IDExists(gpuRepository.getGPUs(), id))
             {
+                var item = gpuRepository.GetById(id);
                 Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
             }
             else
             {
                 Console.WriteLine("Error: Please input a valid ID");
-                GetLaptop();
-            }
-
+                GetGPU();
+            }           
         }
         public static void GetLaptop()
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
-            int id = int.Parse(Console.ReadLine());            
-            var item = laptopRepository.GetById( id);
-            if(item != null)
+            int id = int.Parse(Console.ReadLine()); 
+            if(search.IDExists(laptopRepository.getLaptops(), id))
             {
+                var item = laptopRepository.GetById(id);
                 Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
-            }
+            }            
             else
             {
                 Console.WriteLine("Error: Please input a valid ID");
                 GetLaptop();
             }
-
         }
 
         //Update
@@ -102,21 +101,30 @@
         {
             Console.WriteLine("Please input the ID of the stock you would like to update");
             int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input new value when prompted, leave input blank to keep original value.");
-            Console.WriteLine("Input Name");
-            string name = Console.ReadLine();
-            Console.WriteLine("Input Stock Quantity");
-            int quantity = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input Price");
-            decimal price = decimal.Parse(Console.ReadLine());
-            Console.WriteLine("Input VRAM in GB");
-            int vram = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input cuda cores");
-            int cuda = int.Parse(Console.ReadLine());
+            if (search.IDExists(gpuRepository.getGPUs(), id))
+            {
+                Console.WriteLine("Input new value when prompted, leave input blank to keep original value.");
+                Console.WriteLine("Input Name");
+                string name = Console.ReadLine();
+                Console.WriteLine("Input Stock Quantity");
+                int quantity = int.Parse(Console.ReadLine());
+                Console.WriteLine("Input Price");
+                decimal price = decimal.Parse(Console.ReadLine());
+                Console.WriteLine("Input VRAM in GB");
+                int vram = int.Parse(Console.ReadLine());
+                Console.WriteLine("Input cuda cores");
+                int cuda = int.Parse(Console.ReadLine());
 
-            GPU newGPU = new GPU(name, quantity, price, vram, cuda);
-            var item = gpuRepository.Update( id, newGPU);
-            Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
+                GPU newGPU = new GPU(name, quantity, price, vram, cuda);
+                var item = gpuRepository.Update(id, newGPU);
+                Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
+            }
+            else 
+            {
+                Console.WriteLine("Error: Please input a valid ID");
+                UpdateGPU();
+            }
+
 
 
         }
@@ -124,23 +132,32 @@
         {
             Console.WriteLine("Please input the ID of the stock you would like to update");
             int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input new value when prompted, leave input blank to keep original value.");
-            Console.WriteLine("Input Name");
-            string name = Console.ReadLine();
-            Console.WriteLine("Input Stock Quantity");
-            int quantity = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input Price");
-            decimal price = decimal.Parse(Console.ReadLine()) + 'm';
-            Console.WriteLine("Input screen size in inches");
-            decimal screen = decimal.Parse(Console.ReadLine()) + 'm';
-            Console.WriteLine("Input RAM in GB");
-            int ram = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input storage size in GB");
-            int storage = int.Parse(Console.ReadLine());
+            if (search.IDExists(laptopRepository.getLaptops(), id))
+            {
+                Console.WriteLine("Input new value when prompted, leave input blank to keep original value.");
+                Console.WriteLine("Input Name");
+                string name = Console.ReadLine();
+                Console.WriteLine("Input Stock Quantity");
+                int quantity = int.Parse(Console.ReadLine());
+                Console.WriteLine("Input Price");
+                decimal price = decimal.Parse(Console.ReadLine()) + 'm';
+                Console.WriteLine("Input screen size in inches");
+                decimal screen = decimal.Parse(Console.ReadLine()) + 'm';
+                Console.WriteLine("Input RAM in GB");
+                int ram = int.Parse(Console.ReadLine());
+                Console.WriteLine("Input storage size in GB");
+                int storage = int.Parse(Console.ReadLine());
 
-            Laptop newLaptop = new Laptop(name, quantity, price, screen, ram, storage);
-            var item = laptopRepository.Update( id, newLaptop);
-            Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
+                Laptop newLaptop = new Laptop(name, quantity, price, screen, ram, storage);
+                var item = laptopRepository.Update(id, newLaptop);
+                Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
+
+            }
+            else
+            {
+                Console.WriteLine("Error: Please input a valid ID");
+                UpdateLaptop();
+            }
 
         }
 
@@ -149,8 +166,8 @@
         public static void DeleteLaptop()
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
-            int? id = int.Parse(Console.ReadLine());
-            if(id == null)
+            int id = int.Parse(Console.ReadLine());
+            if(search.IDExists(laptopRepository.getLaptops(), id) == false)
             {
                 DeleteLaptop();
             }
@@ -160,8 +177,8 @@
         public static void DeleteGPU()
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
-            int? id = int.Parse(Console.ReadLine());
-            if (id == null)
+            int id = int.Parse(Console.ReadLine());
+            if (search.IDExists(gpuRepository.getGPUs(), id) == false)
             {
                 DeleteGPU();
             }

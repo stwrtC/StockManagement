@@ -2,6 +2,7 @@
 {
     public class CRUD_Stock
     {
+        
         public static GPURepository gpuRepository = new GPURepository();
         public static LaptopRepository laptopRepository = new LaptopRepository();
         

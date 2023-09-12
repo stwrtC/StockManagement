@@ -10,7 +10,6 @@ namespace StockManagement_Test
         public static Search search = new Search();
 
 
-
         [SetUp]
         public void Setup()
         {
@@ -19,11 +18,11 @@ namespace StockManagement_Test
             laptopRepository.getLaptops().Add(new Laptop("Chromebook", 5, 199, 17, 32, 512));
             gpuRepository.getGPUs().Add(new GPU("GTX1660", 1, 209.99m, 6, 1408));
 
-
-
         }
         // Create
         [Test]
+        [Category("Repository Tests")]
+        [Category("Add")]
         public void AddLaptop()
         {
             // Arrange
@@ -34,6 +33,8 @@ namespace StockManagement_Test
             Assert.That(laptopRepository.getLaptops(), Does.Contain(newLaptop));
         }
         [Test]
+        [Category("Repository Tests")]
+        [Category("Add")]
         public void AddGPU()
         {
             // Arrange
@@ -45,12 +46,16 @@ namespace StockManagement_Test
         }
         // Read
         [Test]
+        [Category("Repository Tests")]
+
         public void ReadLaptop()
         {
             var result = laptopRepository.GetAll();            
             Assert.That(result, Is.Not.Null);
         }
         [Test]
+        [Category("Repository Tests")]
+
         public void ReadGPU()
         {
             GPU result = gpuRepository.GetAll().First();            
@@ -60,17 +65,18 @@ namespace StockManagement_Test
         public void GetIdByName()
         {
             // Arrange
-            List<Laptop> laptops = CRUD_Stock.laptopRepository.getLaptops();
             Laptop newLaptop = (new Laptop("Chromebook", 5, 199, 17, 32, 512));          
-            var newId = CRUD_Stock.laptopRepository.Add(newLaptop).Id;
+            var newId = laptopRepository.Add(newLaptop).Id;
             string name = "Chromebook";
             // Act
-            List<int?> result = search.GetLaptopIdsByName(name);
+            List<int?> result = search.GetIdsByName(laptopRepository.getLaptops(), name);
             // Assert
             Assert.That(result, Does.Contain(newId));
         }
         // Update
         [Test]
+        [Category("Repository Tests")]
+
         public void Update()
         {
             // Arrange
@@ -84,6 +90,8 @@ namespace StockManagement_Test
             Assert.That(result.Id, Is.EqualTo(newId));
         }
         [Test]
+        [Category("Repository Tests")]
+
         public void Delete()
         {
             // Arrange

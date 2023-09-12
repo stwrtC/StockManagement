@@ -14,7 +14,7 @@ namespace StockManagement
 
 
 
-        public Laptop(string name, int stockAmount, decimal price, decimal screen, int ram, int storage)
+        public Laptop(string name, int stockAmount, decimal? price, decimal screen, int ram, int storage)
             : base(name, stockAmount, price)
         {
             ScreenSize = screen;

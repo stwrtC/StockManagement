@@ -49,22 +49,20 @@ namespace StockManagement
         }
 
 
-        public GPU Update( int? id, GPU newStock)
+        public GPU Update(int? id, GPU newStock)
         {
-            var item = GetById( id);
+            var item = GetById(id);
             if (item != null)
             {
-                if (newStock.Name != null) { item.Name = newStock.Name; }
-                if (newStock.Quantity.ToString() != null) { item.Quantity = newStock.Quantity; }
-                if (newStock.Price.ToString() != null) { item.Price = newStock.Price; }
-                if (newStock.Vram.ToString() != null) { item.Vram = newStock.Vram; }
-                if (newStock.Cuda.ToString() != null) { item.Cuda = newStock.Cuda; }
-
+                item.Name = newStock.Name;
+                item.Quantity = newStock.Quantity;
+                item.Price = newStock.Price;
+                item.Vram = newStock.Vram;
+                item.Cuda = newStock.Cuda;      
+                
                 return item;
-
             }
             return null;
-
         }
     }
 }

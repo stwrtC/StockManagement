@@ -69,14 +69,31 @@
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine());
             var item = gpuRepository.GetById(id);
-            Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
+            if (item != null)
+            {
+                Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
+            }
+            else
+            {
+                Console.WriteLine("Error: Please input a valid ID");
+                GetLaptop();
+            }
+
         }
         public static void GetLaptop()
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
-            int id = int.Parse(Console.ReadLine());
+            int id = int.Parse(Console.ReadLine());            
             var item = laptopRepository.GetById( id);
-            Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
+            if(item != null)
+            {
+                Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
+            }
+            else
+            {
+                Console.WriteLine("Error: Please input a valid ID");
+                GetLaptop();
+            }
 
         }
 

@@ -107,7 +107,7 @@
         {
             Console.WriteLine("Please input the ID of the stock you would like to update");
             int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please input the ID of the stock you would like to update");
+            Console.WriteLine("Input new value when prompted, leave input blank to keep original value.");
             Console.WriteLine("Input Name");
             string name = Console.ReadLine();
             Console.WriteLine("Input Stock Quantity");

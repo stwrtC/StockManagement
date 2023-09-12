@@ -20,7 +20,7 @@ namespace StockManagement
 
                 Console.WriteLine("Input '1' to add Laptop");
                 Console.WriteLine("Input '2' to add GPU");
-                Console.WriteLine("Input '3' to all stock");
+                Console.WriteLine("Input '3' to view all stock");
                 Console.WriteLine("Input '4' to view Laptop by ID");
                 Console.WriteLine("Input '5' to view GPU by ID");
                 Console.WriteLine("Input '6' to view stock level");

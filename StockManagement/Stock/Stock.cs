@@ -15,7 +15,7 @@ namespace StockManagement
         public decimal? Price { get; set; }
 
         private static int UUID = 1;
-        public Stock(string name, int stockAmount, decimal price)
+        public Stock(string name, int stockAmount, decimal? price)
         {
             Name = name;
             Quantity = stockAmount;

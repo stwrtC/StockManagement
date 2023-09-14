@@ -15,7 +15,7 @@ namespace StockManagement
 
 
 
-        public GPU(string name, int stockAmount, decimal price, int vram, int cuda)
+        public GPU(string name, int stockAmount, decimal? price, int vram, int cuda)
             : base(name, stockAmount, price)
         {
             Vram = vram;

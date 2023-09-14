@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel.Design;
 using StockManagement;
-
-
+using StockManagement.Services;
 
 namespace StockManagement
 {
-    class Program
+    internal class Program
     {
 
         private static IRepository<Laptop> _laptop = new LaptopRepository();
         private static IRepository<GPU> _gpu = new GPURepository();
-        static void Main(string[] args)
+        private static ILaptopCalc _laptopCalc = new LaptopCalc();
+        private static IGPUCalc _gpuCalc = new GPUCalc();
+        public static void Main(string[] args)
         {            
 
             List<GPU> gpus = _gpu.GetAll();
@@ -61,16 +62,10 @@ namespace StockManagement
                         CRUD_Stock.GetGPU(_gpu);
                         break;
                     case 6:
-                        var calc = new CalculateStock();
-                        Console.Write("Laptops have ");
-                        CalculateStock.StockLevel(calc.CalcLaptop(laptops));
-                        Console.Write("GPUs have ");
-                        CalculateStock.StockLevel(calc.CalcGPU(gpus));
-                        Console.WriteLine($"The total stock of laptops is {calc.CalcLaptop(laptops)} and the total stock of GPUs is {calc.CalcGPU(gpus)}.");
+                        Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock(_laptop)} and the total stock of GPUs is {_gpuCalc.TotalStock(_gpu)}.");
                         break;
                     case 7:
-                        calc = new CalculateStock();
-                        Console.WriteLine($"The total value of all laptops is £{calc.LaptopValue(laptops)} and the total value of all GPUs is £{calc.GPUValue(gpus)}.");
+                        Console.WriteLine($"The total value of all laptops is £{_laptopCalc.TotalValue(_laptop)} and the total value of all GPUs is £{_gpuCalc.TotalValue(_gpu)}.");
                         break;
 
                     case 8:

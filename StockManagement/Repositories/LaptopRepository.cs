@@ -44,12 +44,13 @@
             var item = GetById( id);
             if (item != null)
             {
-                if (newStock.Name != null) { item.Name = newStock.Name; }
-                if (newStock.Quantity.ToString() != null) { item.Quantity = newStock.Quantity; }
-                if (newStock.Price.ToString() != null) { item.Price = newStock.Price; }
-                if (newStock.ScreenSize.ToString() != null) { item.ScreenSize = newStock.ScreenSize; }
-                if (newStock.Ram.ToString() != null) { item.Ram = newStock.Ram; }
-                if (newStock.Storage.ToString() != null) { item.Storage = newStock.Storage; }
+                item.Name = newStock.Name;
+                item.Quantity = newStock.Quantity;
+                item.Price = newStock.Price;
+                item.ScreenSize = newStock.ScreenSize;
+                item.Storage = newStock.Storage;
+                item.Ram = newStock.Ram;
+
 
                 return item;
 

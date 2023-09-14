@@ -9,10 +9,6 @@
         {
             laptops = new List<Laptop>();
         }
-        public List<Laptop> getLaptops()
-        {
-            return laptops;
-        }
         public Laptop Add(Laptop? item)
         {
             if(item == null)

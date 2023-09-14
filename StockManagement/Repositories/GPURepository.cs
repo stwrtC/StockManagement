@@ -15,10 +15,6 @@ namespace StockManagement
         {
             gpus = new List<GPU>();
         }
-        public List<GPU> getGPUs() 
-        {
-            return gpus;
-        }
         public GPU Add( GPU? item)
         {
             if (item == null)

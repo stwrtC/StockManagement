@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Services
 {
-    internal interface IGPUCalc
+    public interface ISearchGPU
     {
-        int TotalStock(IRepository<GPU> gpuRepo);
-        decimal? TotalValue(IRepository<GPU> gpuRepo);
-
+        List<int?> GetIdsByName(IStockRepository<GPU> gpuRepo, string name);
+        bool IDExists(IStockRepository<GPU> gpuRepo, int id);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace StockManagement
 {
-    public class LaptopRepository : IRepository<Laptop>
+    public class LaptopRepository : IStockRepository<Laptop>
     {
         
         private List<Laptop> laptops;

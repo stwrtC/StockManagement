@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Services
 {
-    internal class LaptopCalc : ILaptopCalc
+    public class LaptopCalc : ILaptopCalc
     {
 
-        public int TotalStock(IRepository<Laptop> laptopRepo)
+        public int TotalStock(IStockRepository<Laptop> laptopRepo)
         {
             int TotalStock = 0;
 
@@ -20,7 +20,7 @@ namespace StockManagement.Services
             return TotalStock;
         }
 
-        public decimal? TotalValue(IRepository<Laptop> laptopRepo)
+        public decimal? TotalValue(IStockRepository<Laptop> laptopRepo)
         {
             decimal? totalValue = 0;
             foreach (Laptop st in laptopRepo.GetAll())

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Services
 {
-    internal class GPUCalc : IGPUCalc
+    public class GPUCalc : IGPUCalc
     {
         
 
-        public int TotalStock(IRepository<GPU> gpuRepo)
+        public int TotalStock(IStockRepository<GPU> gpuRepo)
         {
             int TotalStock = 0;
 
@@ -22,7 +22,7 @@ namespace StockManagement.Services
             return TotalStock;
         }
 
-        public decimal? TotalValue(IRepository<GPU> gpuRepo)
+        public decimal? TotalValue(IStockRepository<GPU> gpuRepo)
         {
             decimal? totalValue = 0;
             foreach (GPU st in gpuRepo.GetAll())

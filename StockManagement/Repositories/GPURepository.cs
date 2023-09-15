@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement
 {
-    public class GPURepository : IRepository<GPU>
+    public class GPURepository : IStockRepository<GPU>
     {
         private List<GPU> gpus;
 

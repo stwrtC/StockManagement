@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design;
-using StockManagement;
+﻿using StockManagement;
 using StockManagement.Services;
 
 namespace StockManagement
@@ -7,10 +6,12 @@ namespace StockManagement
     internal class Program
     {
 
-        private static IRepository<Laptop> _laptop = new LaptopRepository();
-        private static IRepository<GPU> _gpu = new GPURepository();
+        private static IStockRepository<Laptop> _laptop = new LaptopRepository();
+        private static IStockRepository<GPU> _gpu = new GPURepository();
         private static ILaptopCalc _laptopCalc = new LaptopCalc();
         private static IGPUCalc _gpuCalc = new GPUCalc();
+        private static ISearchLaptop _searchLaptop = new SearchLaptop();
+        private static ISearchGPU _searchGPU = new SearchGPU();
         public static void Main(string[] args)
         {            
 
@@ -56,10 +57,10 @@ namespace StockManagement
                         CRUD_Stock.ViewStock(_laptop, _gpu);
                         break;
                     case 4:
-                        CRUD_Stock.GetLaptop(_laptop);
+                        CRUD_Stock.GetLaptop(_laptop, _searchLaptop);
                         break;
                     case 5:
-                        CRUD_Stock.GetGPU(_gpu);
+                        CRUD_Stock.GetGPU(_gpu, _searchGPU);
                         break;
                     case 6:
                         Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock(_laptop)} and the total stock of GPUs is {_gpuCalc.TotalStock(_gpu)}.");
@@ -69,16 +70,16 @@ namespace StockManagement
                         break;
 
                     case 8:
-                        CRUD_Stock.UpdateLaptop(_laptop);
+                        CRUD_Stock.UpdateLaptop(_laptop, _searchLaptop);
                         break;
                     case 9:
-                        CRUD_Stock.UpdateGPU(_gpu);
+                        CRUD_Stock.UpdateGPU(_gpu, _searchGPU);
                         break;
                     case 10:
-                        CRUD_Stock.DeleteLaptop(_laptop);
+                        CRUD_Stock.DeleteLaptop(_laptop, _searchLaptop);
                         break;
                     case 11:
-                        CRUD_Stock.DeleteGPU(_gpu);
+                        CRUD_Stock.DeleteGPU(_gpu, _searchGPU);
                         break;
                     case 12:
                         cont = false;

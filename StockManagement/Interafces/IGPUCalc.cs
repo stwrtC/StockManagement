@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Services
 {
-    internal interface ILaptopCalc
+    public interface IGPUCalc
     {
-        int TotalStock(IRepository<Laptop> LaptopRepo);
-        decimal? TotalValue(IRepository<Laptop> LaptopRepo);
+        int TotalStock(IStockRepository<GPU> gpuRepo);
+        decimal? TotalValue(IStockRepository<GPU> gpuRepo);
 
     }
 }

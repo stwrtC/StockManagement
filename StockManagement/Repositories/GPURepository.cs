@@ -7,17 +7,13 @@ using System.Threading.Tasks;
 
 namespace StockManagement
 {
-    public class GPURepository : IRepository<GPU>
+    public class GPURepository : IStockRepository<GPU>
     {
         private List<GPU> gpus;
 
         public GPURepository()
         {
             gpus = new List<GPU>();
-        }
-        public List<GPU> getGPUs() 
-        {
-            return gpus;
         }
         public GPU Add( GPU? item)
         {
@@ -49,20 +45,22 @@ namespace StockManagement
         }
 
 
-        public GPU Update(int? id, GPU newStock)
+        public GPU Update( int? id, GPU newStock)
         {
-            var item = GetById(id);
+            var item = GetById( id);
             if (item != null)
             {
                 item.Name = newStock.Name;
                 item.Quantity = newStock.Quantity;
                 item.Price = newStock.Price;
                 item.Vram = newStock.Vram;
-                item.Cuda = newStock.Cuda;      
-                
+                item.Cuda = newStock.Cuda;
+
                 return item;
+
             }
             return null;
+
         }
     }
 }

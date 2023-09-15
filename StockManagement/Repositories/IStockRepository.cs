@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace StockManagement
 {
-    internal interface IRepository<T> where T : Stock
+    public interface IStockRepository<T> where T : Stock
     {
         T? GetById( int? id);
         List<T> GetAll();

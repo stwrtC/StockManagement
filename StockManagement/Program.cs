@@ -1,13 +1,22 @@
-﻿
+﻿using StockManagement;
+using StockManagement.Services;
+
 namespace StockManagement
 {
     internal class Program
     {
-        
-        private static void Main(string[] args)
-        {
-            List<GPU> gpus = CRUD_Stock.gpuRepository.getGPUs();
-            List<Laptop> laptops = CRUD_Stock.laptopRepository.getLaptops();
+
+        private static IStockRepository<Laptop> _laptop = new LaptopRepository();
+        private static IStockRepository<GPU> _gpu = new GPURepository();
+        private static ILaptopCalc _laptopCalc = new LaptopCalc();
+        private static IGPUCalc _gpuCalc = new GPUCalc();
+        private static ISearchLaptop _searchLaptop = new SearchLaptop();
+        private static ISearchGPU _searchGPU = new SearchGPU();
+        public static void Main(string[] args)
+        {            
+
+            List<GPU> gpus = _gpu.GetAll();
+            List<Laptop> laptops = _laptop.GetAll();
             gpus.Add(new GPU("Nvidia GTX 950", 5, 209.99m, 2, 768));
             gpus.Add(new GPU("Nvidia RTX 4090 Ti", 1, 1699.99m, 24, 16384));
             laptops.Add(new Laptop("Chromebook", 5, 199, 17, 32, 512));
@@ -39,44 +48,38 @@ namespace StockManagement
                 switch (input)
                 {
                     case 1:
-                        CRUD_Stock.AddLaptop();
+                        CRUD_Stock.AddLaptop(_laptop);
                         break;
                     case 2:
-                        CRUD_Stock.AddGPU();
+                        CRUD_Stock.AddGPU(_gpu);
                         break;
                     case 3:
-                        CRUD_Stock.ViewStock();
+                        CRUD_Stock.ViewStock(_laptop, _gpu);
                         break;
                     case 4:
-                        CRUD_Stock.GetLaptop();
+                        CRUD_Stock.GetLaptop(_laptop, _searchLaptop);
                         break;
                     case 5:
-                        CRUD_Stock.GetGPU();
+                        CRUD_Stock.GetGPU(_gpu, _searchGPU);
                         break;
                     case 6:
-                        var calc = new CalculateStock();
-                        Console.Write("Laptops have ");
-                        CalculateStock.StockLevel(calc.CalcLaptop(laptops));
-                        Console.Write("GPUs have ");
-                        CalculateStock.StockLevel(calc.CalcGPU(gpus));
-                        Console.WriteLine($"The total stock of laptops is {calc.CalcLaptop(laptops)} and the total stock of GPUs is {calc.CalcGPU(gpus)}.");
+                        Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock(_laptop)} and the total stock of GPUs is {_gpuCalc.TotalStock(_gpu)}.");
                         break;
                     case 7:
-                        calc = new CalculateStock();
-                        Console.WriteLine($"The total value of all laptops is £{calc.LaptopValue(laptops)} and the total value of all GPUs is £{calc.GPUValue(gpus)}.");
+                        Console.WriteLine($"The total value of all laptops is £{_laptopCalc.TotalValue(_laptop)} and the total value of all GPUs is £{_gpuCalc.TotalValue(_gpu)}.");
                         break;
 
                     case 8:
-                        CRUD_Stock.UpdateLaptop();
+                        CRUD_Stock.UpdateLaptop(_laptop, _searchLaptop);
                         break;
                     case 9:
-                        CRUD_Stock.UpdateGPU();
+                        CRUD_Stock.UpdateGPU(_gpu, _searchGPU);
                         break;
                     case 10:
-                        CRUD_Stock.DeleteLaptop();
+                        CRUD_Stock.DeleteLaptop(_laptop, _searchLaptop);
                         break;
                     case 11:
-                        CRUD_Stock.DeleteGPU();
+                        CRUD_Stock.DeleteGPU(_gpu, _searchGPU);
                         break;
                     case 12:
                         cont = false;

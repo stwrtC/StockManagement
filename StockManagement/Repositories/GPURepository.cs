@@ -9,11 +9,18 @@ namespace StockManagement
 {
     public class GPURepository : IStockRepository<GPU>
     {
-        private List<GPU> gpus;
+        private List<GPU> _gpus;
 
         public GPURepository()
         {
-            gpus = new List<GPU>();
+            _gpus = new List<GPU>()
+            {
+                new GPU() 
+                {Name = "Nvidia GTX 950", Quantity = 5, Price = 209.99m, Vram = 2, Cuda = 768 },
+                new GPU()
+                {Name = "Nvidia RTX 4090 Ti", Quantity = 1, Price = 1699.99m, Vram = 24, Cuda = 16384 }
+            };
+            
         }
         public GPU Add( GPU? item)
         {
@@ -21,7 +28,7 @@ namespace StockManagement
             {
                 throw new ArgumentNullException(nameof(item));
             }
-            gpus.Add(item);
+            _gpus.Add(item);
             return GetById(item.Id);
         }
 
@@ -30,18 +37,18 @@ namespace StockManagement
             var item = GetById( id);
             if (item != null)
             {
-                gpus.Remove(item);
+                _gpus.Remove(item);
             }
         }
 
-        public List<GPU> GetAll()
+        public IEnumerable<GPU> GetAll()
         {
-            return gpus;
+            return _gpus;
         }
 
         public GPU? GetById( int? id)
         {
-            return gpus.FirstOrDefault(x => x.Id == id);
+            return _gpus.FirstOrDefault(x => x.Id == id);
         }
 
 

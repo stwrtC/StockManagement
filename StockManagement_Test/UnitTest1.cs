@@ -6,8 +6,8 @@ namespace StockManagement_Test
     public class Tests
     {
 
-        private static IStockRepository<Laptop> _laptop = new LaptopRepository();
-        private static IStockRepository<GPU> _gpu = new GPURepository();
+        private static IStockRepository<Laptop> _laptops = new LaptopRepository();
+        private static IStockRepository<GPU> _gpus = new GPURepository();
         private static ILaptopCalc _laptopCalc = new LaptopCalc();
         private static IGPUCalc _gpuCalc = new GPUCalc();
         private static ISearchLaptop _searchLaptop = new SearchLaptop();
@@ -17,10 +17,10 @@ namespace StockManagement_Test
         [SetUp]
         public void Setup()
         {
-            _gpu.GetAll().Add(new GPU("Nvidia RTX 4090 Ti", 1, 1699.99m, 24, 16384));
-            _gpu.GetAll().Add(new GPU("Nvidia GTX 950", 5, 209.99m, 2, 768));
-            _laptop.GetAll().Add(new Laptop("Chromebook", 5, 199, 17, 32, 512));
-            _gpu.GetAll().Add(new GPU("GTX1660", 1, 209.99m, 6, 1408));
+            _gpus.Add(new GPU() { Name = "Nvidia GTX 950", Quantity = 5, Price = 209.99m, Vram = 2, Cuda = 768 });
+            _gpus.Add(new GPU() { Name = "Nvidia RTX 4090 Ti", Quantity = 1, Price = 1699.99m, Vram = 24, Cuda = 16384 });
+            _laptops.Add(new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
+            _gpus.Add(new GPU() {Name = "GTX1660", Quantity = 1, Price = 209.99m, Vram = 6, Cuda = 1408 });
 
         }
        // Create
@@ -28,46 +28,46 @@ namespace StockManagement_Test
         public void AddLaptop()
         {
            // Arrange
-           Laptop newLaptop = new Laptop("Macbook", 5, 199, 17, 32, 512);
+           Laptop newLaptop = new Laptop() {Name = "Macbook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
             // Act
-            _laptop.Add(newLaptop);
+            _laptops.Add(newLaptop);
            // Assert
-           Assert.That(_laptop.GetAll(), Does.Contain(newLaptop));
+           Assert.That(_laptops.GetAll(), Does.Contain(newLaptop));
         }
         [Test]
        public void AddGPU()
         {
            // Arrange
-           GPU newGPU = new GPU("Nvidia GTX 1080", 1, 329.99m, 8, 2560);
+           GPU newGPU = new GPU() {Name = "Nvidia GTX 1080", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
             // Act
-            _gpu.Add(newGPU);
+            _gpus.Add(newGPU);
            // Assert
-           Assert.That(_gpu.GetAll(), Does.Contain(newGPU));
+           Assert.That(_gpus.GetAll(), Does.Contain(newGPU));
         }
        // Read
        [Test]
 
         public void ReadLaptop()
         {
-            var result = _laptop.GetAll();
+            var result = _laptops.GetAll();
             Assert.That(result, Is.Not.Null);
         }
         [Test]
 
         public void ReadGPU()
         {
-            GPU result = _gpu.GetAll().First();
+            GPU result = _gpus.GetAll().First();
             Assert.That(result, Is.Not.Null);
         }
         [Test]
-        public void GetIdByName()
+        public void GetIdByName()   
         {
            // Arrange
-           Laptop newLaptop = (new Laptop("Chromebook", 5, 199, 17, 32, 512));
-           var newId = _laptop.Add(newLaptop).Id;
+           Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
+           var newId = _laptops.Add(newLaptop).Id;
            string name = "Chromebook";
            // Act
-           List<int?> result = _searchLaptop.GetIdsByName(_laptop, name);
+           List<int?> result = _searchLaptop.GetIdsByName(_laptops, name);
            // Assert
             Assert.That(result, Does.Contain(newId));
         }
@@ -77,12 +77,12 @@ namespace StockManagement_Test
         public void Update()
         {
            // Arrange
-           GPU newGPU = new GPU("GTX1660", 1, 209.99m, 6, 1408);
-           var newId = _gpu.Add(newGPU).Id;
+           GPU newGPU = new GPU() { Name = "GTX1660", Quantity = 1, Price = 209.99m, Vram = 6, Cuda = 1408 };
+           var newId = _gpus.Add(newGPU).Id;
 
-           GPU updated = new GPU("Nvidia GTX 1660", 5, 209.99m, 6, 1408);
+           GPU updated = new GPU() { Name = "Nvidia GTX 950", Quantity = 5, Price = 209.99m, Vram = 2, Cuda = 768 };
            // Act
-           var result = _gpu.Update(newId, updated);
+           var result = _gpus.Update(newId, updated);
            // Assert
            Assert.That(result.Id, Is.EqualTo(newId));
         }
@@ -91,12 +91,12 @@ namespace StockManagement_Test
         public void Delete()
         {
            // Arrange
-           GPU newGPU = new GPU("Nvidia GTX 1080", 1, 329.99m, 8, 2560);
-           var newId = _gpu.Add(newGPU).Id;
+           GPU newGPU = new GPU() { Name = "Nvidia GTX 1080", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
+           var newId = _gpus.Add(newGPU).Id;
            // Act
-           _gpu.Delete(newId);
+           _gpus.Delete(newId);
            // Assert
-           Assert.That(_gpu.GetAll().Any(x => x.Id != newId));
+           Assert.That(_gpus.GetAll().Any(x => x.Id != newId));
         }
 
 

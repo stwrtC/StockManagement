@@ -5,9 +5,14 @@ namespace StockManagement
     public class CRUD_Stock
     {
 
+        private static IStockRepository<Laptop> _laptopRepo = new LaptopRepository();
+        private static IStockRepository<GPU> _gpuRepo = new GPURepository();
+        private static ISearchLaptop _searchLaptop = new SearchLaptop();
+        private static ISearchGPU _searchGPU = new SearchGPU();
 
         // Create
-        public static void AddLaptop(IStockRepository<Laptop> laptopRepo)
+
+        public static void AddLaptop()
         {
 
             Console.WriteLine("Input Name");
@@ -23,12 +28,12 @@ namespace StockManagement
             Console.WriteLine("Input storage size in GB");
             int storage = int.Parse(Console.ReadLine());
 
-            Laptop newLaptop = new Laptop(name, quantity, price, screen, ram, storage);
-            var x = laptopRepo.Add(newLaptop);
+            Laptop newLaptop = new Laptop { Name = name, Quantity = quantity, Price = price, ScreenSize = screen, Ram = ram, Storage = storage };
+            var x = _laptopRepo.Add(newLaptop);
             Console.WriteLine($"Laptop {x.Name} has been added with an ID of {x.Id}.");
 
         }
-        public static void AddGPU(IStockRepository<GPU> gpuRepo)
+        public static void AddGPU()
         {
             Console.WriteLine("Input Name");
             string? name = Console.ReadLine();
@@ -41,20 +46,20 @@ namespace StockManagement
             Console.WriteLine("Input cuda cores");
             int cuda = int.Parse(Console.ReadLine());
 
-            GPU newGPU = new GPU(name, quantity, price, vram, cuda);
-            var x = gpuRepo.Add(newGPU);
+            GPU newGPU = new GPU() {Name = name, Quantity = quantity, Price = price, Vram = vram, Cuda = cuda };
+            var x = _gpuRepo.Add(newGPU);
             Console.WriteLine($"GPU {x.Name} has been added with an ID of {x.Id}.");
 
         }
 
         // Read
-        public static void ViewStock(IStockRepository<Laptop> laptopRepo, IStockRepository<GPU> gpuRepo)
+        public static void ViewStock()
         {
-            foreach (Laptop x in laptopRepo.GetAll())
+            foreach (Laptop x in _laptopRepo.GetAll())
             {
                 Console.WriteLine($"ID: {x.Id}, Type: {nameof(Laptop)}, Name: {x.Name}, Ram: {x.Ram}GB, Storage: {x.Storage}GB, Screen Size: {x.ScreenSize}, Price: {x.Price}, Quantity: {x.Quantity}");
             }
-            foreach (GPU y in gpuRepo.GetAll())
+            foreach (GPU y in _gpuRepo.GetAll())
             {
                 Console.WriteLine($"ID: {y.Id}, Type: {nameof(GPU)}, Name: {y.Name}, VRam: {y.Vram}GB, Cuda: {y.Cuda}, Price: {y.Price}, Quantity: {y.Quantity}");
             }
@@ -62,44 +67,44 @@ namespace StockManagement
 
         }
 
-        public static void GetGPU(IStockRepository<GPU> gpuRepo, ISearchGPU search)
+        public static void GetGPU()
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine());
-            if (search.IDExists(gpuRepo, id) == false)
+            if (_searchGPU.IDExists(_gpuRepo, id) == false)
             {
                 Console.WriteLine("Error: Please input a valid ID");
 
             }
-            var item = gpuRepo.GetById(id);
+            var item = _gpuRepo.GetById(id);
             Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
 
         }
-        public static void GetLaptop(IStockRepository<Laptop> laptopRepo, ISearchLaptop search)
+        public static void GetLaptop()
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine()); 
-            if(search.IDExists(laptopRepo, id) == false)
+            if(_searchLaptop.IDExists(_laptopRepo, id) == false)
             {
                 Console.WriteLine("Error: Please input a valid ID");
 
             }
-            var item = laptopRepo.GetById(id);
+            var item = _laptopRepo.GetById(id);
             Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
 
         }
 
         //Update
-        public static void UpdateGPU(IStockRepository<GPU> gpuRepo, ISearchGPU search)
+        public static void UpdateGPU()
         {
             Console.WriteLine("Please input the ID of the stock you would like to update");
 
             int id = int.Parse(Console.ReadLine());
-            if (search.IDExists(gpuRepo, id))
+            if (_searchGPU.IDExists(_gpuRepo, id))
             {
-                var item = gpuRepo.GetById(id);
+                var item = _gpuRepo.GetById(id);
                 Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
-                GPU newGPU = new GPU(item.Name, item.Quantity, item.Price, item.Vram, item.Cuda);
+                GPU newGPU = new GPU() {Name = item.Name, Quantity = item.Quantity, Price = item.Price, Vram = item.Vram, Cuda = item.Cuda };
                 bool cont = true;
                 while (cont)
                 {
@@ -143,7 +148,7 @@ namespace StockManagement
                             Console.WriteLine($"Name: {newGPU.Name}, VRam: {newGPU.Vram}GB, Cuda: {newGPU.Cuda}, Price: {newGPU.Price}, Quantity: {newGPU.Quantity}");
                             break;
                         case 7:
-                            var newItem = gpuRepo.Update(id, newGPU);
+                            var newItem = _gpuRepo.Update(id, newGPU);
                             Console.WriteLine($"Name: {newItem.Name}, VRam: {newItem.Vram}GB, Cuda: {newItem.Cuda}, Price: {newItem.Price} , Quantity:  {newItem.Quantity}");
                             cont = false;
                             break;
@@ -156,16 +161,16 @@ namespace StockManagement
                 Console.WriteLine("Error: Please input a valid ID");
             }
         }
-        public static void UpdateLaptop(IStockRepository<Laptop> laptopRepo, ISearchLaptop search)
+        public static void UpdateLaptop()
         {
             Console.WriteLine("Please input the ID of the stock you would like to update");
 
             int id = int.Parse(Console.ReadLine());
-            if (search.IDExists(laptopRepo, id))
+            if (_searchLaptop.IDExists(_laptopRepo, id))
             {
-                var item = laptopRepo.GetById(id);
+                var item = _laptopRepo.GetById(id);
                 Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
-                Laptop newLaptop = new Laptop(item.Name, item.Quantity, item.Price, item.ScreenSize, item.Ram, item.Storage);
+                Laptop newLaptop = new Laptop {Name = item.Name, Quantity = item.Quantity, Price = item.Price, ScreenSize = item.ScreenSize, Ram = item.Ram, Storage = item.Storage };
                 bool cont = true;
                 while (cont)
                 {
@@ -215,7 +220,7 @@ namespace StockManagement
                             Console.WriteLine($"Name: {newLaptop.Name}, Ram: {newLaptop.Ram}GB, Storage: {newLaptop.Storage}GB, Screen Size: {newLaptop.ScreenSize}, Price: {newLaptop.Price}, Quantity: {newLaptop.Quantity}");
                             break;
                         case 8:
-                            var newItem = laptopRepo.Update(id, newLaptop);
+                            var newItem = _laptopRepo.Update(id, newLaptop);
                             Console.WriteLine($"ID: {newItem.Id}, Type: {nameof(Laptop)}, Name: {newItem.Name}, Ram: {newItem.Ram}GB, Storage: {newItem.Storage}GB, Screen Size: {newItem.ScreenSize}, Price: {newItem.Price}, Quantity: {newItem.Quantity}");
                             cont = false;
                             break;
@@ -231,26 +236,26 @@ namespace StockManagement
 
 
             //Delete
-        public static void DeleteLaptop(IStockRepository<Laptop> laptopRepo, ISearchLaptop search)
+        public static void DeleteLaptop()
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
             int id = int.Parse(Console.ReadLine());
-            if(search.IDExists(laptopRepo, id) == false)
+            if(_searchLaptop.IDExists(_laptopRepo, id) == false)
             {
                 Console.WriteLine("Error: Please input a valid ID");
             }
 
-            laptopRepo.Delete(id);
+            _laptopRepo.Delete(id);
         }
-        public static void DeleteGPU(IStockRepository<GPU> gpuRepo, ISearchGPU search)
+        public static void DeleteGPU()
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
             int id = int.Parse(Console.ReadLine());
-            if (search.IDExists(gpuRepo, id) == false)
+            if (_searchGPU.IDExists(_gpuRepo, id) == false)
             {
                 Console.WriteLine("Error: Please input a valid ID");
             }
-            gpuRepo.Delete(id);
+            _gpuRepo.Delete(id);
         }
 
 

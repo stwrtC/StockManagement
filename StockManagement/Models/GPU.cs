@@ -13,18 +13,5 @@ namespace StockManagement
         public int Vram { get; set; }
         public int Cuda { get; set; }
 
-
-
-        public GPU(string name, int stockAmount, decimal? price, int vram, int cuda)
-            : base(name, stockAmount, price)
-        {
-            Vram = vram;
-            Cuda = cuda;
-
-        }
-
-
-
-
     }
 }

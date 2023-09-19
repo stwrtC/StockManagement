@@ -3,11 +3,15 @@
     public class LaptopRepository : IStockRepository<Laptop>
     {
         
-        private List<Laptop> laptops;
+        private List<Laptop> _laptops;
 
         public LaptopRepository()
         {
-            laptops = new List<Laptop>();
+            _laptops = new List<Laptop>()
+            {
+                new Laptop()
+                {Name= "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512}
+            };
         }
         public Laptop Add(Laptop? item)
         {
@@ -15,7 +19,7 @@
             {
                 throw new ArgumentNullException(nameof(item));
             }
-            laptops.Add(item);
+            _laptops.Add(item);
             return GetById(item.Id);
         }
 
@@ -24,18 +28,18 @@
             var item = GetById( id);
             if (item != null)
             {
-                laptops.Remove(item);
+                _laptops.Remove(item);
             }
         }
 
-        public List<Laptop> GetAll()
+        public IEnumerable<Laptop> GetAll()
         {
-            return laptops;
+            return _laptops;
         }
 
         public Laptop GetById( int? id)
         {
-            return laptops.FirstOrDefault(x => x.Id == id);
+            return _laptops.FirstOrDefault(x => x.Id == id);
         }
 
 

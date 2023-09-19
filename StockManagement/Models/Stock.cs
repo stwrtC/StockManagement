@@ -9,17 +9,15 @@ namespace StockManagement
 {
     public abstract class Stock
     {
-        public int? Id { get; }
+        public int? Id { get; set; }
         public string? Name { get; set; }
         public int Quantity { get; set; } = 0;
         public decimal? Price { get; set; }
 
         private static int UUID = 1;
-        public Stock(string name, int stockAmount, decimal? price)
+        
+        public Stock()
         {
-            Name = name;
-            Quantity = stockAmount;
-            Price = price;
             Id = UUID++;
         }
 

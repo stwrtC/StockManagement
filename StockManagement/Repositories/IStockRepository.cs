@@ -11,7 +11,7 @@ namespace StockManagement
     public interface IStockRepository<T> where T : Stock
     {
         T? GetById( int? id);
-        List<T> GetAll();
+        IEnumerable<T> GetAll();
         T Add( T item);
         T Update( int? id, T stock);
         void Delete( int? id);

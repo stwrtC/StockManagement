@@ -11,9 +11,6 @@ namespace StockManagement
         public decimal ScreenSize { get; set; }
         public int Ram { get; set; }
         public int Storage { get; set; }
-
-
-
         
     }
 }

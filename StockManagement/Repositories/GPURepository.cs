@@ -67,7 +67,6 @@ namespace StockManagement
 
             }
             return null;
-
         }
     }
 }

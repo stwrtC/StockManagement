@@ -10,11 +10,11 @@ namespace StockManagement
 {
     public interface IStockRepository<T> where T : Stock
     {
-        T? GetById( int? id);
+        T? GetById( int id);
         IEnumerable<T> GetAll();
         T Add( T item);
-        T Update( int? id, T stock);
-        void Delete( int? id);
+        T Update( int id, T stock);
+        void Delete( int id);
 
 
     }

@@ -13,17 +13,13 @@
                 {Name= "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512}
             };
         }
-        public Laptop Add(Laptop? item)
+        public Laptop Add(Laptop item)
         {
-            if(item == null)
-            {
-                throw new ArgumentNullException(nameof(item));
-            }
             _laptops.Add(item);
             return GetById(item.Id);
         }
 
-        public void Delete( int? id)
+        public void Delete( int id)
         {
             var item = GetById( id);
             if (item != null)
@@ -37,13 +33,13 @@
             return _laptops;
         }
 
-        public Laptop GetById( int? id)
+        public Laptop GetById( int id)
         {
             return _laptops.FirstOrDefault(x => x.Id == id);
         }
 
 
-        public Laptop Update( int? id, Laptop newStock)
+        public Laptop Update( int id, Laptop newStock)
         {
             var item = GetById( id);
             if (item != null)

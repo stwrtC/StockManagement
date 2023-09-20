@@ -13,5 +13,6 @@ namespace StockManagement
         public int Vram { get; set; }
         public int Cuda { get; set; }
 
+        public GPU() { }
     }
 }

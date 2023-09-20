@@ -42,19 +42,19 @@ namespace StockManagement
                 switch (input)
                 {
                     case 1:
-                        CRUD_Stock.AddLaptop();
+                        CRUD_Stock.AddLaptop(_laptopRepo);
                         break;
                     case 2:
-                        CRUD_Stock.AddGPU();
+                        CRUD_Stock.AddGPU(_gpuRepo);
                         break;
                     case 3:
-                        CRUD_Stock.ViewStock();
+                        CRUD_Stock.ViewStock(_laptopRepo, _gpuRepo);
                         break;
                     case 4:
-                        CRUD_Stock.GetLaptop();
+                        CRUD_Stock.GetLaptop(_laptopRepo, _searchLaptop);
                         break;
                     case 5:
-                        CRUD_Stock.GetGPU();
+                        CRUD_Stock.GetGPU(_gpuRepo, _searchGPU);
                         break;
                     case 6:
                         Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock(_laptopRepo)} and the total stock of GPUs is {_gpuCalc.TotalStock(_gpuRepo)}.");
@@ -64,16 +64,16 @@ namespace StockManagement
                         break;
 
                     case 8:
-                        CRUD_Stock.UpdateLaptop();
+                        CRUD_Stock.UpdateLaptop(_laptopRepo, _searchLaptop);
                         break;
                     case 9:
-                        CRUD_Stock.UpdateGPU();
+                        CRUD_Stock.UpdateGPU(_gpuRepo, _searchGPU);
                         break;
                     case 10:
-                        CRUD_Stock.DeleteLaptop();
+                        CRUD_Stock.DeleteLaptop(_laptopRepo, _searchLaptop);
                         break;
                     case 11:
-                        CRUD_Stock.DeleteGPU();
+                        CRUD_Stock.DeleteGPU(_gpuRepo, _searchGPU);
                         break;
                     case 12:
                         cont = false;

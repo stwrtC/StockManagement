@@ -8,7 +8,7 @@ namespace StockManagement.Services
 {
     public interface ISearchLaptop
     {
-        List<int?> GetIdsByName(IStockRepository<Laptop> laptopRepo, string name);
+        List<int> GetIdsByName(IStockRepository<Laptop> laptopRepo, string name);
         bool IDExists(IStockRepository<Laptop> laptopRepo, int id);
     }
 }

@@ -4,17 +4,10 @@ namespace StockManagement
 {
     public class CRUD_Stock
     {
-
-        private static IStockRepository<Laptop> _laptopRepo = new LaptopRepository();
-        private static IStockRepository<GPU> _gpuRepo = new GPURepository();
-        private static ISearchLaptop _searchLaptop = new SearchLaptop();
-        private static ISearchGPU _searchGPU = new SearchGPU();
-
         // Create
 
-        public static void AddLaptop()
+        public static void AddLaptop(IStockRepository<Laptop> _laptopRepo)
         {
-
             Console.WriteLine("Input Name");
             string? name = Console.ReadLine();
             Console.WriteLine("Input Stock Quantity");
@@ -28,12 +21,12 @@ namespace StockManagement
             Console.WriteLine("Input storage size in GB");
             int storage = int.Parse(Console.ReadLine());
 
-            Laptop newLaptop = new Laptop { Name = name, Quantity = quantity, Price = price, ScreenSize = screen, Ram = ram, Storage = storage };
+            Laptop newLaptop = new Laptop { Name = name, Quantity = quantity , Price = price, ScreenSize = screen, Ram = ram, Storage = storage };
             var x = _laptopRepo.Add(newLaptop);
             Console.WriteLine($"Laptop {x.Name} has been added with an ID of {x.Id}.");
 
         }
-        public static void AddGPU()
+        public static void AddGPU(IStockRepository<GPU> _gpuRepo)
         {
             Console.WriteLine("Input Name");
             string? name = Console.ReadLine();
@@ -53,7 +46,7 @@ namespace StockManagement
         }
 
         // Read
-        public static void ViewStock()
+        public static void ViewStock(IStockRepository<Laptop> _laptopRepo, IStockRepository<GPU> _gpuRepo)
         {
             foreach (Laptop x in _laptopRepo.GetAll())
             {
@@ -67,7 +60,7 @@ namespace StockManagement
 
         }
 
-        public static void GetGPU()
+        public static void GetGPU(IStockRepository<GPU> _gpuRepo, ISearchGPU _searchGPU)
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine());
@@ -80,7 +73,7 @@ namespace StockManagement
             Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
 
         }
-        public static void GetLaptop()
+        public static void GetLaptop(IStockRepository<Laptop> _laptopRepo, ISearchLaptop _searchLaptop)
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine()); 
@@ -95,7 +88,7 @@ namespace StockManagement
         }
 
         //Update
-        public static void UpdateGPU()
+        public static void UpdateGPU(IStockRepository<GPU> _gpuRepo, ISearchGPU _searchGPU)
         {
             Console.WriteLine("Please input the ID of the stock you would like to update");
 
@@ -161,7 +154,7 @@ namespace StockManagement
                 Console.WriteLine("Error: Please input a valid ID");
             }
         }
-        public static void UpdateLaptop()
+        public static void UpdateLaptop(IStockRepository<Laptop> _laptopRepo, ISearchLaptop _searchLaptop)
         {
             Console.WriteLine("Please input the ID of the stock you would like to update");
 
@@ -236,7 +229,7 @@ namespace StockManagement
 
 
             //Delete
-        public static void DeleteLaptop()
+        public static void DeleteLaptop(IStockRepository<Laptop> _laptopRepo, ISearchLaptop _searchLaptop)
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
             int id = int.Parse(Console.ReadLine());
@@ -247,7 +240,7 @@ namespace StockManagement
 
             _laptopRepo.Delete(id);
         }
-        public static void DeleteGPU()
+        public static void DeleteGPU(IStockRepository<GPU> _gpuRepo, ISearchGPU _searchGPU)
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
             int id = int.Parse(Console.ReadLine());

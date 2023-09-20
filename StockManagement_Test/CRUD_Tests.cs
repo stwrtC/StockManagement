@@ -6,17 +6,23 @@ namespace StockManagement_Test
     public class Tests
     {
 
-        private static IStockRepository<Laptop> _laptops = new LaptopRepository();
-        private static IStockRepository<GPU> _gpus = new GPURepository();
-        private static ILaptopCalc _laptopCalc = new LaptopCalc();
-        private static IGPUCalc _gpuCalc = new GPUCalc();
-        private static ISearchLaptop _searchLaptop = new SearchLaptop();
-        private static ISearchGPU _searchGPU = new SearchGPU();
+        private IStockRepository<Laptop> _laptops;
+        private IStockRepository<GPU> _gpus;
+        private ILaptopCalc _laptopCalc;
+        private IGPUCalc _gpuCalc;
+        private ISearchLaptop _searchLaptop;
+        private ISearchGPU _searchGPU;
 
 
         [SetUp]
         public void Setup()
         {
+            _laptops = new LaptopRepository();
+            _gpus = new GPURepository();
+            _laptopCalc = new LaptopCalc();
+            _gpuCalc = new GPUCalc();
+            _searchLaptop = new SearchLaptop();
+            _searchGPU = new SearchGPU();
             _gpus.Add(new GPU() { Name = "Nvidia GTX 950", Quantity = 5, Price = 209.99m, Vram = 2, Cuda = 768 });
             _gpus.Add(new GPU() { Name = "Nvidia RTX 4090 Ti", Quantity = 1, Price = 1699.99m, Vram = 24, Cuda = 16384 });
             _laptops.Add(new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
@@ -67,7 +73,7 @@ namespace StockManagement_Test
            var newId = _laptops.Add(newLaptop).Id;
            string name = "Chromebook";
            // Act
-           List<int?> result = _searchLaptop.GetIdsByName(_laptops, name);
+           List<int> result = _searchLaptop.GetIdsByName(_laptops, name);
            // Assert
             Assert.That(result, Does.Contain(newId));
         }

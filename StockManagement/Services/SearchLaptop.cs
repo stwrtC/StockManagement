@@ -8,11 +8,11 @@ namespace StockManagement.Services
 {
     public class SearchLaptop : ISearchLaptop
     {
-        public List<int?> GetIdsByName(IStockRepository<Laptop> laptopRepo, string? name)
+        public List<int> GetIdsByName(IStockRepository<Laptop> laptopRepo, string? name)
         {
-            if (String.IsNullOrEmpty(name) == false)
+            if (string.IsNullOrEmpty(name) == false)
             {
-                List<int?> items = laptopRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
+                List<int> items = laptopRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
                 return items;
             }
             return null;

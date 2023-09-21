@@ -9,11 +9,11 @@ namespace StockManagement
 {
     public class SearchGPU : ISearchGPU
     {
-        public List<int?> GetIdsByName(IStockRepository<GPU> gpuRepo, string? name)
+        public List<int> GetIdsByName(IStockRepository<GPU> gpuRepo, string? name)
         {
-            if (String.IsNullOrEmpty(name) == false)
+            if (string.IsNullOrEmpty(name) == false)
             {
-                List<int?> items = gpuRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
+                List<int> items = gpuRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
                 return items;
             }
             return null;

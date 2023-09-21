@@ -28,9 +28,9 @@ namespace StockManagement
             return GetById(item.Id);
         }
 
-        public void Delete( int id)
+        public void Delete(int id)
         {
-            var item = GetById( id);
+            var item = GetById(id);
             if (item != null)
             {
                 _gpus.Remove(item);
@@ -42,15 +42,15 @@ namespace StockManagement
             return _gpus;
         }
 
-        public GPU? GetById( int id)
+        public GPU? GetById(int id)
         {
             return _gpus.FirstOrDefault(x => x.Id == id);
         }
 
 
-        public GPU Update( int id, GPU newStock)
+        public GPU? Update(int id, GPU newStock)
         {
-            var item = GetById( id);
+            var item = GetById(id);
             if (item != null)
             {
                 item.Name = newStock.Name;

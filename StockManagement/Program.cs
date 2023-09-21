@@ -14,7 +14,7 @@ namespace StockManagement
         private static ISearchGPU _searchGPU = new SearchGPU();
         public static void Main(string[] args)
         {
-
+            CRUD_Stock crud = new CRUD_Stock(_laptopRepo, _gpuRepo, _searchLaptop, _searchGPU);
             bool cont = true;
             Console.WriteLine("Welcome to the Stock Management Console App");
 
@@ -42,19 +42,19 @@ namespace StockManagement
                 switch (input)
                 {
                     case 1:
-                        CRUD_Stock.AddLaptop(_laptopRepo);
+                        crud.AddLaptop();
                         break;
                     case 2:
-                        CRUD_Stock.AddGPU(_gpuRepo);
+                        crud.AddGPU();
                         break;
                     case 3:
-                        CRUD_Stock.ViewStock(_laptopRepo, _gpuRepo);
+                        crud.ViewStock();
                         break;
                     case 4:
-                        CRUD_Stock.GetLaptop(_laptopRepo, _searchLaptop);
+                        crud.GetLaptop();
                         break;
                     case 5:
-                        CRUD_Stock.GetGPU(_gpuRepo, _searchGPU);
+                        crud.GetGPU();
                         break;
                     case 6:
                         Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock(_laptopRepo)} and the total stock of GPUs is {_gpuCalc.TotalStock(_gpuRepo)}.");
@@ -64,16 +64,16 @@ namespace StockManagement
                         break;
 
                     case 8:
-                        CRUD_Stock.UpdateLaptop(_laptopRepo, _searchLaptop);
+                        crud.UpdateLaptop();
                         break;
                     case 9:
-                        CRUD_Stock.UpdateGPU(_gpuRepo, _searchGPU);
+                        crud.UpdateGPU();
                         break;
                     case 10:
-                        CRUD_Stock.DeleteLaptop(_laptopRepo, _searchLaptop);
+                        crud.DeleteLaptop();
                         break;
                     case 11:
-                        CRUD_Stock.DeleteGPU(_gpuRepo, _searchGPU);
+                        crud.DeleteGPU();
                         break;
                     case 12:
                         cont = false;

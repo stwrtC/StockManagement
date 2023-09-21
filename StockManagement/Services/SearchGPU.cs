@@ -11,7 +11,7 @@ namespace StockManagement
     {
         public List<int> GetIdsByName(IStockRepository<GPU> gpuRepo, string? name)
         {
-            if (String.IsNullOrEmpty(name) == false)
+            if (string.IsNullOrEmpty(name) == false)
             {
                 List<int> items = gpuRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
                 return items;

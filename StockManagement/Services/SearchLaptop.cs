@@ -10,7 +10,7 @@ namespace StockManagement.Services
     {
         public List<int> GetIdsByName(IStockRepository<Laptop> laptopRepo, string? name)
         {
-            if (String.IsNullOrEmpty(name) == false)
+            if (string.IsNullOrEmpty(name) == false)
             {
                 List<int> items = laptopRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
                 return items;

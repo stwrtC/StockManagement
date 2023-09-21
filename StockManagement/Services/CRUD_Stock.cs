@@ -4,9 +4,23 @@ namespace StockManagement
 {
     public class CRUD_Stock
     {
+        private readonly IStockRepository<Laptop> _laptopRepo;
+        private readonly IStockRepository<GPU> _gpuRepo;
+        private readonly ISearchLaptop _searchLaptop;
+        private readonly ISearchGPU _searchGPU;
+
+        public CRUD_Stock(IStockRepository<Laptop> laptopRepo, IStockRepository<GPU> gpuRepo, ISearchLaptop searchLaptop, ISearchGPU searchGPU)
+        {
+            _laptopRepo = laptopRepo;
+            _gpuRepo = gpuRepo;
+            _searchLaptop = searchLaptop;
+            _searchGPU = searchGPU;
+        }
+
+
         // Create
 
-        public static void AddLaptop(IStockRepository<Laptop> _laptopRepo)
+        public void AddLaptop()
         {
             Console.WriteLine("Input Name");
             string? name = Console.ReadLine();
@@ -26,7 +40,7 @@ namespace StockManagement
             Console.WriteLine($"Laptop {x.Name} has been added with an ID of {x.Id}.");
 
         }
-        public static void AddGPU(IStockRepository<GPU> _gpuRepo)
+        public void AddGPU()
         {
             Console.WriteLine("Input Name");
             string? name = Console.ReadLine();
@@ -46,7 +60,7 @@ namespace StockManagement
         }
 
         // Read
-        public static void ViewStock(IStockRepository<Laptop> _laptopRepo, IStockRepository<GPU> _gpuRepo)
+        public void ViewStock()
         {
             foreach (Laptop x in _laptopRepo.GetAll())
             {
@@ -60,7 +74,7 @@ namespace StockManagement
 
         }
 
-        public static void GetGPU(IStockRepository<GPU> _gpuRepo, ISearchGPU _searchGPU)
+        public void GetGPU()
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine());
@@ -73,7 +87,7 @@ namespace StockManagement
             Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
 
         }
-        public static void GetLaptop(IStockRepository<Laptop> _laptopRepo, ISearchLaptop _searchLaptop)
+        public void GetLaptop()
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine()); 
@@ -88,7 +102,7 @@ namespace StockManagement
         }
 
         //Update
-        public static void UpdateGPU(IStockRepository<GPU> _gpuRepo, ISearchGPU _searchGPU)
+        public void UpdateGPU()
         {
             Console.WriteLine("Please input the ID of the stock you would like to update");
 
@@ -154,7 +168,7 @@ namespace StockManagement
                 Console.WriteLine("Error: Please input a valid ID");
             }
         }
-        public static void UpdateLaptop(IStockRepository<Laptop> _laptopRepo, ISearchLaptop _searchLaptop)
+        public void UpdateLaptop()
         {
             Console.WriteLine("Please input the ID of the stock you would like to update");
 
@@ -229,7 +243,7 @@ namespace StockManagement
 
 
             //Delete
-        public static void DeleteLaptop(IStockRepository<Laptop> _laptopRepo, ISearchLaptop _searchLaptop)
+        public void DeleteLaptop()
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
             int id = int.Parse(Console.ReadLine());
@@ -240,7 +254,7 @@ namespace StockManagement
 
             _laptopRepo.Delete(id);
         }
-        public static void DeleteGPU(IStockRepository<GPU> _gpuRepo, ISearchGPU _searchGPU)
+        public void DeleteGPU()
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
             int id = int.Parse(Console.ReadLine());

@@ -19,9 +19,9 @@
             return GetById(item.Id);
         }
 
-        public void Delete( int id)
+        public void Delete(int id)
         {
-            var item = GetById( id);
+            var item = GetById(id);
             if (item != null)
             {
                 _laptops.Remove(item);
@@ -33,13 +33,13 @@
             return _laptops;
         }
 
-        public Laptop GetById( int id)
+        public Laptop GetById(int id)
         {
             return _laptops.FirstOrDefault(x => x.Id == id);
         }
 
 
-        public Laptop Update( int id, Laptop newStock)
+        public Laptop? Update(int id, Laptop newStock)
         {
             var item = GetById( id);
             if (item != null)

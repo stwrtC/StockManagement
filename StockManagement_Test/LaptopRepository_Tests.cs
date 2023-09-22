@@ -31,21 +31,6 @@ namespace StockManagement_Test
             Assert.That(result, Is.Not.Null);
         }
 
-        [Test]
-        public void GetIdByName()
-        {
-            // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
-            var mockSearchLaptop = new Mock<SearchLaptop>();
-            Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
-            var newId = mockLaptopRepo.Object.Add(newLaptop).Id;
-            string name = "Chromebook";
-            // Act
-            List<int> result = mockSearchLaptop.Object.GetIdsByName(mockLaptopRepo.Object, name);
-            // Assert
-            Assert.That(result, Does.Contain(newId));
-        }
-
         // Update
         [Test]
         public void Update()

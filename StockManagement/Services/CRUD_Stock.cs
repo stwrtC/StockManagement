@@ -78,7 +78,7 @@ namespace StockManagement
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine());
-            if (_searchGPU.IDExists(_gpuRepo, id) == false)
+            if (_searchGPU.IDExists(id) == false)
             {
                 Console.WriteLine("Error: Please input a valid ID");
 
@@ -91,7 +91,7 @@ namespace StockManagement
         {
             Console.WriteLine("Please input the ID of the stock you would like to view");
             int id = int.Parse(Console.ReadLine()); 
-            if(_searchLaptop.IDExists(_laptopRepo, id) == false)
+            if(_searchLaptop.IDExists(id) == false)
             {
                 Console.WriteLine("Error: Please input a valid ID");
 
@@ -107,7 +107,7 @@ namespace StockManagement
             Console.WriteLine("Please input the ID of the stock you would like to update");
 
             int id = int.Parse(Console.ReadLine());
-            if (_searchGPU.IDExists(_gpuRepo, id))
+            if (_searchGPU.IDExists(id))
             {
                 var item = _gpuRepo.GetById(id);
                 Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
@@ -173,7 +173,7 @@ namespace StockManagement
             Console.WriteLine("Please input the ID of the stock you would like to update");
 
             int id = int.Parse(Console.ReadLine());
-            if (_searchLaptop.IDExists(_laptopRepo, id))
+            if (_searchLaptop.IDExists(id))
             {
                 var item = _laptopRepo.GetById(id);
                 Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
@@ -247,7 +247,7 @@ namespace StockManagement
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
             int id = int.Parse(Console.ReadLine());
-            if(_searchLaptop.IDExists(_laptopRepo, id) == false)
+            if(_searchLaptop.IDExists(id) == false)
             {
                 Console.WriteLine("Error: Please input a valid ID");
             }
@@ -258,7 +258,7 @@ namespace StockManagement
         {
             Console.WriteLine("Please input the ID of the stock you would like to remove");
             int id = int.Parse(Console.ReadLine());
-            if (_searchGPU.IDExists(_gpuRepo, id) == false)
+            if (_searchGPU.IDExists(id) == false)
             {
                 Console.WriteLine("Error: Please input a valid ID");
             }

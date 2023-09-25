@@ -8,8 +8,8 @@ namespace StockManagement.Services
 {
     public interface IGPUCalc
     {
-        int TotalStock(IStockRepository<GPU> gpuRepo);
-        decimal? TotalValue(IStockRepository<GPU> gpuRepo);
+        int TotalStock();
+        decimal? TotalValue();
 
     }
 }

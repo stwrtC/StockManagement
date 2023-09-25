@@ -9,23 +9,27 @@ namespace StockManagement.Services
 {
     public class GPUCalc : IGPUCalc
     {
-        
+        private readonly IStockRepository<GPU> _gpuRepo;
+        public GPUCalc(IStockRepository<GPU> gpuRepo)
+        {
+            _gpuRepo = gpuRepo;
+        }
 
-        public int TotalStock(IStockRepository<GPU> gpuRepo)
+        public int TotalStock()
         {
             int TotalStock = 0;
 
-            foreach (GPU st in gpuRepo.GetAll())
+            foreach (GPU st in _gpuRepo.GetAll())
             {
                 TotalStock += st.Quantity;
             }
             return TotalStock;
         }
 
-        public decimal? TotalValue(IStockRepository<GPU> gpuRepo)
+        public decimal? TotalValue()
         {
             decimal? totalValue = 0;
-            foreach (GPU st in gpuRepo.GetAll())
+            foreach (GPU st in _gpuRepo.GetAll())
             {
                 totalValue += st.Price;
             }

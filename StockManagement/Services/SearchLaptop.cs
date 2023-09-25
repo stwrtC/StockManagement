@@ -8,19 +8,25 @@ namespace StockManagement.Services
 {
     public class SearchLaptop : ISearchLaptop
     {
-        public List<int> GetIdsByName(IStockRepository<Laptop> laptopRepo, string? name)
+        private readonly IStockRepository<Laptop> _laptopRepo;
+        public SearchLaptop(IStockRepository<Laptop> laptopRepo)
+        {
+            _laptopRepo = laptopRepo;
+        }
+
+        public List<int> GetIdsByName(string? name)
         {
             if (string.IsNullOrEmpty(name) == false)
             {
-                List<int> items = laptopRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
+                List<int> items = _laptopRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
                 return items;
             }
             return null;
         }
 
-        public bool IDExists(IStockRepository<Laptop> laptopRepo, int id)
+        public bool IDExists(int id)
         {
-            return laptopRepo.GetAll().Where(x => x.Id == id).Any();
+            return _laptopRepo.GetAll().Where(x => x.Id == id).Any();
         }
     }
 }

@@ -10,8 +10,8 @@ namespace StockManagement
         private static IStockRepository<GPU> _gpuRepo = new GPURepository();
         private static ILaptopCalc _laptopCalc = new LaptopCalc();
         private static IGPUCalc _gpuCalc = new GPUCalc();
-        private static ISearchLaptop _searchLaptop = new SearchLaptop();
-        private static ISearchGPU _searchGPU = new SearchGPU();
+        private static ISearchLaptop _searchLaptop = new SearchLaptop(_laptopRepo);
+        private static ISearchGPU _searchGPU = new SearchGPU(_gpuRepo);
         public static void Main(string[] args)
         {
             CRUD_Stock crud = new CRUD_Stock(_laptopRepo, _gpuRepo, _searchLaptop, _searchGPU);

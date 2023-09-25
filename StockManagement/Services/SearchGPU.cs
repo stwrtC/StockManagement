@@ -9,19 +9,25 @@ namespace StockManagement
 {
     public class SearchGPU : ISearchGPU
     {
-        public List<int> GetIdsByName(IStockRepository<GPU> gpuRepo, string? name)
+        private readonly IStockRepository<GPU> _gpuRepo;
+        
+        public SearchGPU(IStockRepository<GPU> gpuRepo)
+        {
+            _gpuRepo = gpuRepo;
+        }
+        public List<int> GetIdsByName(string? name)
         {
             if (string.IsNullOrEmpty(name) == false)
             {
-                List<int> items = gpuRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
+                List<int> items = _gpuRepo.GetAll().Where(x => x.Name == name).Select(x => x.Id).ToList();
                 return items;
             }
             return null;
         }
 
-        public bool IDExists(IStockRepository<GPU> gpuRepo, int id)
+        public bool IDExists(int id)
         {
-            return gpuRepo.GetAll().Where(x => x.Id == id).Any();
+            return _gpuRepo.GetAll().Where(x => x.Id == id).Any();
         }
     }
 }

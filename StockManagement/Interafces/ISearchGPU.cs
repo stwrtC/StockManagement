@@ -8,7 +8,7 @@ namespace StockManagement.Services
 {
     public interface ISearchGPU
     {
-        List<int> GetIdsByName(IStockRepository<GPU> gpuRepo, string name);
-        bool IDExists(IStockRepository<GPU> gpuRepo, int id);
+        List<int> GetIdsByName(string name);
+        bool IDExists(int id);
     }
 }

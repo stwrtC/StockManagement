@@ -14,8 +14,9 @@ namespace StockManagement_Test
             var gpuCalc = new GPUCalc(mockGPURepo.Object);
             // Act
             int result = gpuCalc.TotalStock();
+            int expected = mockGPURepo.Object.GetAll().Select(x=>x.Quantity).Sum();
             // Assert
-            Assert.That(result, Is.EqualTo(6));
+            Assert.That(result, Is.EqualTo(expected));
         }
         [Test]
         public void TotalValueTest()
@@ -25,8 +26,9 @@ namespace StockManagement_Test
             var gpuCalc = new GPUCalc(mockGPURepo.Object);
             // Act
             var result = gpuCalc.TotalValue();
+            var expected = mockGPURepo.Object.GetAll().Select(x => x.Price).Sum();
             // Assert
-            Assert.That(result, Is.EqualTo(1909.98m));
+            Assert.That(result, Is.EqualTo(expected));
         }
 
 

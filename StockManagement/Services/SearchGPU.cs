@@ -10,7 +10,6 @@ namespace StockManagement
     public class SearchGPU : ISearchGPU
     {
         private readonly IStockRepository<GPU> _gpuRepo;
-        
         public SearchGPU(IStockRepository<GPU> gpuRepo)
         {
             _gpuRepo = gpuRepo;

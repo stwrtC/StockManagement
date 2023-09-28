@@ -8,8 +8,8 @@ namespace StockManagement
 
         private static IStockRepository<Laptop> _laptopRepo = new LaptopRepository();
         private static IStockRepository<GPU> _gpuRepo = new GPURepository();
-        private static ILaptopCalc _laptopCalc = new LaptopCalc();
-        private static IGPUCalc _gpuCalc = new GPUCalc();
+        private static ILaptopCalc _laptopCalc = new LaptopCalc(_laptopRepo);
+        private static IGPUCalc _gpuCalc = new GPUCalc(_gpuRepo);
         private static ISearchLaptop _searchLaptop = new SearchLaptop(_laptopRepo);
         private static ISearchGPU _searchGPU = new SearchGPU(_gpuRepo);
         public static void Main(string[] args)
@@ -57,10 +57,10 @@ namespace StockManagement
                         crud.GetGPU();
                         break;
                     case 6:
-                        Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock(_laptopRepo)} and the total stock of GPUs is {_gpuCalc.TotalStock(_gpuRepo)}.");
+                        Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock()} and the total stock of GPUs is {_gpuCalc.TotalStock()}.");
                         break;
                     case 7:
-                        Console.WriteLine($"The total value of all laptops is £{_laptopCalc.TotalValue(_laptopRepo)} and the total value of all GPUs is £{_gpuCalc.TotalValue(_gpuRepo)}.");
+                        Console.WriteLine($"The total value of all laptops is £{_laptopCalc.TotalValue()} and the total value of all GPUs is £{_gpuCalc.TotalValue()}.");
                         break;
 
                     case 8:

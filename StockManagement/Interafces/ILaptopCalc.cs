@@ -8,8 +8,8 @@ namespace StockManagement.Services
 {
     public interface ILaptopCalc
     {
-        int TotalStock(IStockRepository<Laptop> LaptopRepo);
-        decimal? TotalValue(IStockRepository<Laptop> LaptopRepo);
+        int TotalStock();
+        decimal? TotalValue();
 
     }
 }

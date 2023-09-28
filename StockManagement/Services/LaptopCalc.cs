@@ -8,22 +8,27 @@ namespace StockManagement.Services
 {
     public class LaptopCalc : ILaptopCalc
     {
+        private readonly IStockRepository<Laptop> _laptopRepo;
+        public LaptopCalc(IStockRepository<Laptop> laptopRepo)
+        {
+            _laptopRepo = laptopRepo;
+        }
 
-        public int TotalStock(IStockRepository<Laptop> laptopRepo)
+        public int TotalStock()
         {
             int TotalStock = 0;
 
-            foreach (Laptop st in laptopRepo.GetAll())
+            foreach (Laptop st in _laptopRepo.GetAll())
             {
                 TotalStock += st.Quantity;
             }
             return TotalStock;
         }
 
-        public decimal? TotalValue(IStockRepository<Laptop> laptopRepo)
+        public decimal? TotalValue()
         {
             decimal? totalValue = 0;
-            foreach (Laptop st in laptopRepo.GetAll())
+            foreach (Laptop st in _laptopRepo.GetAll())
             {
                 totalValue += st.Price;
             }

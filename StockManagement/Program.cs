@@ -39,7 +39,7 @@ namespace StockManagement
                         Console.Clear();
                         Console.WriteLine("Input '1' to add Laptop");
                         Console.WriteLine("Input '2' to add GPU");
-                        Console.WriteLine("Input '3' to exit program");
+                        Console.WriteLine("Input '3' to return to menu");
                         select = int.Parse(Console.ReadLine());
                         switch (select)
                         {
@@ -68,8 +68,9 @@ namespace StockManagement
                         {
                             case "GPU":
                                 crud.GetGPU(id);
-                                Console.WriteLine("Input '1' to update GPUs");
-                                Console.WriteLine("Input '2' to delete Laptops");
+                                Console.WriteLine("Input '1' to update GPU");
+                                Console.WriteLine("Input '2' to delete GPU");
+                                Console.WriteLine("Input '3' to return to menu");
                                 select = int.Parse(Console.ReadLine());
                                 switch (select)
                                 {
@@ -79,13 +80,16 @@ namespace StockManagement
                                     case 2:
                                         crud.DeleteGPU(id);
                                         break;
+                                    case 3:
+                                        break;
                                 }
 
                                 break;
                             case "Laptop":
                                 crud.GetLaptop(id);
-                                Console.WriteLine("Input '1' to update GPUs");
-                                Console.WriteLine("Input '2' to delete Laptops");
+                                Console.WriteLine("Input '1' to update Laptop");
+                                Console.WriteLine("Input '2' to delete Laptop");
+                                Console.WriteLine("Input '3' to return to menu");
                                 select = int.Parse(Console.ReadLine());
                                 switch (select)
                                 {
@@ -95,17 +99,33 @@ namespace StockManagement
                                     case 2:
                                         crud.DeleteLaptop(id);
                                         break;
+                                    case 3:
+                                        break;
                                 }
                                 break;
                             default:
-                                Console.WriteLine("{id} is not a valid ID.");
+                                Console.WriteLine($"{id} is not a valid ID.");
                                 break;
                         }
                         break;
                     case 4:
                         Console.Clear();
-                        Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock()} and the total stock of GPUs is {_gpuCalc.TotalStock()}.");
-                        Console.WriteLine($"The total value of all laptops is £{_laptopCalc.TotalValue()} and the total value of all GPUs is £{_gpuCalc.TotalValue()}.");
+                        Console.WriteLine("Input '1' to view total stock");
+                        Console.WriteLine("Input '2' to view total value");
+                        Console.WriteLine("Input '3' to return to menu");
+                        select = int.Parse(Console.ReadLine());
+                        switch (select)
+                        {
+                            case 1:
+                                Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock()} and the total stock of GPUs is {_gpuCalc.TotalStock()}.");
+                                break;
+                            case 2:
+                                Console.WriteLine($"The total value of all laptops is £{_laptopCalc.TotalValue()} and the total value of all GPUs is £{_gpuCalc.TotalValue()}.");
+                                break;
+                            case 3:
+                                break;
+                        }
+
                         break;
                     case 5:
                         cont = false;

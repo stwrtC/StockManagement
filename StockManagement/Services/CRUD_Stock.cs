@@ -251,7 +251,7 @@ namespace StockManagement
             }
             var item = _laptopRepo.GetById(id);
             Console.Clear();
-            Console.WriteLine($"Are you sure you want to delete ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name} from the system?");
+            Console.WriteLine($"Are you sure you want to delete ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name} from the system?");
             Console.WriteLine("Type 1 for YES and 2 for NO");
             int input = int.Parse(Console.ReadLine());
             switch (input)

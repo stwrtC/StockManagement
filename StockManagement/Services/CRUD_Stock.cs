@@ -116,6 +116,7 @@ namespace StockManagement
                     Console.WriteLine("Input '5' to update quantity");
                     Console.WriteLine("Input '6' to view changes");
                     Console.WriteLine("Input '7' to submit changes");
+                    Console.WriteLine("Input '8' to exit without submitting");
 
                     int input = int.Parse(Console.ReadLine());
                     switch (input)
@@ -150,8 +151,11 @@ namespace StockManagement
                             break;
                         case 7:
                             var newItem = _gpuRepo.Update(id, newGPU);
+                            Console.WriteLine($"ID: {newItem.Id} has been updated successfully");
                             Console.WriteLine($"Name: {newItem.Name}, VRam: {newItem.Vram}GB, Cuda: {newItem.Cuda}, Price: {newItem.Price} , Quantity:  {newItem.Quantity}");
                             cont = false;
+                            break;
+                        case 8:
                             break;
                     }
 
@@ -180,6 +184,8 @@ namespace StockManagement
                     Console.WriteLine("Input '6' to update quantity");
                     Console.WriteLine("Input '7' to view changes");
                     Console.WriteLine("Input '8' to submit changes");
+                    Console.WriteLine("Input '9' to exit without submitting");
+
 
                     int input = int.Parse(Console.ReadLine());
                     switch (input)
@@ -219,8 +225,11 @@ namespace StockManagement
                             break;
                         case 8:
                             var newItem = _laptopRepo.Update(id, newLaptop);
+                            Console.WriteLine($"ID: {newItem.Id} has been updated successfully");
                             Console.WriteLine($"ID: {newItem.Id}, Type: {nameof(Laptop)}, Name: {newItem.Name}, Ram: {newItem.Ram}GB, Storage: {newItem.Storage}GB, Screen Size: {newItem.ScreenSize}, Price: {newItem.Price}, Quantity: {newItem.Quantity}");
                             cont = false;
+                            break;
+                        case 9:
                             break;
                     }
 
@@ -240,8 +249,20 @@ namespace StockManagement
             {
                 Console.WriteLine("Error: Please input a valid ID");
             }
-
-            _laptopRepo.Delete(id);
+            var item = _laptopRepo.GetById(id);
+            Console.Clear();
+            Console.WriteLine($"Are you sure you want to delete ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name} from the system?");
+            Console.WriteLine("Type 1 for YES and 2 for NO");
+            int input = int.Parse(Console.ReadLine());
+            switch (input)
+            {
+                case 1:
+                    _laptopRepo.Delete(id);
+                    Console.WriteLine("Entry has been deleted successfully");
+                    break;
+                case 2:
+                    break;
+            }
         }
         public void DeleteGPU(int id)
         {
@@ -249,7 +270,21 @@ namespace StockManagement
             {
                 Console.WriteLine("Error: Please input a valid ID");
             }
-            _gpuRepo.Delete(id);
+            var item = _gpuRepo.GetById(id);
+            Console.Clear();
+            Console.WriteLine($"Are you sure you want to delete ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name} from the system?");
+            Console.WriteLine("Type 1 for YES and 2 for NO");
+            int input = int.Parse(Console.ReadLine());
+            switch (input)
+            {
+                case 1:
+                    _gpuRepo.Delete(id);
+                    Console.WriteLine("Entry has been deleted successfully");
+                    break;
+                case 2:
+                    break;
+            }
+
         }
 
 

@@ -48,16 +48,16 @@ namespace StockManagement
         }
 
 
-        public GPU? Update(int id, GPU newStock)
+        public GPU? Update(GPU gpu)
         {
-            var item = GetById(id);
+            var item = GetById(gpu.Id);
             if (item != null)
             {
-                item.Name = newStock.Name;
-                item.Quantity = newStock.Quantity;
-                item.Price = newStock.Price;
-                item.Vram = newStock.Vram;
-                item.Cuda = newStock.Cuda;
+                item.Name = gpu.Name;
+                item.Quantity = gpu.Quantity;
+                item.Price = gpu.Price;
+                item.Vram = gpu.Vram;
+                item.Cuda = gpu.Cuda;
 
                 return item;
 

@@ -38,12 +38,12 @@ namespace StockManagement_Test
             // Arrange
             var mockLaptopRepo = new Mock<LaptopRepository>();
             Laptop newLaptop = new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
-            var newId = mockLaptopRepo.Object.Add(newLaptop).Id;
+            var newId = mockLaptopRepo.Object.Add(newLaptop);
             Laptop updated = new Laptop() { Name = "Macbook", Quantity = 3, Price = 1999.99m, ScreenSize = 17, Ram = 32, Storage = 1024 };
             // Act
-            var result = mockLaptopRepo.Object.Update(newId, updated);
+            var result = mockLaptopRepo.Object.Update(newId);
             // Assert
-            Assert.That(result.Id, Is.EqualTo(newId));
+            Assert.That(result.Id, Is.EqualTo(newId.Id));
         }
 
         // Delete

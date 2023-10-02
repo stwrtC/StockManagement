@@ -38,12 +38,12 @@ namespace StockManagement_Test
             // Arrange
             var mockGPURepo = new Mock<GPURepository>();
             GPU newGPU = new GPU() { Name = "GTX1660", Quantity = 1, Price = 209.99m, Vram = 6, Cuda = 1408 };
-            var newId = mockGPURepo.Object.Add(newGPU).Id;
+            var newId = mockGPURepo.Object.Add(newGPU);
             GPU updated = new GPU() { Name = "Nvidia GTX 950", Quantity = 5, Price = 209.99m, Vram = 2, Cuda = 768 };
             // Act
-            var result = mockGPURepo.Object.Update(newId, updated);
+            var result = mockGPURepo.Object.Update(newId);
             // Assert
-            Assert.That(result.Id, Is.EqualTo(newId));
+            Assert.That(result.Id, Is.EqualTo(newId.Id));
         }
 
         // Delete

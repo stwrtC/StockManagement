@@ -105,7 +105,6 @@ namespace StockManagement
             {
                 var item = _gpuRepo.GetById(id);
                 Console.WriteLine($"ID: {item.Id}, Type: {nameof(GPU)}, Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
-                GPU newGPU = new GPU() {Name = item.Name, Quantity = item.Quantity, Price = item.Price, Vram = item.Vram, Cuda = item.Cuda };
                 bool cont = true;
                 while (cont)
                 {
@@ -124,33 +123,33 @@ namespace StockManagement
                         case 1:
                             Console.WriteLine("Input Name");
                             string name = Console.ReadLine();
-                            newGPU.Name = name;
+                            item.Name = name;
                             break;
                         case 2:
                             Console.WriteLine("Input VRAM in GB");
                             int vram = int.Parse(Console.ReadLine());
-                            newGPU.Vram = vram;
+                            item.Vram = vram;
                             break;
                         case 3:
                             Console.WriteLine("Input cuda cores");
                             int cuda = int.Parse(Console.ReadLine());
-                            newGPU.Cuda = cuda;
+                            item.Cuda = cuda;
                             break;
                         case 4:
                             Console.WriteLine("Input Price");
                             decimal price = decimal.Parse(Console.ReadLine());
-                            newGPU.Price = price;
+                            item.Price = price;
                             break;
                         case 5:
                             Console.WriteLine("Input Stock Quantity");
                             int quantity = int.Parse(Console.ReadLine());
-                            newGPU.Quantity = quantity;
+                            item.Quantity = quantity;
                             break;
                         case 6:
-                            Console.WriteLine($"Name: {newGPU.Name}, VRam: {newGPU.Vram}GB, Cuda: {newGPU.Cuda}, Price: {newGPU.Price}, Quantity: {newGPU.Quantity}");
+                            Console.WriteLine($"Name: {item.Name}, VRam: {item.Vram}GB, Cuda: {item.Cuda}, Price: {item.Price}, Quantity: {item.Quantity}");
                             break;
                         case 7:
-                            var newItem = _gpuRepo.Update(id, newGPU);
+                            var newItem = _gpuRepo.Update(item);
                             Console.WriteLine($"ID: {newItem.Id} has been updated successfully");
                             Console.WriteLine($"Name: {newItem.Name}, VRam: {newItem.Vram}GB, Cuda: {newItem.Cuda}, Price: {newItem.Price} , Quantity:  {newItem.Quantity}");
                             cont = false;
@@ -172,7 +171,6 @@ namespace StockManagement
             {
                 var item = _laptopRepo.GetById(id);
                 Console.WriteLine($"ID: {item.Id}, Type: {nameof(Laptop)}, Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
-                Laptop newLaptop = new Laptop {Name = item.Name, Quantity = item.Quantity, Price = item.Price, ScreenSize = item.ScreenSize, Ram = item.Ram, Storage = item.Storage };
                 bool cont = true;
                 while (cont)
                 {
@@ -193,38 +191,38 @@ namespace StockManagement
                         case 1:
                             Console.WriteLine("Input Name");
                             string name = Console.ReadLine();
-                            newLaptop.Name = name;
+                            item.Name = name;
                             break;
                         case 2:
                             Console.WriteLine("Input RAM in GB");
                             int ram = int.Parse(Console.ReadLine());
-                            newLaptop.Ram = ram;
+                            item.Ram = ram;
                             break;
                         case 3:
                             Console.WriteLine("Input storage in GB");
                             int storage = int.Parse(Console.ReadLine());
-                            newLaptop.Storage = storage;
+                            item.Storage = storage;
                             break;
                         case 4:
                             Console.WriteLine("Screen size in inches");
                             int screen = int.Parse(Console.ReadLine());
-                            newLaptop.ScreenSize = screen;
+                            item.ScreenSize = screen;
                             break;
                         case 5:
                             Console.WriteLine("Input Price");
                             decimal price = decimal.Parse(Console.ReadLine());
-                            newLaptop.Price = price;
+                            item.Price = price;
                             break;
                         case 6:
                             Console.WriteLine("Input Stock Quantity");
                             int quantity = int.Parse(Console.ReadLine());
-                            newLaptop.Quantity = quantity;
+                            item.Quantity = quantity;
                             break;
                         case 7:
-                            Console.WriteLine($"Name: {newLaptop.Name}, Ram: {newLaptop.Ram}GB, Storage: {newLaptop.Storage}GB, Screen Size: {newLaptop.ScreenSize}, Price: {newLaptop.Price}, Quantity: {newLaptop.Quantity}");
+                            Console.WriteLine($"Name: {item.Name}, Ram: {item.Ram}GB, Storage: {item.Storage}GB, Screen Size: {item.ScreenSize}, Price: {item.Price}, Quantity: {item.Quantity}");
                             break;
                         case 8:
-                            var newItem = _laptopRepo.Update(id, newLaptop);
+                            var newItem = _laptopRepo.Update(item);
                             Console.WriteLine($"ID: {newItem.Id} has been updated successfully");
                             Console.WriteLine($"ID: {newItem.Id}, Type: {nameof(Laptop)}, Name: {newItem.Name}, Ram: {newItem.Ram}GB, Storage: {newItem.Storage}GB, Screen Size: {newItem.ScreenSize}, Price: {newItem.Price}, Quantity: {newItem.Quantity}");
                             cont = false;

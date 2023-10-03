@@ -15,7 +15,8 @@ namespace StockManagement
         private static Search _search = new Search(_gpuRepo, _laptopRepo);
         public static void Main(string[] args)
         {
-            CRUD_Stock crud = new CRUD_Stock(_laptopRepo, _gpuRepo, _searchLaptop, _searchGPU);
+            CrudGPU _crudGPU = new CrudGPU(_gpuRepo, _searchGPU);
+            CrudLaptop _crudLaptop = new CrudLaptop(_laptopRepo,  _searchLaptop);
             bool cont = true;
             Console.WriteLine("Welcome to the Stock Management Console App");
 
@@ -45,11 +46,11 @@ namespace StockManagement
                         {
                             case 1:
                                 Console.Clear();
-                                crud.AddLaptop();
+                                _crudLaptop.Add();
                                 break;
                             case 2:
                                 Console.Clear();
-                                crud.AddGPU();
+                                _crudGPU.Add();
                                 break;
                             default:
                                 Console.Clear();
@@ -58,7 +59,8 @@ namespace StockManagement
                         break;
                     case 2:
                         Console.Clear();
-                        crud.ViewStock();
+                        _crudLaptop.ViewAll();
+                        _crudGPU.ViewAll();
                         break;
                     case 3:
                         Console.Clear();
@@ -67,7 +69,7 @@ namespace StockManagement
                         switch (_search.GetType(id))
                         {
                             case "GPU":
-                                crud.GetGPU(id);
+                                _crudGPU.Get(id);
                                 Console.WriteLine("Input '1' to update GPU");
                                 Console.WriteLine("Input '2' to delete GPU");
                                 Console.WriteLine("Input '3' to return to menu");
@@ -75,10 +77,10 @@ namespace StockManagement
                                 switch (select)
                                 {
                                     case 1:
-                                        crud.UpdateGPU(id);
+                                        _crudGPU.Update(id);
                                         break;
                                     case 2:
-                                        crud.DeleteGPU(id);
+                                        _crudGPU.Delete(id);
                                         break;
                                     case 3:
                                         break;
@@ -86,7 +88,7 @@ namespace StockManagement
 
                                 break;
                             case "Laptop":
-                                crud.GetLaptop(id);
+                                _crudLaptop.Get(id);
                                 Console.WriteLine("Input '1' to update Laptop");
                                 Console.WriteLine("Input '2' to delete Laptop");
                                 Console.WriteLine("Input '3' to return to menu");
@@ -94,10 +96,10 @@ namespace StockManagement
                                 switch (select)
                                 {
                                     case 1:
-                                        crud.UpdateLaptop(id);
+                                        _crudLaptop.Update(id);
                                         break;
                                     case 2:
-                                        crud.DeleteLaptop(id);
+                                        _crudLaptop.Delete(id);
                                         break;
                                     case 3:
                                         break;

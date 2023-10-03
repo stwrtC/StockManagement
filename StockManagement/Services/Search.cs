@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StockManagement.Interafces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Services
 {
-    public class Search
+    public class Search : ISearch
     {
         private readonly IStockRepository<GPU> _gpuRepo;
         private readonly IStockRepository<Laptop> _laptopRepo;
@@ -27,7 +28,7 @@ namespace StockManagement.Services
             {
                 return "Laptop";
             }
-            return null;
+            return String.Empty;
         }
 
 

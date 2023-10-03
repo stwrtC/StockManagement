@@ -11,12 +11,12 @@ namespace StockManagement_Test
         public void AddLaptop()
         {
             // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
+            var LaptopRepo = new LaptopRepository();
             Laptop newLaptop = new Laptop() { Name = "Macbook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
             // Act
-            mockLaptopRepo.Object.Add(newLaptop);
+            LaptopRepo.Add(newLaptop);
             // Assert
-            Assert.That(mockLaptopRepo.Object.GetAll(), Does.Contain(newLaptop));
+            Assert.That(LaptopRepo.GetAll(), Does.Contain(newLaptop));
         }
 
         // Read
@@ -24,9 +24,9 @@ namespace StockManagement_Test
         public void ReadLaptop()
         {
             // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
+            var LaptopRepo = new LaptopRepository();
             // Act
-            var result = mockLaptopRepo.Object.GetAll();
+            var result = LaptopRepo.GetAll();
             // Assert
             Assert.That(result, Is.Not.Null);
         }
@@ -36,12 +36,12 @@ namespace StockManagement_Test
         public void Update()
         {
             // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
+            var LaptopRepo = new LaptopRepository();
             Laptop newLaptop = new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
-            var newId = mockLaptopRepo.Object.Add(newLaptop);
+            var newId = LaptopRepo.Add(newLaptop);
             Laptop updated = new Laptop() { Name = "Macbook", Quantity = 3, Price = 1999.99m, ScreenSize = 17, Ram = 32, Storage = 1024 };
             // Act
-            var result = mockLaptopRepo.Object.Update(newId);
+            var result = LaptopRepo.Update(newId);
             // Assert
             Assert.That(result.Id, Is.EqualTo(newId.Id));
         }
@@ -51,13 +51,13 @@ namespace StockManagement_Test
         public void Delete()
         {
             // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
+            var LaptopRepo = new LaptopRepository();
             Laptop newLaptop = new Laptop() { Name = "Macbook", Quantity = 3, Price = 1999.99m, ScreenSize = 17, Ram = 32, Storage = 512 };
-            var newId = mockLaptopRepo.Object.Add(newLaptop).Id;
+            var newId = LaptopRepo.Add(newLaptop).Id;
             // Act
-            mockLaptopRepo.Object.Delete(newId);
+            LaptopRepo.Delete(newId);
             // Assert
-            Assert.That(mockLaptopRepo.Object.GetAll().Any(x => x.Id != newId));
+            Assert.That(LaptopRepo.GetAll().Any(x => x.Id != newId));
         }
 
     }

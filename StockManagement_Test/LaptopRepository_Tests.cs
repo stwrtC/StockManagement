@@ -6,12 +6,18 @@ namespace StockManagement_Test
 {
     public class LaptopRepository_Tests
     {
+        private static IStockRepository<Laptop> LaptopRepo;
+
+        [SetUp]
+        public void Setup()
+        {
+            LaptopRepo = new LaptopRepository();
+        }
         // Create
         [Test]
         public void AddLaptop()
         {
             // Arrange
-            var LaptopRepo = new LaptopRepository();
             Laptop newLaptop = new Laptop() { Name = "Macbook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
             // Act
             LaptopRepo.Add(newLaptop);
@@ -23,8 +29,6 @@ namespace StockManagement_Test
         [Test]
         public void ReadLaptop()
         {
-            // Arrange
-            var LaptopRepo = new LaptopRepository();
             // Act
             var result = LaptopRepo.GetAll();
             // Assert
@@ -36,7 +40,6 @@ namespace StockManagement_Test
         public void Update()
         {
             // Arrange
-            var LaptopRepo = new LaptopRepository();
             Laptop newLaptop = new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
             var newId = LaptopRepo.Add(newLaptop);
             Laptop updated = new Laptop() { Name = "Macbook", Quantity = 3, Price = 1999.99m, ScreenSize = 17, Ram = 32, Storage = 1024 };
@@ -51,7 +54,6 @@ namespace StockManagement_Test
         public void Delete()
         {
             // Arrange
-            var LaptopRepo = new LaptopRepository();
             Laptop newLaptop = new Laptop() { Name = "Macbook", Quantity = 3, Price = 1999.99m, ScreenSize = 17, Ram = 32, Storage = 512 };
             var newId = LaptopRepo.Add(newLaptop).Id;
             // Act

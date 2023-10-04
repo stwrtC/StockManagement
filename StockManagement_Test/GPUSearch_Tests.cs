@@ -6,11 +6,17 @@ namespace StockManagement_Test
 {
     public class GPUSearch_Tests
     {
+        private static Mock<GPURepository> mockGPURepo;
+
+        [SetUp]
+        public void SetUp()
+        {
+            mockGPURepo = new Mock<GPURepository>();
+        }
         [Test]
         public void GetIdByName()
         {
             // Arrange
-            var mockGPURepo = new Mock<GPURepository>();
             var searchGPU = new SearchGPU(mockGPURepo.Object);
             GPU newGPU = new GPU() { Name = "Nvidia GTX 1080", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
             var newId = mockGPURepo.Object.Add(newGPU).Id;
@@ -25,7 +31,6 @@ namespace StockManagement_Test
         public void IDExists()
         {
             // Arrange
-            var mockGPURepo = new Mock<GPURepository>();
             var searchGPU = new SearchGPU(mockGPURepo.Object);
             GPU newGPU = new GPU() { Name = "Nvidia GTX 1080", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
             var newId = mockGPURepo.Object.Add(newGPU).Id;

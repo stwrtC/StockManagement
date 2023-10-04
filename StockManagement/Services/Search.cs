@@ -28,7 +28,7 @@ namespace StockManagement.Services
             {
                 return "Laptop";
             }
-            return String.Empty;
+            return string.Empty;
         }
 
 

@@ -9,13 +9,19 @@ using System.Threading.Tasks;
 
 namespace StockManagement_Test
 {
-    internal class LaptopCalc_Tests
+    public class LaptopCalc_Tests
     {
+        private static Mock<LaptopRepository> mockLaptopRepo;
+
+        [SetUp]
+        public void SetUp()
+        {
+            mockLaptopRepo = new Mock<LaptopRepository>();
+        }
         [Test]
         public void TotalStockTest()
         {
             // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
             var laptopCalc = new LaptopCalc(mockLaptopRepo.Object);
             // Act
             int result = laptopCalc.TotalStock();
@@ -27,7 +33,6 @@ namespace StockManagement_Test
         public void TotalValueTest()
         {
             // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
             var laptopCalc = new LaptopCalc(mockLaptopRepo.Object);
             // Act
             var result = laptopCalc.TotalValue();

@@ -11,12 +11,19 @@ namespace StockManagement_Test
 {
     public class Search_Tests
     {
+        private static Mock<LaptopRepository> mockLaptopRepo;
+        private static Mock<GPURepository> mockGPURepo;
+
+        [SetUp]
+        public void SetUp()
+        {
+            mockLaptopRepo = new Mock<LaptopRepository>();
+            mockGPURepo = new Mock<GPURepository>();
+        }
         [Test]
         public void GetType()
         {
             // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
-            var mockGPURepo = new Mock<GPURepository>();
             Search search = new Search(mockGPURepo.Object, mockLaptopRepo.Object);
             Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
             var testID = mockLaptopRepo.Object.Add(newLaptop).Id;

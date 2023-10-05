@@ -6,11 +6,17 @@ namespace StockManagement_Test
 {
     public class LaptopSearch_Tests
     {
+        private static Mock<LaptopRepository> mockLaptopRepo;
+
+        [SetUp]
+        public void SetUp()
+        {
+            mockLaptopRepo = new Mock<LaptopRepository>();
+        }
         [Test]
         public void GetIdByName()
         {
             // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
             var searchLaptop = new SearchLaptop(mockLaptopRepo.Object);
             Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
             var newId = mockLaptopRepo.Object.Add(newLaptop).Id;
@@ -25,7 +31,6 @@ namespace StockManagement_Test
         public void IDExists()
         {
             // Arrange
-            var mockLaptopRepo = new Mock<LaptopRepository>();
             var searchLaptop = new SearchLaptop(mockLaptopRepo.Object);
             Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
             var newId = mockLaptopRepo.Object.Add(newLaptop).Id;

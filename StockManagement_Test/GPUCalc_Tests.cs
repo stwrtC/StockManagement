@@ -6,11 +6,17 @@ namespace StockManagement_Test
 {
     public class GPUCalc_Tests
     {
+        private static Mock<GPURepository> mockGPURepo;
+
+        [SetUp]
+        public void SetUp()
+        {
+            mockGPURepo = new Mock<GPURepository>();
+        }
         [Test]
         public void TotalStockTest()
         {
             // Arrange
-            var mockGPURepo = new Mock<GPURepository>();
             var gpuCalc = new GPUCalc(mockGPURepo.Object);
             // Act
             int result = gpuCalc.TotalStock();
@@ -22,7 +28,6 @@ namespace StockManagement_Test
         public void TotalValueTest()
         {
             // Arrange
-            var mockGPURepo = new Mock<GPURepository>();
             var gpuCalc = new GPUCalc(mockGPURepo.Object);
             // Act
             var result = gpuCalc.TotalValue();

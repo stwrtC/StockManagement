@@ -12,27 +12,22 @@ namespace StockManagement
         private static IGPUCalc _gpuCalc = new GPUCalc(_gpuRepo);
         private static ISearchLaptop _searchLaptop = new SearchLaptop(_laptopRepo);
         private static ISearchGPU _searchGPU = new SearchGPU(_gpuRepo);
+        private static Search _search = new Search(_gpuRepo, _laptopRepo);
         public static void Main(string[] args)
         {
-            CRUD_Stock crud = new CRUD_Stock(_laptopRepo, _gpuRepo, _searchLaptop, _searchGPU);
+            CrudGPU _crudGPU = new CrudGPU(_gpuRepo, _searchGPU);
+            CrudLaptop _crudLaptop = new CrudLaptop(_laptopRepo,  _searchLaptop);
             bool cont = true;
             Console.WriteLine("Welcome to the Stock Management Console App");
 
             while (cont)
             {
-
-                Console.WriteLine("Input '1' to add Laptop");
-                Console.WriteLine("Input '2' to add GPU");
-                Console.WriteLine("Input '3' to view all stock");
-                Console.WriteLine("Input '4' to view Laptop by ID");
-                Console.WriteLine("Input '5' to view GPU by ID");
-                Console.WriteLine("Input '6' to view stock level");
-                Console.WriteLine("Input '7' to view total value of stock");
-                Console.WriteLine("Input '8' to update Laptops");
-                Console.WriteLine("Input '9' to update GPUs");
-                Console.WriteLine("Input '10' to delete Laptops");
-                Console.WriteLine("Input '11' to delete GPUs");
-                Console.WriteLine("Input '12' to exit program");
+                int select;
+                Console.WriteLine("Input '1' to add stock");
+                Console.WriteLine("Input '2' to view all stock");
+                Console.WriteLine("Input '3' to get stock by ID");
+                Console.WriteLine("Input '4' to view stock statistics");
+                Console.WriteLine("Input '5' to exit program");
                 int? input = int.Parse(Console.ReadLine());
                 if (String.IsNullOrEmpty(input.ToString()))
                 {
@@ -42,40 +37,99 @@ namespace StockManagement
                 switch (input)
                 {
                     case 1:
-                        crud.AddLaptop();
+                        Console.Clear();
+                        Console.WriteLine("Input '1' to add Laptop");
+                        Console.WriteLine("Input '2' to add GPU");
+                        Console.WriteLine("Input '3' to return to menu");
+                        select = int.Parse(Console.ReadLine());
+                        switch (select)
+                        {
+                            case 1:
+                                Console.Clear();
+                                _crudLaptop.Add();
+                                break;
+                            case 2:
+                                Console.Clear();
+                                _crudGPU.Add();
+                                break;
+                            default:
+                                Console.Clear();
+                                break;
+                        }
                         break;
                     case 2:
-                        crud.AddGPU();
+                        Console.Clear();
+                        _crudLaptop.ViewAll();
+                        _crudGPU.ViewAll();
                         break;
                     case 3:
-                        crud.ViewStock();
+                        Console.Clear();
+                        Console.WriteLine("Please input stock ID");
+                        int id = int.Parse(Console.ReadLine());
+                        switch (_search.GetType(id))
+                        {
+                            case "GPU":
+                                _crudGPU.Get(id);
+                                Console.WriteLine("Input '1' to update GPU");
+                                Console.WriteLine("Input '2' to delete GPU");
+                                Console.WriteLine("Input '3' to return to menu");
+                                select = int.Parse(Console.ReadLine());
+                                switch (select)
+                                {
+                                    case 1:
+                                        _crudGPU.Update(id);
+                                        break;
+                                    case 2:
+                                        _crudGPU.Delete(id);
+                                        break;
+                                    case 3:
+                                        break;
+                                }
+
+                                break;
+                            case "Laptop":
+                                _crudLaptop.Get(id);
+                                Console.WriteLine("Input '1' to update Laptop");
+                                Console.WriteLine("Input '2' to delete Laptop");
+                                Console.WriteLine("Input '3' to return to menu");
+                                select = int.Parse(Console.ReadLine());
+                                switch (select)
+                                {
+                                    case 1:
+                                        _crudLaptop.Update(id);
+                                        break;
+                                    case 2:
+                                        _crudLaptop.Delete(id);
+                                        break;
+                                    case 3:
+                                        break;
+                                }
+                                break;
+                            default:
+                                Console.WriteLine($"{id} is not a valid ID.");
+                                break;
+                        }
                         break;
                     case 4:
-                        crud.GetLaptop();
+                        Console.Clear();
+                        Console.WriteLine("Input '1' to view total stock");
+                        Console.WriteLine("Input '2' to view total value");
+                        Console.WriteLine("Input '3' to return to menu");
+                        select = int.Parse(Console.ReadLine());
+                        switch (select)
+                        {
+                            case 1:
+                                Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock()} and the total stock of GPUs is {_gpuCalc.TotalStock()}.");
+                                break;
+                            case 2:
+                                Console.WriteLine($"The total value of all laptops is £{_laptopCalc.TotalValue()} and the total value of all GPUs is £{_gpuCalc.TotalValue()}.");
+                                break;
+                            case 3:
+                                break;
+                        }
+
                         break;
                     case 5:
-                        crud.GetGPU();
-                        break;
-                    case 6:
-                        Console.WriteLine($"The total stock of laptops is {_laptopCalc.TotalStock()} and the total stock of GPUs is {_gpuCalc.TotalStock()}.");
-                        break;
-                    case 7:
-                        Console.WriteLine($"The total value of all laptops is £{_laptopCalc.TotalValue()} and the total value of all GPUs is £{_gpuCalc.TotalValue()}.");
-                        break;
-
-                    case 8:
-                        crud.UpdateLaptop();
-                        break;
-                    case 9:
-                        crud.UpdateGPU();
-                        break;
-                    case 10:
-                        crud.DeleteLaptop();
-                        break;
-                    case 11:
-                        crud.DeleteGPU();
-                        break;
-                    case 12:
                         cont = false;
                         break;
                     default:

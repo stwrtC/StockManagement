@@ -39,17 +39,17 @@
         }
 
 
-        public Laptop? Update(int id, Laptop newStock)
+        public Laptop? Update(Laptop laptop)
         {
-            var item = GetById( id);
+            var item = GetById(laptop.Id);
             if (item != null)
             {
-                item.Name = newStock.Name;
-                item.Quantity = newStock.Quantity;
-                item.Price = newStock.Price;
-                item.ScreenSize = newStock.ScreenSize;
-                item.Storage = newStock.Storage;
-                item.Ram = newStock.Ram;
+                item.Name = laptop.Name;
+                item.Quantity = laptop.Quantity;
+                item.Price = laptop.Price;
+                item.ScreenSize = laptop.ScreenSize;
+                item.Storage = laptop.Storage;
+                item.Ram = laptop.Ram;
 
 
                 return item;

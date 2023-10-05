@@ -1,22 +1,29 @@
 using Moq;
 using StockManagement;
 using StockManagement.Services;
+using System.Runtime.CompilerServices;
 
 namespace StockManagement_Test
 {
     public class GPURepository_Tests
     {
-        // Create
-        [Test]
+        private static IStockRepository<GPU> GPURepo;
+
+        [SetUp]
+        public void SetUp() 
+        {
+            GPURepo = new GPURepository();
+        }
+    // Create
+    [Test]
         public void AddGPU()
         {
             // Arrange
-            var mockGPURepo = new Mock<GPURepository>();
             GPU newGPU = new GPU() { Name = "Nvidia GTX 1080", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
             // Act
-            mockGPURepo.Object.Add(newGPU);
+            GPURepo.Add(newGPU);
             // Assert
-            Assert.That(mockGPURepo.Object.GetAll(), Does.Contain(newGPU));
+            Assert.That(GPURepo.GetAll(), Does.Contain(newGPU));
         }
 
         // Read
@@ -24,9 +31,8 @@ namespace StockManagement_Test
         public void ReadGPU()
         {
             // Arrange
-            var mockGPURepo = new Mock<GPURepository>();
             // Act
-            var result = mockGPURepo.Object.GetAll();
+            var result = GPURepo.GetAll();
             // Assert
             Assert.That(result, Is.Not.Null);
         }
@@ -36,14 +42,13 @@ namespace StockManagement_Test
         public void Update()
         {
             // Arrange
-            var mockGPURepo = new Mock<GPURepository>();
             GPU newGPU = new GPU() { Name = "GTX1660", Quantity = 1, Price = 209.99m, Vram = 6, Cuda = 1408 };
-            var newId = mockGPURepo.Object.Add(newGPU).Id;
+            var newId = GPURepo.Add(newGPU);
             GPU updated = new GPU() { Name = "Nvidia GTX 950", Quantity = 5, Price = 209.99m, Vram = 2, Cuda = 768 };
             // Act
-            var result = mockGPURepo.Object.Update(newId, updated);
+            var result = GPURepo.Update(newId);
             // Assert
-            Assert.That(result.Id, Is.EqualTo(newId));
+            Assert.That(result.Id, Is.EqualTo(newId.Id));
         }
 
         // Delete
@@ -51,13 +56,12 @@ namespace StockManagement_Test
         public void Delete()
         {
             // Arrange
-            var mockGPURepo = new Mock<GPURepository>();
             GPU newGPU = new GPU() { Name = "Nvidia GTX 1080", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
-            var newId = mockGPURepo.Object.Add(newGPU).Id;
+            var newId = GPURepo.Add(newGPU).Id;
             // Act
-            mockGPURepo.Object.Delete(newId);
+            GPURepo.Delete(newId);
             // Assert
-            Assert.That(mockGPURepo.Object.GetAll().Any(x => x.Id != newId));
+            Assert.That(GPURepo.GetAll().Any(x => x.Id != newId));
         }
 
 

@@ -13,7 +13,7 @@ namespace StockManagement
         T? GetById(int id);
         IEnumerable<T> GetAll();
         T Add(T item);
-        T Update(int id, T stock);
+        T Update(T stock);
         void Delete(int id);
 
 

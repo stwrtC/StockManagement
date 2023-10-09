@@ -1,0 +1,18 @@
+[
+  {
+    "Vram": 2,
+    "Cuda": 768,
+    "Id": 4,
+    "Name": "Nvidia GTX 950",
+    "Quantity": 5,
+    "Price": 318.99
+  },
+  {
+    "Vram": 24,
+    "Cuda": 16384,
+    "Id": 5,
+    "Name": "Nvidia RTX 4090 Ti",
+    "Quantity": 1,
+    "Price": 1808.99
+  }
+]

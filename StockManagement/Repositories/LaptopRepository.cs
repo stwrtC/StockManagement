@@ -2,7 +2,7 @@
 {
     public class LaptopRepository : IStockRepository<Laptop>
     {
-        
+
         private List<Laptop> _laptops;
 
         public LaptopRepository()

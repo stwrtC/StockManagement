@@ -10,19 +10,27 @@ namespace StockManagement.Repositories
 {
     public class JsonLaptopRepository : IStockRepository<Laptop>
     {
-        private readonly string filePath = @"C:\dev\StockManagement\StockManagement\JSON\Laptops.json";
+        private readonly string filePath = @"C:\Users\stewartc\Documents\Laptops.json";        
         private List<Laptop> _laptops;
 
 
         public JsonLaptopRepository() 
         {
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath).Close();
+            }
             string fileContent = File.ReadAllText(filePath);
             _laptops = new List<Laptop>();
 
             List<Laptop> temp = JsonConvert.DeserializeObject<List<Laptop>>(fileContent);
-            foreach (Laptop x in temp)
+            if (temp != null )
             {
-                _laptops.Add(x);
+                foreach (Laptop x in temp)
+                {
+                    _laptops.Add(x);
+                }
+
             }
         }
         public Laptop Add(Laptop item)

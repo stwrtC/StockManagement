@@ -10,19 +10,27 @@ namespace StockManagement.Repositories
 {
     public class JsonGPURepository : IStockRepository<GPU>
     {
-        private readonly string filePath = @"C:\dev\StockManagement\StockManagement\JSON\GPUs.json";
+        private readonly string filePath = @"C:\Users\stewartc\Documents\GPUs.json";
         private List<GPU> _gpus;
 
 
         public JsonGPURepository() 
         {
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath).Close();
+            }
+
             string fileContent = File.ReadAllText(filePath);
             _gpus = new List<GPU>();
 
             List<GPU> temp = JsonConvert.DeserializeObject<List<GPU>>(fileContent);
-            foreach (GPU x in temp)
+            if(temp != null )
             {
-                _gpus.Add(x);
+                foreach (GPU x in temp)
+                {
+                    _gpus.Add(x);
+                }
             }
         }
         public GPU Add(GPU item)

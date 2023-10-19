@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using StockManagement.Interafces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,25 +21,21 @@ namespace StockManagement.Repositories
             {
                 File.Create(filePath).Close();
             }
-
             string fileContent = File.ReadAllText(filePath);
             _gpus = new List<GPU>();
 
-            List<GPU> temp = JsonConvert.DeserializeObject<List<GPU>>(fileContent);
-            if(temp != null )
-            {
-                foreach (GPU x in temp)
-                {
-                    _gpus.Add(x);
-                }
-            }
+            _gpus = JsonConvert.DeserializeObject<List<GPU>>(fileContent);
+
+
         }
         public GPU Add(GPU item)
         {
             _gpus.Add(item);
             string updatedJSon = JsonConvert.SerializeObject(_gpus, Formatting.Indented);
             File.WriteAllText(filePath, updatedJSon);
+
             return GetById(item.Id);
+
         }
 
         public void Delete(int id)
@@ -47,12 +44,9 @@ namespace StockManagement.Repositories
             if (item != null)
             {
                 GPU itemToRemove = _gpus.Find(x => x.Id == id);
-                _gpus.Remove(itemToRemove);
                 string updatedJSon = JsonConvert.SerializeObject(_gpus, Formatting.Indented);
                 File.WriteAllText(filePath, updatedJSon);
                 _gpus.Remove(item);
-
-
             }
         }
 

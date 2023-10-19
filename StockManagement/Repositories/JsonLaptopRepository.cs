@@ -23,15 +23,8 @@ namespace StockManagement.Repositories
             string fileContent = File.ReadAllText(filePath);
             _laptops = new List<Laptop>();
 
-            List<Laptop> temp = JsonConvert.DeserializeObject<List<Laptop>>(fileContent);
-            if (temp != null )
-            {
-                foreach (Laptop x in temp)
-                {
-                    _laptops.Add(x);
-                }
-
-            }
+            _laptops = JsonConvert.DeserializeObject<List<Laptop>>(fileContent);
+            
         }
         public Laptop Add(Laptop item)
         {

@@ -47,6 +47,8 @@
             if (item != null)
             {
                 item.Name = laptop.Name;
+                item.Brand = laptop.Brand;
+                item.Description = laptop.Description;
                 item.Quantity = laptop.Quantity;
                 item.Price = laptop.Price;
                 item.ScreenSize = laptop.ScreenSize;

@@ -54,6 +54,8 @@ namespace StockManagement
             if (item != null)
             {
                 item.Name = gpu.Name;
+                item.Brand = gpu.Brand;
+                item.Description = gpu.Description;
                 item.Quantity = gpu.Quantity;
                 item.Price = gpu.Price;
                 item.Vram = gpu.Vram;

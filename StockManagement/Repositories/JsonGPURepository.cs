@@ -43,10 +43,10 @@ namespace StockManagement.Repositories
             var item = GetById(id);
             if (item != null)
             {
+                _gpus.Remove(item);
                 GPU itemToRemove = _gpus.Find(x => x.Id == id);
                 string updatedJSon = JsonConvert.SerializeObject(_gpus, Formatting.Indented);
                 File.WriteAllText(filePath, updatedJSon);
-                _gpus.Remove(item);
             }
         }
 

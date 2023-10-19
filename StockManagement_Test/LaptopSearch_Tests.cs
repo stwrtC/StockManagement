@@ -6,12 +6,12 @@ namespace StockManagement_Test
 {
     public class LaptopSearch_Tests
     {
-        private static Mock<LaptopRepository> mockLaptopRepo;
+        private static Mock<IStockRepository<Laptop>> mockLaptopRepo;
 
         [SetUp]
         public void SetUp()
         {
-            mockLaptopRepo = new Mock<LaptopRepository>();
+            mockLaptopRepo = new Mock<IStockRepository<Laptop>>();
         }
         [Test]
         public void GetIdByName()
@@ -19,12 +19,13 @@ namespace StockManagement_Test
             // Arrange
             var searchLaptop = new SearchLaptop(mockLaptopRepo.Object);
             Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
-            var newId = mockLaptopRepo.Object.Add(newLaptop).Id;
+            mockLaptopRepo.Setup(x=> x.GetAll()).Returns(new List<Laptop> { newLaptop });
             string name = "Chromebook";
             // Act
             List<int> result = searchLaptop.GetIdsByName(name);
             // Assert
-            Assert.That(result, Does.Contain(newId));
+            mockLaptopRepo.Verify(x => x.GetAll());
+            Assert.That(result, Does.Contain(newLaptop.Id));
         }
 
         [Test]
@@ -33,10 +34,11 @@ namespace StockManagement_Test
             // Arrange
             var searchLaptop = new SearchLaptop(mockLaptopRepo.Object);
             Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
-            var newId = mockLaptopRepo.Object.Add(newLaptop).Id;
+            mockLaptopRepo.Setup(x => x.GetAll()).Returns(new List<Laptop> { newLaptop });
             // Act
-            bool result = searchLaptop.IDExists(newId);
+            bool result = searchLaptop.IDExists(newLaptop.Id);
             // Assert
+            mockLaptopRepo.Verify(x => x.GetAll());
             Assert.That(result, Is.EqualTo(true));
 
         }

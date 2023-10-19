@@ -1,0 +1,29 @@
+[
+  {
+    "ScreenSize": 17.0,
+    "Ram": 32,
+    "Storage": 512,
+    "Id": 1,
+    "Name": "Chromebook",
+    "Quantity": 5,
+    "Price": 229.99
+  },
+  {
+    "ScreenSize": 13.0,
+    "Ram": 8,
+    "Storage": 256,
+    "Id": 2,
+    "Name": "Macbook Pro (2022)",
+    "Quantity": 5,
+    "Price": 1225.0
+  },
+  {
+    "ScreenSize": 111.0,
+    "Ram": 2,
+    "Storage": 2,
+    "Id": 5,
+    "Name": "test",
+    "Quantity": 2,
+    "Price": 111.0
+  }
+]

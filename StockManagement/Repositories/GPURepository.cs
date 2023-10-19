@@ -15,10 +15,10 @@ namespace StockManagement
         {
             _gpus = new List<GPU>()
             {
-                new GPU() 
-                {Name = "Nvidia GTX 950", Quantity = 5, Price = 209.99m, Vram = 2, Cuda = 768 },
                 new GPU()
-                {Name = "Nvidia RTX 4090 Ti", Quantity = 1, Price = 1699.99m, Vram = 24, Cuda = 16384 }
+                {Name = "GTX 950", Brand = "Nvidia", Quantity = 5, Price = 209.99m, Vram = 2, Cuda = 768 },
+                new GPU()
+                {Name = "RTX 4090 Ti", Brand = "Nvidia", Quantity = 1, Price = 1699.99m, Vram = 24, Cuda = 16384 }
             };
             
         }

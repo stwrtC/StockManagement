@@ -6,25 +6,26 @@ namespace StockManagement_Test
 {
     public class GPUSearch_Tests
     {
-        private static Mock<GPURepository> mockGPURepo;
+        private static Mock<IStockRepository<GPU>> mockGPURepo;
 
         [SetUp]
         public void SetUp()
         {
-            mockGPURepo = new Mock<GPURepository>();
+            mockGPURepo = new Mock<IStockRepository<GPU>>();
         }
         [Test]
         public void GetIdByName()
         {
             // Arrange
             var searchGPU = new SearchGPU(mockGPURepo.Object);
-            GPU newGPU = new GPU() { Name = "Nvidia GTX 1080", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
-            var newId = mockGPURepo.Object.Add(newGPU).Id;
+            GPU newGPU = new GPU() { Name = "Nvidia GTX 1080 FROM THE MOCK", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
+            mockGPURepo.Setup(x => x.GetAll()).Returns(new List<GPU> { newGPU });
             string name = newGPU.Name;
             // Act
             List<int> result = searchGPU.GetIdsByName(name);
             // Assert
-            Assert.That(result, Does.Contain(newId));
+            mockGPURepo.Verify(x => x.GetAll());
+            Assert.That(result, Does.Contain(newGPU.Id));
         }
 
         [Test]
@@ -33,9 +34,9 @@ namespace StockManagement_Test
             // Arrange
             var searchGPU = new SearchGPU(mockGPURepo.Object);
             GPU newGPU = new GPU() { Name = "Nvidia GTX 1080", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
-            var newId = mockGPURepo.Object.Add(newGPU).Id;
+            mockGPURepo.Setup(x => x.GetAll()).Returns(new List<GPU> { newGPU });
             // Act
-            bool result = searchGPU.IDExists(newId);
+            bool result = searchGPU.IDExists(newGPU.Id);
             // Assert
             Assert.That(result, Is.EqualTo(true));
 

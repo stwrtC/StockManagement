@@ -6,34 +6,38 @@ namespace StockManagement_Test
 {
     public class GPUCalc_Tests
     {
-        private static Mock<GPURepository> mockGPURepo;
+        private static Mock<IStockRepository<GPU>> mockGPURepo;
 
         [SetUp]
         public void SetUp()
         {
-            mockGPURepo = new Mock<GPURepository>();
+            mockGPURepo = new Mock<IStockRepository<GPU>>();
         }
         [Test]
         public void TotalStockTest()
         {
             // Arrange
             var gpuCalc = new GPUCalc(mockGPURepo.Object);
+            GPU newGPU = new GPU() { Name = "Nvidia GTX 1080 FROM THE MOCK", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
+            mockGPURepo.Setup(x => x.GetAll()).Returns(new List<GPU> { newGPU});
             // Act
             int result = gpuCalc.TotalStock();
-            int expected = mockGPURepo.Object.GetAll().Select(x=>x.Quantity).Sum();
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            mockGPURepo.Verify(x => x.GetAll());
+            Assert.That(result, Is.EqualTo(newGPU.Quantity));
         }
         [Test]
         public void TotalValueTest()
         {
             // Arrange
             var gpuCalc = new GPUCalc(mockGPURepo.Object);
+            GPU newGPU = new GPU() { Name = "Nvidia GTX 1080 FROM THE MOCK", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
+            mockGPURepo.Setup(x => x.GetAll()).Returns(new List<GPU> { newGPU });
             // Act
             var result = gpuCalc.TotalValue();
-            var expected = mockGPURepo.Object.GetAll().Select(x => x.Price).Sum();
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            mockGPURepo.Verify(x => x.GetAll());
+            Assert.That(result, Is.EqualTo(newGPU.Price));
         }
 
 

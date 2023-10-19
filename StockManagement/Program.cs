@@ -1,13 +1,14 @@
 ﻿using StockManagement;
+using StockManagement.Interafces;
+using StockManagement.Repositories;
 using StockManagement.Services;
 
 namespace StockManagement
 {
     internal class Program
     {
-
-        private static IStockRepository<Laptop> _laptopRepo = new LaptopRepository();
-        private static IStockRepository<GPU> _gpuRepo = new GPURepository();
+        private static IStockRepository<Laptop> _laptopRepo = new JsonLaptopRepository();
+        private static IStockRepository<GPU> _gpuRepo = new JsonGPURepository();
         private static ILaptopCalc _laptopCalc = new LaptopCalc(_laptopRepo);
         private static IGPUCalc _gpuCalc = new GPUCalc(_gpuRepo);
         private static ISearchLaptop _searchLaptop = new SearchLaptop(_laptopRepo);

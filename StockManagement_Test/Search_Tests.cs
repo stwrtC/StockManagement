@@ -11,14 +11,14 @@ namespace StockManagement_Test
 {
     public class Search_Tests
     {
-        private static Mock<LaptopRepository> mockLaptopRepo;
-        private static Mock<GPURepository> mockGPURepo;
+        private static Mock<IStockRepository<Laptop>> mockLaptopRepo;
+        private static Mock<IStockRepository<GPU>> mockGPURepo;
 
         [SetUp]
         public void SetUp()
         {
-            mockLaptopRepo = new Mock<LaptopRepository>();
-            mockGPURepo = new Mock<GPURepository>();
+            mockLaptopRepo = new Mock<IStockRepository<Laptop>>();
+            mockGPURepo = new Mock<IStockRepository<GPU>>();
         }
         [Test]
         public void GetType()
@@ -26,9 +26,9 @@ namespace StockManagement_Test
             // Arrange
             Search search = new Search(mockGPURepo.Object, mockLaptopRepo.Object);
             Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
-            var testID = mockLaptopRepo.Object.Add(newLaptop).Id;
+            mockLaptopRepo.Setup(x => x.GetById(newLaptop.Id)).Returns(newLaptop);
             // Act
-            string result = search.GetType(testID);
+            string result = search.GetType(newLaptop.Id);
             string expected = "Laptop";
             // Assert
             Assert.That(result, Is.EqualTo(expected));

@@ -5,10 +5,12 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockManagement", "StockManagement\StockManagement.csproj", "{DE6A195D-4D68-44B2-A130-526FEB5E84FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagement_Test", "StockManagement_Test\StockManagement_Test.csproj", "{6F687058-214C-407A-BCCE-D4DC6DE51CF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockManagement_Test", "StockManagement_Test\StockManagement_Test.csproj", "{6F687058-214C-407A-BCCE-D4DC6DE51CF5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DE6A195D-4D68-44B2-A130-526FEB5E84FD} = {DE6A195D-4D68-44B2-A130-526FEB5E84FD}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagementAPI", "StockManagementAPI\StockManagementAPI.csproj", "{3000EC82-5809-4111-9030-85440936454C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,10 @@ Global
 		{6F687058-214C-407A-BCCE-D4DC6DE51CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F687058-214C-407A-BCCE-D4DC6DE51CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F687058-214C-407A-BCCE-D4DC6DE51CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3000EC82-5809-4111-9030-85440936454C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3000EC82-5809-4111-9030-85440936454C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3000EC82-5809-4111-9030-85440936454C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3000EC82-5809-4111-9030-85440936454C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

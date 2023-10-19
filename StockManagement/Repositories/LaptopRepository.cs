@@ -2,7 +2,7 @@
 {
     public class LaptopRepository : IStockRepository<Laptop>
     {
-        
+
         private List<Laptop> _laptops;
 
         public LaptopRepository()
@@ -10,7 +10,9 @@
             _laptops = new List<Laptop>()
             {
                 new Laptop()
-                {Name= "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512}
+                {Name= "Chromebook",  Brand = "Samsung", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512},
+                new Laptop()
+                {Name= "Macbook Pro (2022)",  Brand = "Apple", Quantity = 5, Price = 1225, ScreenSize = 13, Ram = 8, Storage = 256}
             };
         }
         public Laptop Add(Laptop item)

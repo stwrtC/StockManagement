@@ -3,19 +3,19 @@ using StockManagement;
 using StockManagement.Services;
 using System.Runtime.CompilerServices;
 
-namespace StockManagement_Test
+namespace StockManagement_Test.Repository_Tests
 {
     public class GPURepository_Tests
     {
         private static IStockRepository<GPU> GPURepo;
 
         [SetUp]
-        public void SetUp() 
+        public void SetUp()
         {
             GPURepo = new GPURepository();
         }
-    // Create
-    [Test]
+        // Create
+        [Test]
         public void AddGPU()
         {
             // Arrange
@@ -36,7 +36,7 @@ namespace StockManagement_Test
             // Assert
             Assert.That(result, Is.Not.Null);
         }
-        
+
         // Update
         [Test]
         public void Update()

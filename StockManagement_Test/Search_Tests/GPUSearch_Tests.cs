@@ -2,7 +2,7 @@
 using StockManagement;
 using StockManagement.Services;
 
-namespace StockManagement_Test
+namespace StockManagement_Test.Search_Tests.Search_Tests
 {
     public class GPUSearch_Tests
     {

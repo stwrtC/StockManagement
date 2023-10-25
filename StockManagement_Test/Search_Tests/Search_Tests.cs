@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement_Test
+namespace StockManagement_Test.Search_Tests
 {
-    public class Search_Tests
+    public class SearchTests
     {
         private static Mock<IStockRepository<Laptop>> mockLaptopRepo;
         private static Mock<IStockRepository<GPU>> mockGPURepo;
@@ -25,7 +25,7 @@ namespace StockManagement_Test
         {
             // Arrange
             Search search = new Search(mockGPURepo.Object, mockLaptopRepo.Object);
-            Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
+            Laptop newLaptop = new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
             mockLaptopRepo.Setup(x => x.GetById(newLaptop.Id)).Returns(newLaptop);
             // Act
             string result = search.GetType(newLaptop.Id);

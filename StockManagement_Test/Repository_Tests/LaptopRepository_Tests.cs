@@ -2,7 +2,7 @@
 using StockManagement;
 using StockManagement.Services;
 
-namespace StockManagement_Test
+namespace StockManagement_Test.Repository_Tests
 {
     public class LaptopRepository_Tests
     {

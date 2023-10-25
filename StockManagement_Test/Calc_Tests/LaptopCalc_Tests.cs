@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement_Test
+namespace StockManagement_Test.Calc_Tests
 {
     public class LaptopCalc_Tests
     {
@@ -23,7 +23,7 @@ namespace StockManagement_Test
         {
             // Arrange
             var laptopCalc = new LaptopCalc(mockLaptopRepo.Object);
-            Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
+            Laptop newLaptop = new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
             mockLaptopRepo.Setup(x => x.GetAll()).Returns(new List<Laptop> { newLaptop });
             // Act
             int result = laptopCalc.TotalStock();
@@ -36,7 +36,7 @@ namespace StockManagement_Test
         {
             // Arrange
             var laptopCalc = new LaptopCalc(mockLaptopRepo.Object);
-            Laptop newLaptop = (new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 });
+            Laptop newLaptop = new Laptop() { Name = "Chromebook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
             mockLaptopRepo.Setup(x => x.GetAll()).Returns(new List<Laptop> { newLaptop });
             // Act
             var result = laptopCalc.TotalValue();

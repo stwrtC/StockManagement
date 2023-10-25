@@ -2,7 +2,7 @@
 using StockManagement;
 using StockManagement.Services;
 
-namespace StockManagement_Test
+namespace StockManagement_Test.Calc_Tests
 {
     public class GPUCalc_Tests
     {
@@ -19,7 +19,7 @@ namespace StockManagement_Test
             // Arrange
             var gpuCalc = new GPUCalc(mockGPURepo.Object);
             GPU newGPU = new GPU() { Name = "Nvidia GTX 1080 FROM THE MOCK", Quantity = 1, Price = 329.99m, Vram = 8, Cuda = 2560 };
-            mockGPURepo.Setup(x => x.GetAll()).Returns(new List<GPU> { newGPU});
+            mockGPURepo.Setup(x => x.GetAll()).Returns(new List<GPU> { newGPU });
             // Act
             int result = gpuCalc.TotalStock();
             // Assert

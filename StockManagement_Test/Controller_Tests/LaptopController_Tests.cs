@@ -1,0 +1,87 @@
+﻿using Castle.Core.Internal;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
+using StockManagement;
+using StockManagement.API.Controllers;
+using StockManagement.Services;
+
+namespace StockManagement_Test.Controller_Tests
+{
+
+    public class LaptopController_Tests
+    {
+        private static T GetObjectResultContent<T>(ActionResult<T> result)
+        {
+            return (T)((ObjectResult)result.Result).Value;
+        }
+        private static Mock<IStockRepository<Laptop>> repository;
+
+        [SetUp]
+        public void SetUp()
+        {
+            repository = new Mock<IStockRepository<Laptop>>();
+        }
+
+        [Test]
+        public void GetLaptop()
+        {
+            // Arrange
+            var controller = new LaptopController(repository.Object);
+            Laptop item = new Laptop() { Id = 1 };
+            var laptops = new List<Laptop>() { item };
+            repository.Setup(x => x.GetAll()).Returns(laptops);
+            repository.Setup(x => x.GetById(1)).Returns(item);
+            // Act
+            var actionResult = controller.GetLaptop(item.Id);
+            // Assert
+            var resultObject = GetObjectResultContent(actionResult);
+            Assert.That(resultObject.Id, Is.EqualTo(item.Id));
+        }
+        [Test]
+        public void GetAll()
+        {
+            // Arrange
+            var controller = new LaptopController(repository.Object);
+            Laptop item = new Laptop() { Id = 1 };
+            var laptops = new List<Laptop>() { item };
+            repository.Setup(x => x.GetAll()).Returns(laptops);
+            // Act
+            var actionResult = controller.GetAll();
+
+
+            // Assert
+            var result = actionResult.Result as OkObjectResult;
+            Assert.That(result.Value, Is.Not.Null);
+        }
+
+        [Test]
+        public void AddLaptop()
+        {
+            var controller = new LaptopController(repository.Object);
+            Laptop newLaptop = new Laptop() { Id = 2, Name = "Macbook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
+            repository.Setup(x => x.Add(newLaptop)).Returns(newLaptop);
+            repository.Setup(x => x.GetById(2)).Returns(newLaptop);
+            // Act
+            var actionResult = controller.Create(newLaptop);
+            // Assert
+            var resultObject = GetObjectResultContent(actionResult);
+            Assert.That(resultObject.Name, Is.EqualTo(newLaptop.Name));
+        }
+
+        // Delete
+        [Test]
+        public void Delete()
+        {
+            // Arrange
+            var controller = new LaptopController(repository.Object);
+            Laptop newLaptop = new Laptop() { Id = 1, Name = "Macbook", Quantity = 3, Price = 1999.99m, ScreenSize = 17, Ram = 32, Storage = 512 };
+            repository.Setup(x => x.Delete(1));
+            repository.Setup(x => x.GetById(1)).Returns(newLaptop);
+            // Act
+            controller.Delete(1);
+            // Assert
+            repository.Verify(x => x.Delete(1));
+        }
+
+    }
+}

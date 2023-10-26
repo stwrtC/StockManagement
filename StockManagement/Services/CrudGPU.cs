@@ -1,5 +1,9 @@
 ﻿using StockManagement.Interafces;
 using StockManagement.Services;
+using StockManagementLibraries.Repositories;
+using StockManagementLibraries;
+
+
 
 namespace StockManagement
 {

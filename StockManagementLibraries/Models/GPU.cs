@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement
+namespace StockManagementLibraries.Models
 {
     public class GPU : Stock
     {
         [Required]
         public int Vram { get; set; }
+        [Required]
         public int Cuda { get; set; }
 
     }

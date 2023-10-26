@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using StockManagementLibraries.Repositories;
+using StockManagementLibraries;
+using StockManagementLibraries.Models;
+
 
 namespace StockManagement.API.Controllers
 {
@@ -36,6 +40,7 @@ namespace StockManagement.API.Controllers
             {
                 Name = entity.Name,
                 Brand = entity.Brand,
+                Description = entity.Description,
                 Quantity = entity.Quantity,
                 Price = entity.Price,
                 ScreenSize = entity.ScreenSize,
@@ -61,25 +66,6 @@ namespace StockManagement.API.Controllers
             _laptopRepository.Delete(id);
             return Ok($"Item with ID number {id} has been deleted");
         }
-
-        //[HttpPut("{id}")]
-        //public ActionResult<Laptop> Update(int id, [FromBody] Laptop laptop)
-        //{
-        //    var item = _laptopRepository.GetById(id);
-        //    if (item != null)
-        //    {
-        //        item.Name = laptop.Name;
-        //        item.Brand = laptop.Brand;
-        //        item.Description = laptop.Description;
-        //        item.Quantity = laptop.Quantity;
-        //        item.Price = laptop.Price;
-        //        item.ScreenSize = laptop.ScreenSize;
-        //        item.Storage = laptop.Storage;
-        //        item.Ram = laptop.Ram;
-        //        return NoContent();
-        //    };
-        //    return NotFound();
-        //}
 
         [HttpPatch("{id}")]
         public ActionResult PartialUpdate(int id, JsonPatchDocument<Laptop> patchDocument)

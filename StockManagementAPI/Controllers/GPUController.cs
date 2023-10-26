@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using StockManagementLibraries.Repositories;
+using StockManagementLibraries;
+using StockManagementLibraries.Models;
+
+
 
 namespace StockManagement.API.Controllers
 {
@@ -36,6 +41,7 @@ namespace StockManagement.API.Controllers
             {
                 Name = entity.Name,
                 Brand = entity.Brand,
+                Description = entity.Description,
                 Quantity = entity.Quantity,
                 Price = entity.Price,
                 Vram = entity.Vram,

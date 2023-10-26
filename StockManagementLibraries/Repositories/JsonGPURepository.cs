@@ -1,13 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using StockManagement.Interafces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StockManagementLibraries.Repositories;
 
-namespace StockManagement.Repositories
+
+namespace StockManagementLibraries.Repositories
 {
     public class JsonGPURepository : IStockRepository<GPU>
     {

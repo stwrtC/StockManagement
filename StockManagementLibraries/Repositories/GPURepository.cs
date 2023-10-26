@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement
+namespace StockManagementLibraries.Repositories
 {
     public class GPURepository : IStockRepository<GPU>
     {

@@ -1,5 +1,4 @@
-using StockManagement;
-using StockManagement.Repositories;
+using StockManagementLibraries.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

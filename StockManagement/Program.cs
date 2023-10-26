@@ -1,12 +1,18 @@
-﻿using StockManagement;
+﻿using log4net;
+using log4net.Config;
+using StockManagement;
 using StockManagement.Interafces;
-using StockManagement.Repositories;
+using StockManagementLibraries.Repositories;
+
+using StockManagementLibraries;
 using StockManagement.Services;
+using StockManagement.Logging;
 
 namespace StockManagement
 {
     internal class Program
     {
+        private static ILog _log = LogManager.GetLogger(typeof(Program));
         private static IStockRepository<Laptop> _laptopRepo = new JsonLaptopRepository();
         private static IStockRepository<GPU> _gpuRepo = new JsonGPURepository();
         private static ILaptopCalc _laptopCalc = new LaptopCalc(_laptopRepo);
@@ -16,6 +22,8 @@ namespace StockManagement
         private static Search _search = new Search(_gpuRepo, _laptopRepo);
         public static void Main(string[] args)
         {
+            XmlConfigurator.Configure(new FileInfo("../../../log4net.config"));
+            _log.Info($"{LogStrings.defaultMessage}{LogStrings.Http200}");
             CrudGPU _crudGPU = new CrudGPU(_gpuRepo, _searchGPU);
             CrudLaptop _crudLaptop = new CrudLaptop(_laptopRepo,  _searchLaptop);
             bool cont = true;

@@ -10,16 +10,14 @@ namespace StockManagement_Test.Controller_Tests
 
     public class LaptopController_Tests
     {
-        private static T GetObjectResultContent<T>(ActionResult<T> result)
-        {
-            return (T)((ObjectResult)result.Result).Value;
-        }
+        private static GetObjectResult helper;
         private static Mock<IStockRepository<Laptop>> repository;
 
         [SetUp]
         public void SetUp()
         {
             repository = new Mock<IStockRepository<Laptop>>();
+            helper =  new GetObjectResult();
         }
 
         [Test]
@@ -34,7 +32,7 @@ namespace StockManagement_Test.Controller_Tests
             // Act
             var actionResult = controller.GetLaptop(item.Id);
             // Assert
-            var resultObject = GetObjectResultContent(actionResult);
+            var resultObject = helper.GetObjectResultContent(actionResult);
             Assert.That(resultObject.Id, Is.EqualTo(item.Id));
         }
         [Test]
@@ -64,7 +62,7 @@ namespace StockManagement_Test.Controller_Tests
             // Act
             var actionResult = controller.Create(newLaptop);
             // Assert
-            var resultObject = GetObjectResultContent(actionResult);
+            var resultObject = helper.GetObjectResultContent(actionResult);
             Assert.That(resultObject.Name, Is.EqualTo(newLaptop.Name));
         }
 
@@ -78,9 +76,10 @@ namespace StockManagement_Test.Controller_Tests
             repository.Setup(x => x.Delete(1));
             repository.Setup(x => x.GetById(1)).Returns(newLaptop);
             // Act
-            controller.Delete(1);
+            var result = controller.Delete(1) as OkObjectResult;
             // Assert
-            repository.Verify(x => x.Delete(1));
+            repository.Verify(x => x.Delete(1), Times.Once());
+            Assert.That(result.StatusCode, Is.EqualTo(200));
         }
 
     }

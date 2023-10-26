@@ -6,17 +6,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement
+namespace StockManagementLibraries.Models
 {
     public abstract class Stock
     {
-        [Required]
         public int Id { get; set; }
+        [Required]
+        [MaxLength(55)]
         public string Name { get; set; }
+        [Required]
+        [MaxLength(55)]
         public string Brand { get; set; }
+        [MaxLength(255)]
         public string? Description { get; set; }
-
         public int Quantity { get; set; } = 0;
+        [Required]
         public decimal Price { get; set; }
 
         private static int UUID = 1;

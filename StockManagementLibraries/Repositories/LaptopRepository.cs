@@ -1,4 +1,4 @@
-﻿namespace StockManagement
+﻿namespace StockManagementLibraries.Repositories
 {
     public class LaptopRepository : IStockRepository<Laptop>
     {

@@ -1,12 +1,14 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using StockManagementLibraries.Repositories;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement.Repositories
+namespace StockManagementLibraries.Repositories
 {
     public class JsonLaptopRepository : IStockRepository<Laptop>
     {

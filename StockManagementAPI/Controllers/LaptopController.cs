@@ -3,24 +3,28 @@ using Microsoft.AspNetCore.Mvc;
 using StockManagementLibraries.Repositories;
 using StockManagementLibraries;
 using StockManagementLibraries.Models;
-
+using log4net;
+using StockManagementLibraries.Logging;
 
 namespace StockManagement.API.Controllers
 {
     [ApiController]
     [Route("api/laptops")]
-    public class LaptopController : Controller
+    public class LaptopController : ControllerBase
     {
         public readonly IStockRepository<Laptop> _laptopRepository;
+        private readonly ILogger _log;
 
-        public LaptopController(IStockRepository<Laptop> laptopRepository)
+        public LaptopController(IStockRepository<Laptop> laptopRepository, ILogger<LaptopController> log)
         {
             _laptopRepository = laptopRepository;
+            _log = log;            
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Laptop>> GetAll()
         {
+            _log.LogInformation($"{LogStrings.defaultMessage}{LogStrings.Http200}");
             return Ok(_laptopRepository.GetAll());
         }
         [HttpGet("{id}", Name = "GetLaptop")]
@@ -28,8 +32,10 @@ namespace StockManagement.API.Controllers
         {
             if (_laptopRepository.GetById(id) == null)
             {
+                _log.LogError($"{LogStrings.context404}{LogStrings.Http404}");
                 return NotFound("ID does not exist");
             }
+            _log.LogInformation($"{LogStrings.defaultMessage}{LogStrings.Http200}");
             return Ok(_laptopRepository.GetById(id));
         }
 
@@ -48,12 +54,33 @@ namespace StockManagement.API.Controllers
                 Storage = entity.Storage
             };
             _laptopRepository.Add(newItem);
-            return CreatedAtRoute("GetLaptop",
-                new
+
+            try
+            {
+                return CreatedAtRoute("GetLaptop",
+                                    new
+                                    {
+                                        id = newItem.Id
+                                    },
+                                    newItem);
+            }
+            finally
+            {
+                if (CreatedAtRoute("GetLaptop",
+                                    new
+                                    {
+                                        id = newItem.Id
+                                    },
+                                    newItem).StatusCode.Equals(201))
                 {
-                    id = newItem.Id
-                },
-                newItem);
+                    _log.LogInformation($"{LogStrings.context204}{LogStrings.Http201}");
+                }
+                else
+                {
+                    _log.LogError($"{LogStrings.context404}{LogStrings.Http400}");
+                }
+            }
+
         }
 
         [HttpDelete("{id}")]
@@ -61,9 +88,11 @@ namespace StockManagement.API.Controllers
         {
             if (_laptopRepository.GetById(id) == null)
             {
+                _log.LogError($"{LogStrings.context404}{LogStrings.Http404}");
                 return NotFound("ID does not exist");
             }
             _laptopRepository.Delete(id);
+            _log.LogInformation($"{LogStrings.defaultMessage}{LogStrings.Http200}");
             return Ok($"Item with ID number {id} has been deleted");
         }
 
@@ -73,6 +102,7 @@ namespace StockManagement.API.Controllers
             var item = _laptopRepository.GetById(id);
             if (item == null)
             {
+                _log.LogError($"{LogStrings.context404}{LogStrings.Http404}");
                 return NotFound();
             }
 
@@ -91,6 +121,7 @@ namespace StockManagement.API.Controllers
 
             if(!ModelState.IsValid)
             {
+                _log.LogError($"{LogStrings.context404}{LogStrings.Http400}");
                 return BadRequest();
             }
 
@@ -102,6 +133,7 @@ namespace StockManagement.API.Controllers
             item.ScreenSize = newItem.ScreenSize;
             item.Storage = newItem.Storage;
             item.Ram = newItem.Ram;
+            _log.LogInformation($"{LogStrings.context204}{LogStrings.Http204}");
             return NoContent();
         }
     }

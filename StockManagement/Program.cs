@@ -6,7 +6,7 @@ using StockManagementLibraries.Repositories;
 
 using StockManagementLibraries;
 using StockManagement.Services;
-using StockManagement.Logging;
+using StockManagementLibraries.Logging;
 
 namespace StockManagement
 {
@@ -56,10 +56,12 @@ namespace StockManagement
                             case 1:
                                 Console.Clear();
                                 _crudLaptop.Add();
+                                _log.Info($"{LogStrings.defaultMessage}{LogStrings.Http201}");
                                 break;
                             case 2:
                                 Console.Clear();
                                 _crudGPU.Add();
+                                _log.Info($"{LogStrings.defaultMessage}{LogStrings.Http201}");
                                 break;
                             default:
                                 Console.Clear();
@@ -70,6 +72,7 @@ namespace StockManagement
                         Console.Clear();
                         _crudLaptop.ViewAll();
                         _crudGPU.ViewAll();
+                        _log.Info($"{LogStrings.defaultMessage}{LogStrings.Http200}");
                         break;
                     case 3:
                         Console.Clear();
@@ -87,9 +90,11 @@ namespace StockManagement
                                 {
                                     case 1:
                                         _crudGPU.Update(id);
+                                        _log.Info($"{LogStrings.context204}{LogStrings.Http204}");
                                         break;
                                     case 2:
                                         _crudGPU.Delete(id);
+                                        _log.Info($"{LogStrings.defaultMessage}{LogStrings.Http200}");
                                         break;
                                     case 3:
                                         break;
@@ -106,9 +111,11 @@ namespace StockManagement
                                 {
                                     case 1:
                                         _crudLaptop.Update(id);
+                                        _log.Info($"{LogStrings.context204}{LogStrings.Http204}");
                                         break;
                                     case 2:
                                         _crudLaptop.Delete(id);
+                                        _log.Info($"{LogStrings.defaultMessage}{LogStrings.Http200}");
                                         break;
                                     case 3:
                                         break;
@@ -116,6 +123,7 @@ namespace StockManagement
                                 break;
                             default:
                                 Console.WriteLine($"{id} is not a valid ID.");
+                                _log.Info($"{LogStrings.context404}{LogStrings.Http404}");
                                 break;
                         }
                         break;
@@ -143,6 +151,7 @@ namespace StockManagement
                         break;
                     default:
                         Console.WriteLine("That was not a valid option, please try again.");
+                        _log.Info($"{LogStrings.defaultMessage}{LogStrings.Http400}");
                         break;
 
                 }

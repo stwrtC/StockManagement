@@ -1,5 +1,7 @@
 ﻿using Castle.Core.Internal;
+using Castle.Core.Logging;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using StockManagement;
 using StockManagement.API.Controllers;
@@ -12,26 +14,28 @@ namespace StockManagement_Test.Controller_Tests
     {
         private static GetObjectResult helper;
         private static Mock<IStockRepository<Laptop>> repository;
+        private static Mock<ILogger<LaptopController>> logger;
 
         [SetUp]
         public void SetUp()
         {
             repository = new Mock<IStockRepository<Laptop>>();
             helper =  new GetObjectResult();
+            logger = new Mock<ILogger<LaptopController>>();
         }
 
         [Test]
         public void GetLaptop()
         {
             // Arrange
-            var controller = new LaptopController(repository.Object);
+            var controller = new LaptopController(repository.Object, logger.Object);
             Laptop item = new Laptop() { Id = 1 };
             var laptops = new List<Laptop>() { item };
             repository.Setup(x => x.GetAll()).Returns(laptops);
             repository.Setup(x => x.GetById(1)).Returns(item);
             // Act
             var actionResult = controller.GetLaptop(item.Id);
-            // Assert
+            // Assert            
             var resultObject = helper.GetObjectResultContent(actionResult);
             Assert.That(resultObject.Id, Is.EqualTo(item.Id));
         }
@@ -39,7 +43,7 @@ namespace StockManagement_Test.Controller_Tests
         public void GetAll()
         {
             // Arrange
-            var controller = new LaptopController(repository.Object);
+            var controller = new LaptopController(repository.Object, logger.Object);
             Laptop item = new Laptop() { Id = 1 };
             var laptops = new List<Laptop>() { item };
             repository.Setup(x => x.GetAll()).Returns(laptops);
@@ -55,7 +59,7 @@ namespace StockManagement_Test.Controller_Tests
         [Test]
         public void AddLaptop()
         {
-            var controller = new LaptopController(repository.Object);
+            var controller = new LaptopController(repository.Object, logger.Object);
             Laptop newLaptop = new Laptop() { Id = 2, Name = "Macbook", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512 };
             repository.Setup(x => x.Add(newLaptop)).Returns(newLaptop);
             repository.Setup(x => x.GetById(2)).Returns(newLaptop);
@@ -71,7 +75,7 @@ namespace StockManagement_Test.Controller_Tests
         public void Delete()
         {
             // Arrange
-            var controller = new LaptopController(repository.Object);
+            var controller = new LaptopController(repository.Object, logger.Object);
             Laptop newLaptop = new Laptop() { Id = 1, Name = "Macbook", Quantity = 3, Price = 1999.99m, ScreenSize = 17, Ram = 32, Storage = 512 };
             repository.Setup(x => x.Delete(1));
             repository.Setup(x => x.GetById(1)).Returns(newLaptop);

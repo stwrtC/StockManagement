@@ -22,7 +22,7 @@ namespace StockManagement.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<GPU>> GetAll()
         {
-            _log.LogInformation($"{LogStrings.defaultMessage}{LogStrings.Http200}");
+            _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
             return Ok(_gpuRepository.GetAll());
         }
         [HttpGet("{id}", Name = "GetGPU")]
@@ -30,10 +30,10 @@ namespace StockManagement.API.Controllers
         {
             if (_gpuRepository.GetById(id) == null)
             {
-                _log.LogError($"{LogStrings.context404}{LogStrings.Http404}");
+                _log.LogError($"{LogStrings.RequestFailed}{LogStrings.Http404}");
                 return NotFound("ID does not exist");
             }
-            _log.LogInformation($"{LogStrings.defaultMessage}{LogStrings.Http200}");
+            _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
             return Ok(_gpuRepository.GetById(id));
         }
 
@@ -52,31 +52,20 @@ namespace StockManagement.API.Controllers
             };
             _gpuRepository.Add(newItem);
             
-            try
+            if(ModelState.IsValid)
             {
-                return CreatedAtRoute("GetGPU",
-                                    new
-                                    {
-                                        id = newItem.Id
-                                    },
-                                    newItem);                
+                _log.LogInformation($"{LogStrings.RequestSuccessful}{LogStrings.Http201}");
+
             }
-            finally
-            {
-                if(CreatedAtRoute("GetGPU",
-                                    new
-                                    {
-                                        id = newItem.Id
-                                    },
-                                    newItem).StatusCode.Equals(201))
-                    {
-                    _log.LogInformation($"{LogStrings.context204}{LogStrings.Http201}");
-                }
-                else
+
+            return CreatedAtRoute("GetGPU",
+                new
                 {
-                    _log.LogError($"{LogStrings.context404}{LogStrings.Http400}");
-                }
-            }
+                    id = newItem.Id
+                },
+                newItem);
+
+
         }
 
         [HttpDelete("{id}")]
@@ -84,11 +73,11 @@ namespace StockManagement.API.Controllers
         {
             if (_gpuRepository.GetById(id) == null)
             {
-                _log.LogError($"{LogStrings.context404}{LogStrings.Http404}");
+                _log.LogError($"{LogStrings.RequestFailed}{LogStrings.Http404}");
                 return NotFound("ID does not exist");
             }
             _gpuRepository.Delete(id);
-            _log.LogInformation($"{LogStrings.defaultMessage}{LogStrings.Http200}");
+            _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
             return Ok($"Item with ID number {id} has been deleted");
 
         }
@@ -99,7 +88,7 @@ namespace StockManagement.API.Controllers
             var item = _gpuRepository.GetById(id);
             if (item == null)
             {
-                _log.LogError($"{LogStrings.context404}{LogStrings.Http404}");
+                _log.LogError($"{LogStrings.RequestFailed}{LogStrings.Http404}");
                 return NotFound();
             }
 
@@ -117,7 +106,7 @@ namespace StockManagement.API.Controllers
 
             if (!ModelState.IsValid)
             {
-                _log.LogError($"{LogStrings.context404}{LogStrings.Http400}");
+                _log.LogError($"{LogStrings.RequestFailed}{LogStrings.Http400}");
                 return BadRequest();
             }
 
@@ -129,7 +118,7 @@ namespace StockManagement.API.Controllers
             item.Vram = newItem.Vram;
             item.Cuda = newItem.Cuda;
 
-            _log.LogInformation($"{LogStrings.context204}{LogStrings.Http204}");
+            _log.LogInformation($"{LogStrings.RequestSuccessful}{LogStrings.Http204}");
             return NoContent();
         }
 

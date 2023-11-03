@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using StockManagementLibraries.Models;
 using System.Reflection;
 using Microsoft.Extensions.Logging.Log4Net.AspNetCore.Extensions;
-
+using StockManagement.API.Controllers;
+using StockManagementLibraries.Logging;
+using Microsoft.AspNetCore.Http.Extensions;
 
 internal class Program
 {
@@ -22,7 +24,25 @@ internal class Program
         });
         // Add services to the container.
 
-        builder.Services.AddControllers().AddNewtonsoftJson()
+        builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+        {
+            var builtInFactory = options.InvalidModelStateResponseFactory;
+
+            options.InvalidModelStateResponseFactory = context =>
+            {
+                if (context.HttpContext.Request.GetDisplayUrl().Contains("gpus"))
+                {
+                    var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<GPUController>>();
+                    logger.LogError($"{LogStrings.RequestFailed}{LogStrings.Http400}");
+                }
+                else if(context.HttpContext.Request.GetDisplayUrl().Contains("laptops"))
+                {
+                    var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<LaptopController>>();
+                    logger.LogError($"{LogStrings.RequestFailed}{LogStrings.Http400}");
+                }
+                return builtInFactory(context);
+            };
+        }).AddNewtonsoftJson()
           .AddXmlDataContractSerializerFormatters();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
@@ -52,14 +72,4 @@ internal class Program
 
         app.Run();
     }
-    //public static IHostBuilder CreateHostBuilder(string[] args) =>
-    //Host.CreateDefaultBuilder(args)
-    //.ConfigureWebHostDefaults(webBuilder =>
-    //{
-    //    webBuilder.UseStartup<Program>();
-    //}).ConfigureLogging(builder =>
-    //{
-    //    builder.SetMinimumLevel(LogLevel.Trace);
-    //    builder.AddLog4Net("log4net.config");
-    //});
 }

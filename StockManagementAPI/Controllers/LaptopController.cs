@@ -24,7 +24,7 @@ namespace StockManagement.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Laptop>> GetAll()
         {
-            _log.LogInformation($"{LogStrings.defaultMessage}{LogStrings.Http200}");
+            _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
             return Ok(_laptopRepository.GetAll());
         }
         [HttpGet("{id}", Name = "GetLaptop")]
@@ -32,10 +32,10 @@ namespace StockManagement.API.Controllers
         {
             if (_laptopRepository.GetById(id) == null)
             {
-                _log.LogError($"{LogStrings.context404}{LogStrings.Http404}");
+                _log.LogError($"{LogStrings.RequestFailed}{LogStrings.Http404}");
                 return NotFound("ID does not exist");
             }
-            _log.LogInformation($"{LogStrings.defaultMessage}{LogStrings.Http200}");
+            _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
             return Ok(_laptopRepository.GetById(id));
         }
 
@@ -55,31 +55,18 @@ namespace StockManagement.API.Controllers
             };
             _laptopRepository.Add(newItem);
 
-            try
+            if (ModelState.IsValid)
             {
-                return CreatedAtRoute("GetLaptop",
-                                    new
-                                    {
-                                        id = newItem.Id
-                                    },
-                                    newItem);
+                _log.LogInformation($"{LogStrings.RequestSuccessful}{LogStrings.Http201}");
+
             }
-            finally
-            {
-                if (CreatedAtRoute("GetLaptop",
-                                    new
-                                    {
-                                        id = newItem.Id
-                                    },
-                                    newItem).StatusCode.Equals(201))
+
+            return CreatedAtRoute("GetLaptop",
+                new
                 {
-                    _log.LogInformation($"{LogStrings.context204}{LogStrings.Http201}");
-                }
-                else
-                {
-                    _log.LogError($"{LogStrings.context404}{LogStrings.Http400}");
-                }
-            }
+                    id = newItem.Id
+                },
+                newItem);
 
         }
 
@@ -88,11 +75,11 @@ namespace StockManagement.API.Controllers
         {
             if (_laptopRepository.GetById(id) == null)
             {
-                _log.LogError($"{LogStrings.context404}{LogStrings.Http404}");
+                _log.LogError($"{LogStrings.RequestFailed}{LogStrings.Http404}");
                 return NotFound("ID does not exist");
             }
             _laptopRepository.Delete(id);
-            _log.LogInformation($"{LogStrings.defaultMessage}{LogStrings.Http200}");
+            _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
             return Ok($"Item with ID number {id} has been deleted");
         }
 
@@ -102,7 +89,7 @@ namespace StockManagement.API.Controllers
             var item = _laptopRepository.GetById(id);
             if (item == null)
             {
-                _log.LogError($"{LogStrings.context404}{LogStrings.Http404}");
+                _log.LogError($"{LogStrings.RequestFailed}{LogStrings.Http404}");
                 return NotFound();
             }
 
@@ -121,7 +108,7 @@ namespace StockManagement.API.Controllers
 
             if(!ModelState.IsValid)
             {
-                _log.LogError($"{LogStrings.context404}{LogStrings.Http400}");
+                _log.LogError($"{LogStrings.RequestFailed}{LogStrings.Http400}");
                 return BadRequest();
             }
 
@@ -133,7 +120,7 @@ namespace StockManagement.API.Controllers
             item.ScreenSize = newItem.ScreenSize;
             item.Storage = newItem.Storage;
             item.Ram = newItem.Ram;
-            _log.LogInformation($"{LogStrings.context204}{LogStrings.Http204}");
+            _log.LogInformation($"{LogStrings.RequestSuccessful}{LogStrings.Http204}");
             return NoContent();
         }
     }

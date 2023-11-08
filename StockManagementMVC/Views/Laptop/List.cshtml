@@ -1,0 +1,12 @@
+﻿@model LaptopListViewModel
+
+
+<h1>@Model.StockType</h1>
+@foreach(var laptop in Model.Laptops)
+{
+    <div>
+        <h2>@laptop.Name</h2>
+        <h3>@laptop.Brand</h3>
+        <h4>@laptop.Price.ToString("c")</h4>
+    </div>
+}

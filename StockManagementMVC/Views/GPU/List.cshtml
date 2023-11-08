@@ -1,0 +1,12 @@
+﻿@model GPUListViewModel
+
+
+<h1>@Model.StockType</h1>
+@foreach (var gpu in Model.GPUs)
+{
+    <div>
+        <h2>@gpu.Name</h2>
+        <h3>@gpu.Brand</h3>
+        <h4>@gpu.Price.ToString("c")</h4>
+    </div>
+}

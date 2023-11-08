@@ -14,7 +14,7 @@ namespace StockManagement.API.Controllers
         public readonly IStockRepository<GPU> _gpuRepository;
         private readonly ILogger _log;
 
-        public GPUController(IStockRepository<GPU> gpuRepository, ILogger<LaptopController> log)
+        public GPUController(IStockRepository<GPU> gpuRepository, ILogger<GPUController> log)
         {
             _gpuRepository = gpuRepository;
             _log = log;

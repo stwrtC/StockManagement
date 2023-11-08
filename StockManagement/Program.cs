@@ -1,12 +1,18 @@
-﻿using StockManagement;
+﻿using log4net;
+using log4net.Config;
+using StockManagement;
 using StockManagement.Interafces;
-using StockManagement.Repositories;
+using StockManagementLibraries.Repositories;
+
+using StockManagementLibraries;
 using StockManagement.Services;
+using StockManagementLibraries.Logging;
 
 namespace StockManagement
 {
     internal class Program
     {
+        private static ILog _log = LogManager.GetLogger(typeof(Program));
         private static IStockRepository<Laptop> _laptopRepo = new JsonLaptopRepository();
         private static IStockRepository<GPU> _gpuRepo = new JsonGPURepository();
         private static ILaptopCalc _laptopCalc = new LaptopCalc(_laptopRepo);
@@ -16,6 +22,7 @@ namespace StockManagement
         private static Search _search = new Search(_gpuRepo, _laptopRepo);
         public static void Main(string[] args)
         {
+            XmlConfigurator.Configure(new FileInfo("../../../log4net.config"));
             CrudGPU _crudGPU = new CrudGPU(_gpuRepo, _searchGPU);
             CrudLaptop _crudLaptop = new CrudLaptop(_laptopRepo,  _searchLaptop);
             bool cont = true;
@@ -48,10 +55,12 @@ namespace StockManagement
                             case 1:
                                 Console.Clear();
                                 _crudLaptop.Add();
+                                _log.Info($"{LogStrings.DefaultMessage}");
                                 break;
                             case 2:
                                 Console.Clear();
                                 _crudGPU.Add();
+                                _log.Info($"{LogStrings.DefaultMessage}");
                                 break;
                             default:
                                 Console.Clear();
@@ -62,6 +71,7 @@ namespace StockManagement
                         Console.Clear();
                         _crudLaptop.ViewAll();
                         _crudGPU.ViewAll();
+                        _log.Info($"{LogStrings.DefaultMessage}");
                         break;
                     case 3:
                         Console.Clear();
@@ -79,9 +89,11 @@ namespace StockManagement
                                 {
                                     case 1:
                                         _crudGPU.Update(id);
+                                        _log.Info($"{LogStrings.RequestSuccessful}");
                                         break;
                                     case 2:
                                         _crudGPU.Delete(id);
+                                        _log.Info($"{LogStrings.DefaultMessage}");
                                         break;
                                     case 3:
                                         break;
@@ -98,9 +110,11 @@ namespace StockManagement
                                 {
                                     case 1:
                                         _crudLaptop.Update(id);
+                                        _log.Info($"{LogStrings.RequestSuccessful}");
                                         break;
                                     case 2:
                                         _crudLaptop.Delete(id);
+                                        _log.Info($"{LogStrings.DefaultMessage}");
                                         break;
                                     case 3:
                                         break;
@@ -108,6 +122,7 @@ namespace StockManagement
                                 break;
                             default:
                                 Console.WriteLine($"{id} is not a valid ID.");
+                                _log.Info($"{LogStrings.RequestFailed}");
                                 break;
                         }
                         break;
@@ -135,6 +150,7 @@ namespace StockManagement
                         break;
                     default:
                         Console.WriteLine("That was not a valid option, please try again.");
+                        _log.Info($"{LogStrings.DefaultMessage}");
                         break;
 
                 }

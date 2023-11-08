@@ -22,6 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+	  <Using Include="StockManagementLibraries.Repositories"/>
+	  <Using Include="StockManagementLibraries"/>
+	  <Using Include="StockManagementLibraries.Models"/>
+
+	  <ProjectReference Include="..\StockManagementAPI\StockManagementAPI.csproj" />
+    <ProjectReference Include="..\StockManagementLibraries\StockManagementLibraries.csproj" />
     <ProjectReference Include="..\StockManagement\StockManagement.csproj" />
   </ItemGroup>
 

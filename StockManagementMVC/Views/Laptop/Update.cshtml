@@ -1,0 +1,51 @@
+﻿@model Laptop
+
+<form asp-action="Update" method="post" role="form">
+    <h3>Updating Laptop</h3>
+    @{
+        var laptop = ViewBag.item;
+    }
+    <div>
+        <div>
+
+            <div>
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" value=@laptop.Name class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Brand" class="form-label"></label>
+                <input asp-for="Brand" value=@laptop.Brand class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" value=@laptop.Description class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Storage" class="form-label"></label>
+                <input asp-for="Storage" value=@laptop.Storage class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Ram" class="form-label"></label>
+                <input asp-for="Ram" value=@laptop.Ram class="form-control" />
+            </div>
+            <div>
+                <label asp-for="ScreenSize" class="form-label"></label>
+                <input asp-for="ScreenSize" value=@laptop.ScreenSize class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" value=@laptop.Price class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Quantity" class="form-label"></label>
+                <input asp-for="Quantity" value=@laptop.Quantity class="form-control" />
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="submit" class="btn btn-secondary" value="Submit Update" />
+            </div>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,47 @@
+﻿@model GPU
+
+<form asp-action="Update" method="post" role="form">
+    <h3>Updating GPU</h3>
+    @{
+        var gpu = ViewBag.item;
+    }
+    <div>
+        <div>
+
+            <div>
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" value=@gpu.Name class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Brand" class="form-label"></label>
+                <input asp-for="Brand" value=@gpu.Brand class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" value=@gpu.Description class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Vram" class="form-label"></label>
+                <input asp-for="Vram" value=@gpu.Vram class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Cuda" class="form-label"></label>
+                <input asp-for="Cuda" value=@gpu.Cuda class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" value=@gpu.Price class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Quantity" class="form-label"></label>
+                <input asp-for="Quantity" value=@gpu.Quantity class="form-control" />
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="submit" class="btn btn-secondary" value="Submit Update" />
+            </div>
+        </div>
+    </div>
+
+</form>

@@ -9,7 +9,7 @@ namespace StockManagementMVC.ViewModels
         public LaptopListViewModel(IEnumerable<Laptop> laptops) 
         { 
             Laptops = laptops;
-            StockType = typeof(Laptop).ToString();
+            StockType = nameof(Laptop);
         }
     }
 }

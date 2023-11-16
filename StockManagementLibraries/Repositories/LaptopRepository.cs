@@ -10,9 +10,9 @@
             _laptops = new List<Laptop>()
             {
                 new Laptop()
-                {Name= "Chromebook",  Brand = "Samsung", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512},
+                {Name= "Chromebook",  Brand = "Samsung", Quantity = 5, Price = 199, ScreenSize = 17, Ram = 32, Storage = 512, ImageThumbnail = "https://m.media-amazon.com/images/I/713vNsqcW0L._AC_SL1500_.jpg"},
                 new Laptop()
-                {Name= "Macbook Pro (2022)",  Brand = "Apple", Quantity = 5, Price = 1225, ScreenSize = 13, Ram = 8, Storage = 256}
+                {Name= "Macbook Pro (2022)",  Brand = "Apple", Quantity = 5, Price = 1225, ScreenSize = 13, Ram = 8, Storage = 256, ImageThumbnail="https://m.media-amazon.com/images/I/61NRYreJ2cL._AC_SL1500_.jpg"}
             };
         }
         public Laptop Add(Laptop item)

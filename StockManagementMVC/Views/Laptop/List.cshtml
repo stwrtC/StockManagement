@@ -2,11 +2,35 @@
 
 
 <h1>@Model.StockType</h1>
-@foreach(var laptop in Model.Laptops)
-{
-    <div>
-        <h2>@laptop.Name</h2>
-        <h3>@laptop.Brand</h3>
-        <h4>@laptop.Price.ToString("c")</h4>
-    </div>
-}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    @foreach (var laptop in Model.Laptops)
+    {
+        <div class="col">
+            <div class="card laptop-card">
+                <img style="max-width: 320px; max-height: 200px" src="@laptop.ImageThumbnail" class="card-img-top" alt="@laptop.Name">
+                <div class="card-body laptop-button">
+                    <h4 class="d-grid">
+                    </h4>
+
+                    <div class="d-flex justify-content-between mt-2">
+                        <h2 class="text-start">
+                            <a class="laptop-link" asp-controller="Laptop" asp-action="Details" asp-route-id ="@laptop.Id">@laptop.Name</a>
+                        </h2>
+                        <h5 class="text-nowrap">
+                            @laptop.Price.ToString("c")
+                        </h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<div>
+    <a class="btn btn-secondary" asp-controller="Laptop"
+       asp-action="Create"><h4>Create new Laptop</h4></a>
+</div>
+

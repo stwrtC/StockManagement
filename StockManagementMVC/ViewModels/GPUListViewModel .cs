@@ -9,7 +9,7 @@ namespace StockManagementMVC.ViewModels
         public GPUListViewModel(IEnumerable<GPU> gpus) 
         { 
             GPUs = gpus;
-            StockType = typeof(GPU).ToString();
+            StockType = nameof(GPU);
         }
     }
 }

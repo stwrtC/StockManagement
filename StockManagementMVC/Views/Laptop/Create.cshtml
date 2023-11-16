@@ -1,0 +1,50 @@
+﻿@model Laptop
+
+<form asp-action="Create" method="post" role="form">
+    <h3>Adding new Laptop to repository</h3>
+    <h4>Fields with * are required</h4>
+
+    <div>
+        <div>
+
+            <div>
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Brand" class="form-label"></label>
+                <input asp-for="Brand" class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Storage" class="form-label"></label>
+                <input asp-for="Storage" class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Ram" class="form-label"></label>
+                <input asp-for="Ram" class="form-control" />
+            </div>
+            <div>
+                <label asp-for="ScreenSize" class="form-label"></label>
+                <input asp-for="ScreenSize" class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control" />
+            </div>
+            <div>
+                <label asp-for="Quantity" class="form-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="submit" class="btn btn-secondary" value="Submit new Laptop"/>
+            </div>
+        </div>
+    </div>
+
+</form>

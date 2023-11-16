@@ -1,0 +1,17 @@
+﻿@model HomeViewModel
+
+<form asp-controller="Home" asp-action="Search" method="post">
+    <p>
+        <label for="searchType"></label>
+        <select id="searchType" asp-for=searchType>
+            <option value="searchID">ID</option>
+            <option value="searchName">Name</option>
+            <option value="searchBrand">Brand</option>
+        </select>
+        <input type="text" asp-for=searchString/>
+        <input type="submit" value="Search" asp-controller="Home" asp-action="Search" />
+    </p>
+    
+
+
+</form>

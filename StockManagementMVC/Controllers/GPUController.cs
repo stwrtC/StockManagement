@@ -18,7 +18,7 @@ namespace StockManagementMVC.Controllers
             _log = log;
         }
 
-        public IActionResult List()
+        public ViewResult List()
         {
             GPUListViewModel gpuListViewModel = new GPUListViewModel(_gpuRepository.GetAll());
             _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
@@ -30,7 +30,7 @@ namespace StockManagementMVC.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(GPU entity)
+        public ActionResult<GPU> Create(GPU entity)
         {
             var newItem = new GPU()
             {

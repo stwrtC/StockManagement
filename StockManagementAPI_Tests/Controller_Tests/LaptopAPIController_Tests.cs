@@ -6,11 +6,12 @@ using Moq;
 using StockManagement;
 using StockManagement.API.Controllers;
 using StockManagement.Services;
+using StockManagementLibraries.Test_Helper;
 
 namespace StockManagement_Test.Controller_Tests
 {
 
-    public class LaptopController_Tests
+    public class LaptopAPIController_Tests
     {
         private static GetObjectResult helper;
         private static Mock<IStockRepository<Laptop>> repository;

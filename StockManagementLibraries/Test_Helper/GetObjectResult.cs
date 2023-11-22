@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManagement_Test.Controller_Tests
+namespace StockManagementLibraries.Test_Helper
 {
     public class GetObjectResult
     {

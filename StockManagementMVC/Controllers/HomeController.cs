@@ -19,12 +19,12 @@ namespace StockManagementMVC.Controllers
             return View();
         }
 
-        [Route("Search/{searchType}/{searchString}")]
-        public IActionResult Search(string searchType, string searchString)
+        //[Route("Home/Search/{searchBy}/{searchString}")]
+        public IActionResult Search(string searchBy, string searchString)
         {
             List<Laptop> laptopResult = new List<Laptop>();
             List<GPU> gpuResult = new List<GPU>();
-            switch (searchType)
+            switch (searchBy)
             {
                 case "ID":
                     laptopResult = _laptopRepository.GetAll().Where(x => x.Id == int.Parse(searchString)).ToList();
@@ -34,15 +34,15 @@ namespace StockManagementMVC.Controllers
                     return View();
 
                 case "Name":
-                    laptopResult = _laptopRepository.GetAll().Where(x => x.Name == searchString).ToList();
-                    gpuResult = _gpuRepository.GetAll().Where(x => x.Name == searchString).ToList();
+                    laptopResult = _laptopRepository.GetAll().Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
+                    gpuResult = _gpuRepository.GetAll().Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
                     ViewBag.laptops = laptopResult;
                     ViewBag.gpus = gpuResult;
                     return View();
 
                 case "Brand":
-                    laptopResult = _laptopRepository.GetAll().Where(x => x.Brand == searchString).ToList();
-                    gpuResult = _gpuRepository.GetAll().Where(x => x.Brand == searchString).ToList();
+                    laptopResult = _laptopRepository.GetAll().Where(x => x.Brand.ToLower().Contains(searchString.ToLower())).ToList();
+                    gpuResult = _gpuRepository.GetAll().Where(x => x.Brand.ToLower().Contains(searchString.ToLower())).ToList();
                     ViewBag.laptops = laptopResult;
                     ViewBag.gpus = gpuResult;
                     return View();

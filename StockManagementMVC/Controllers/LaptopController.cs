@@ -19,7 +19,7 @@ namespace StockManagementMVC.Controllers
             _log = log;
         }
 
-        public IActionResult List()
+        public ViewResult List()
         {
             LaptopListViewModel laptopListViewModel = new LaptopListViewModel(_laptopRepository.GetAll());
             _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");

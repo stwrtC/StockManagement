@@ -1,10 +1,10 @@
-﻿@model GPU
+﻿@model ItemViewModel<GPU>
 
 
 <a asp-action="Delete" method="GET"></a>
 <h1>Would you like to delete this item from the repository?</h1>
 @{
-    var gpu = ViewBag.item;
+    var gpu = Model.Item;
 }
 <div>
     <h2>ID: @gpu.Id</h2>

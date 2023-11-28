@@ -20,7 +20,7 @@ namespace StockManagementMVC.Controllers
 
         public ViewResult List()
         {
-            GPUListViewModel gpuListViewModel = new GPUListViewModel(_gpuRepository.GetAll());
+            ListViewModel<GPU> gpuListViewModel = new ListViewModel<GPU>(_gpuRepository.GetAll());
             _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
             return View(gpuListViewModel);
         }
@@ -56,26 +56,36 @@ namespace StockManagementMVC.Controllers
         public IActionResult Delete(int id)
         {
             var item = _gpuRepository.GetById(id);
-            ViewBag.item = item;
-            return View();
+            ItemViewModel<GPU> model = new ItemViewModel<GPU>(item)
+            {
+                Item = item
+            };
+
+            return View(model);
         }
         [Route("GPU/ConfirmDelete/{id}")]
         public IActionResult ConfirmDelete(int id)
         {
             var item = _gpuRepository.GetById(id);
-            ViewBag.item = item;
+            ItemViewModel<GPU> model = new ItemViewModel<GPU>(item)
+            {
+                Item = item
+            };
             _gpuRepository.Delete(id);
             _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
-            return View();
+            return View(model);
         }
 
         [Route("GPU/Update/{id}")]
         public IActionResult Update(int id)
         {
             var item = _gpuRepository.GetById(id);
-            ViewBag.item = item;
+            ItemViewModel<GPU> model = new ItemViewModel<GPU>(item)
+            {
+                Item = item
+            };
 
-            return View();
+            return View(model);
         }
 
         [HttpPost, Route("GPU/Update/{id}")]
@@ -111,6 +121,10 @@ namespace StockManagementMVC.Controllers
             {
                 old.Vram = entity.Vram;
             }
+            if(entity.ImageThumbnail != null)
+            {
+                old.ImageThumbnail = entity.ImageThumbnail;
+            }
 
 
             _gpuRepository.Update(old);
@@ -126,9 +140,12 @@ namespace StockManagementMVC.Controllers
             {
                 return NotFound();
             }
-            ViewBag.item = item;
+            ItemViewModel<GPU> model = new ItemViewModel<GPU>(item)
+            {
+                Item = item
+            };
 
-            return View(item);
+            return View(model);
         }
 
     }

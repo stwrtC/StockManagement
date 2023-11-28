@@ -1,23 +1,26 @@
-﻿@model Laptop
+﻿@model ItemViewModel<Laptop>
+@{
+    var laptop = Model.Item;
+}
 
-<h2 class="my-5">@Model.Name</h2>
-<h3>@Model.Brand</h3>
+<h2 class="my-5">@laptop.Name</h2>
+<h3>@laptop.Brand</h3>
 
 <div class="row gx-5">
-    <img alt="@Model.Name" style="max-width: 500px; max-height: 400px" src="@Model.ImageThumbnail" class="img-fluid col-5" />
+    <img alt="@laptop.Name" style="max-width: 500px; max-height: 400px" src="@laptop.ImageThumbnail" class="img-fluid col-5" />
     <div class="col-7">
-        <h4>@Model.Description</h4>
-        <h4>Screen Size: @Model.ScreenSize"</h4>
-        <h4>Storage: @Model.Storage GB</h4>
-        <h4>Ram: @Model.Ram GB</h4>
-        <h4>Quantity: @Model.Quantity</h4>
-        <h3 class="pull-right">@Model.Price.ToString("c")</h3>
+        <h4>@laptop.Description</h4>
+        <h4>Screen Size: @laptop.ScreenSize"</h4>
+        <h4>Storage: @laptop.Storage GB</h4>
+        <h4>Ram: @laptop.Ram GB</h4>
+        <h4>Quantity: @laptop.Quantity</h4>
+        <h5 class="pull-right">@laptop.Price.ToString("c")</h5>
 
         <div>
             <a class="btn btn-secondary" asp-controller="Laptop"
-               asp-action="Delete" asp-route-id="@Model.Id"><h4>Delete item</h4></a>
+               asp-action="Delete" asp-route-id="@laptop.Id"><h4>Delete item</h4></a>
             <a class="btn btn-secondary" asp-controller="Laptop"
-               asp-action="Update" asp-route-id="@Model.Id"><h4>Update item</h4></a>
+               asp-action="Update" asp-route-id="@laptop.Id"><h4>Update item</h4></a>
         </div>
 
     </div>

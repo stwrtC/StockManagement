@@ -35,8 +35,8 @@ internal class Program
                 return builtInFactory(context);
             };
         });
-        builder.Services.AddSingleton<IStockRepository<GPU>, GPURepository>();
-        builder.Services.AddSingleton<IStockRepository<Laptop>, LaptopRepository>();
+        builder.Services.AddSingleton<IStockRepository<GPU>, JsonGPURepository>();
+        builder.Services.AddSingleton<IStockRepository<Laptop>, JsonLaptopRepository>();
         var app = builder.Build();
 
         app.UseStaticFiles();

@@ -1,10 +1,10 @@
-﻿@model GPU
+﻿@model ItemViewModel<GPU>
 
 
 <form asp-action="ConfirmDelete" method="Post">
     <h1>Item successfully deleted from repository</h1>
     @{
-        var gpu = ViewBag.item;
+        var gpu = Model.Item;
     }
 
 

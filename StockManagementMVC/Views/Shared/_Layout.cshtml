@@ -37,6 +37,24 @@
                             <li class="nav-item">
                                 <a asp-controller="GPU" asp-action="List" class="nav-link">GPUs</a>
                             </li>
+                            <li class="nav-item">
+                                <a asp-controller="Shipment" asp-action="Index" class="nav-link">Shipment</a>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-controller="Home" asp-action="Search" method="get">
+                                    <div>
+                                        <label for="searchBy"></label>
+                                        <select for="searchBy" name="searchBy">
+                                            <option value="ID">ID</option>
+                                            <option value="Name">Name</option>
+                                            <option value="Brand">Brand</option>
+                                        </select>
+                                        <input for="searchString" type="text" name="searchString" />
+                                        <input type="submit" value="Search" asp-controller="Home" asp-action="Search" />
+                                    </div>
+                                </form>
+
+                            </li>
 
                         </ul>
                     </div>

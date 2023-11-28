@@ -65,6 +65,9 @@ namespace StockManagementLibraries.Repositories
             if (item != null)
             {
                 item.Name = laptop.Name;
+                item.Brand = laptop.Brand;
+                item.Description = laptop.Description;
+                item.ImageThumbnail = laptop.ImageThumbnail;
                 item.Quantity = laptop.Quantity;
                 item.Price = laptop.Price;
                 item.ScreenSize = laptop.ScreenSize;

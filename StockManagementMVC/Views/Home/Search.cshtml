@@ -1,12 +1,8 @@
-﻿@model HomeViewModel
+﻿@model SearchViewModel
 
-@{
-    var gpus = ViewBag.gpus;
-    var laptops = ViewBag.laptops;
-}
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
-    @foreach (var gpu in gpus)
+    @foreach (var gpu in Model.GPUs)
     {
         <div class="col">
             <div class="card gpu-card">
@@ -28,7 +24,7 @@
             </div>
         </div>
     }
-    @foreach (var laptop in laptops)
+    @foreach (var laptop in Model.Laptops)
     {
         <div class="col">
             <div class="card laptop-card">

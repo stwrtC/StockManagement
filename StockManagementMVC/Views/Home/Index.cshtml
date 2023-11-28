@@ -1,7 +1,7 @@
-﻿@model HomeViewModel
+﻿@model SearchViewModel
 
 <form asp-controller="Home" asp-action="Index" method="get">
-    <p>
+    <div>
         <label for="searchBy"></label>
         <select asp-for="searchBy">
             <option value="ID">ID</option>
@@ -9,12 +9,10 @@
             <option value="Brand">Brand</option>
         </select>
         <input asp-for="searchString" type="text" name="searchString" />
-        <input type="submit" value="Search" asp-controller="Home" asp-action="Search"/>
-    </p>
-    
-
-
+        <input type="submit" value="Search" asp-controller="Home" asp-action="Search" />
+    </div>
 </form>
+
 
 
 

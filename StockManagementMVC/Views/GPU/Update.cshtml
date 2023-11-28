@@ -1,41 +1,46 @@
-﻿@model GPU
+﻿@model ItemViewModel<GPU>
 
 <form asp-action="Update" method="post" role="form">
     <h3>Updating GPU</h3>
     @{
-        var gpu = ViewBag.item;
+        var gpu = Model.Item;
     }
     <div>
         <div>
 
             <div>
-                <label asp-for="Name" class="form-label"></label>
-                <input asp-for="Name" value=@gpu.Name class="form-control" />
+                <label asp-for="@gpu.Name" class="form-label"></label>
+                <input asp-for="@gpu.Name" value=@gpu.Name class="form-control" />
             </div>
             <div>
-                <label asp-for="Brand" class="form-label"></label>
-                <input asp-for="Brand" value=@gpu.Brand class="form-control" />
+                <label asp-for="@gpu.Brand" class="form-label"></label>
+                <input asp-for="@gpu.Brand" value=@gpu.Brand class="form-control" />
             </div>
             <div>
-                <label asp-for="Description" class="form-label"></label>
-                <input asp-for="Description" value=@gpu.Description class="form-control" />
+                <label asp-for="@gpu.Description" class="form-label"></label>
+                <input asp-for="@gpu.Description" value=@gpu.Description class="form-control" />
             </div>
             <div>
-                <label asp-for="Vram" class="form-label"></label>
-                <input asp-for="Vram" value=@gpu.Vram class="form-control" />
+                <label asp-for="@gpu.Vram" class="form-label"></label>
+                <input asp-for="@gpu.Vram" value=@gpu.Vram class="form-control" />
             </div>
             <div>
-                <label asp-for="Cuda" class="form-label"></label>
-                <input asp-for="Cuda" value=@gpu.Cuda class="form-control" />
+                <label asp-for="@gpu.Cuda" class="form-label"></label>
+                <input asp-for="@gpu.Cuda" value=@gpu.Cuda class="form-control" />
             </div>
             <div>
-                <label asp-for="Price" class="form-label"></label>
-                <input asp-for="Price" value=@gpu.Price class="form-control" />
+                <label asp-for="@gpu.Price" class="form-label"></label>
+                <input asp-for="@gpu.Price" value=@gpu.Price class="form-control" />
             </div>
             <div>
-                <label asp-for="Quantity" class="form-label"></label>
-                <input asp-for="Quantity" value=@gpu.Quantity class="form-control" />
+                <label asp-for="@gpu.Quantity" class="form-label"></label>
+                <input asp-for="@gpu.Quantity" value=@gpu.Quantity class="form-control" />
             </div>
+            <div>
+                <label asp-for="@gpu.ImageThumbnail" class="form-label"></label>
+                <input asp-for="@gpu.ImageThumbnail" value=@gpu.ImageThumbnail class="form-control" />
+            </div>
+
         </div>
         <div>
             <div>

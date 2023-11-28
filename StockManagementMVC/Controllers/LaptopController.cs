@@ -21,7 +21,7 @@ namespace StockManagementMVC.Controllers
 
         public ViewResult List()
         {
-            LaptopListViewModel laptopListViewModel = new LaptopListViewModel(_laptopRepository.GetAll());
+            ListViewModel<Laptop> laptopListViewModel = new ListViewModel<Laptop>(_laptopRepository.GetAll());
             _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
             return View(laptopListViewModel);
 
@@ -60,64 +60,80 @@ namespace StockManagementMVC.Controllers
         public IActionResult Delete(int id)
         {
             var item = _laptopRepository.GetById(id);
-            ViewBag.item = item;
-            return View();
+            ItemViewModel<Laptop> model = new ItemViewModel<Laptop>(item)
+            {
+                Item = item
+            };
+            return View(model);
         }
         [Route("Laptop/ConfirmDelete/{id}")]
         public IActionResult ConfirmDelete(int id)
         {
             var item = _laptopRepository.GetById(id);
-            ViewBag.item = item;
+            ItemViewModel<Laptop> model = new ItemViewModel<Laptop>(item)
+            {
+                Item = item
+            };
             _laptopRepository.Delete(id);
             _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
-            return View();
+            return View(model);
         }
 
-        [Route("Laptop/Update/{id}")]
+        [HttpGet, Route("Laptop/Update/{id}")]
         public IActionResult Update(int id)
         {
             var item = _laptopRepository.GetById(id);
-            ViewBag.item = item;
+            ItemViewModel<Laptop> model = new ItemViewModel<Laptop>(item)
+            {
+                Item = item 
+            };
 
-            return View();
+
+            return View(model);
         }
 
         [HttpPost,Route("Laptop/Update/{id}")]
-        public IActionResult Update(int id, Laptop entity)
+        public IActionResult Update(int id, Laptop updated)
         {
+
             var old = _laptopRepository.GetById(id);
 
-            if(!String.IsNullOrEmpty(entity.Name))
+
+            if (!string.IsNullOrEmpty(updated.Name))
             {
-                old.Name = entity.Name;
+                old.Name = updated.Name;
             }
-            if (!String.IsNullOrEmpty(entity.Brand))
+            if (!string.IsNullOrEmpty(updated.Brand))
             {
-                old.Brand = entity.Brand;
+                old.Brand = updated.Brand;
             }
-            if (!String.IsNullOrEmpty(entity.Description))
+            if (!string.IsNullOrEmpty(updated.Description))
             {
-                old.Description = entity.Description;
+                old.Description = updated.Description;
             }
-            if ( entity.Quantity != 0)
+            if ( updated.Quantity != 0)
             {
-                old.Quantity = entity.Quantity;
+                old.Quantity = updated.Quantity;
             }
-            if (entity.Price != 0)
+            if (updated.Price != 0)
             {
-                old.Price = entity.Price;
+                old.Price = updated.Price;
             }
-            if (entity.ScreenSize != 0)
+            if (updated.ScreenSize != 0)
             {
-                old.ScreenSize = entity.ScreenSize;
+                old.ScreenSize = updated.ScreenSize;
             }
-            if (entity.Storage != 0)
+            if (updated.Storage != 0)
             {
-                old.Storage = entity.Storage;
+                old.Storage = updated.Storage;
             }
-            if (entity.Ram != 0)
+            if (updated.Ram != 0)
             {
-                old.Ram = entity.Ram;
+                old.Ram = updated.Ram;
+            }
+            if (updated.ImageThumbnail != null)
+            {
+                old.ImageThumbnail = updated.ImageThumbnail;
             }
 
 
@@ -134,9 +150,12 @@ namespace StockManagementMVC.Controllers
             {
                 return NotFound();
             }
-            ViewBag.item = item;
+            ItemViewModel<Laptop> model = new ItemViewModel<Laptop>(item)
+            {
+                Item = item
+            };
 
-            return View(item);
+            return View(model);
         }
 
     }

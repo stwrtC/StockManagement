@@ -1,45 +1,50 @@
-﻿@model Laptop
+﻿@model ItemViewModel<Laptop>
 
 <form asp-action="Update" method="post" role="form">
     <h3>Updating Laptop</h3>
     @{
-        var laptop = ViewBag.item;
+        var laptop = Model.Item;
     }
     <div>
         <div>
 
             <div>
-                <label asp-for="Name" class="form-label"></label>
-                <input asp-for="Name" value=@laptop.Name class="form-control" />
+                <label asp-for="Item.Name" class="form-label"></label>
+                <input asp-for="Item.Name" value=@laptop.Name class="form-control" />
             </div>
             <div>
-                <label asp-for="Brand" class="form-label"></label>
-                <input asp-for="Brand" value=@laptop.Brand class="form-control" />
+                <label asp-for="Item.Brand" class="form-label"></label>
+                <input asp-for="Item.Brand" value=@laptop.Brand class="form-control" />
             </div>
             <div>
-                <label asp-for="Description" class="form-label"></label>
-                <input asp-for="Description" value=@laptop.Description class="form-control" />
+                <label asp-for="Item.Description" class="form-label"></label>
+                <input asp-for="Item.Description" value=@laptop.Description class="form-control" />
             </div>
             <div>
-                <label asp-for="Storage" class="form-label"></label>
-                <input asp-for="Storage" value=@laptop.Storage class="form-control" />
+                <label asp-for="Item.Storage" class="form-label"></label>
+                <input asp-for="Item.Storage" value=@laptop.Storage class="form-control" />
             </div>
             <div>
-                <label asp-for="Ram" class="form-label"></label>
-                <input asp-for="Ram" value=@laptop.Ram class="form-control" />
+                <label asp-for="Item.Ram" class="form-label"></label>
+                <input asp-for="Item.Ram" value=@laptop.Ram class="form-control" />
             </div>
             <div>
-                <label asp-for="ScreenSize" class="form-label"></label>
-                <input asp-for="ScreenSize" value=@laptop.ScreenSize class="form-control" />
+                <label asp-for="Item.ScreenSize" class="form-label"></label>
+                <input asp-for="Item.ScreenSize" value=@laptop.ScreenSize class="form-control" />
             </div>
             <div>
-                <label asp-for="Price" class="form-label"></label>
-                <input asp-for="Price" value=@laptop.Price class="form-control" />
+                <label asp-for="Item.Price" class="form-label"></label>
+                <input asp-for="Item.Price" value=@laptop.Price class="form-control" />
             </div>
             <div>
-                <label asp-for="Quantity" class="form-label"></label>
-                <input asp-for="Quantity" value=@laptop.Quantity class="form-control" />
+                <label asp-for="Item.Quantity" class="form-label"></label>
+                <input asp-for="Item.Quantity" value=@laptop.Quantity class="form-control" />
             </div>
+            <div>
+                <label asp-for="Item.ImageThumbnail" class="form-label"></label>
+                <input asp-for="Item.ImageThumbnail" value=@laptop.ImageThumbnail class="form-control" />
+            </div>
+
         </div>
         <div>
             <div>

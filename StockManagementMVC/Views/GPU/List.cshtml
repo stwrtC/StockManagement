@@ -1,11 +1,11 @@
-﻿@model GPUListViewModel
+﻿@model ListViewModel<GPU>
 
 
 <h1>@Model.StockType</h1>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
 
-    @foreach (var gpu in Model.GPUs)
+    @foreach (var gpu in Model.StockList)
     {
         <div class="col">
             <div class="card gpu-card">

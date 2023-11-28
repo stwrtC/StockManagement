@@ -1,22 +1,25 @@
-﻿@model GPU
+﻿@model ItemViewModel<GPU>
+@{
+    var gpu = Model.Item;
+}
 
-<h2 class="my-5">@Model.Name</h2>
-<h3>@Model.Brand</h3>
+<h2 class="my-5">@gpu.Name</h2>
+<h3>@gpu.Brand</h3>
 
 <div class="row gx-5">
-    <img alt="@Model.Name" style="max-width: 500px; max-height: 400px" src="@Model.ImageThumbnail" class="img-fluid col-5" />
+    <img alt="@gpu.Name" style="max-width: 500px; max-height: 400px" src="@gpu.ImageThumbnail" class="img-fluid col-5" />
     <div class="col-7">
-        <h4>@Model.Description</h4>
-        <h4>Cuda Cores: @Model.Cuda"</h4>
-        <h4>VRam: @Model.Vram GB</h4>
-        <h4>Quantity: @Model.Quantity</h4>
-        <h3 class="pull-right">@Model.Price.ToString("c")</h3>
+        <h4>@gpu.Description</h4>
+        <h4>Cuda Cores: @gpu.Cuda</h4>
+        <h4>VRam: @gpu.Vram GB</h4>
+        <h4>Quantity: @gpu.Quantity</h4>
+        <h5 class="pull-right">@gpu.Price.ToString("c")</h5>
 
         <div>
             <a class="btn btn-secondary" asp-controller="GPU"
-               asp-action="Delete" asp-route-id="@Model.Id"><h4>Delete item</h4></a>
+               asp-action="Delete" asp-route-id="@gpu.Id"><h4>Delete item</h4></a>
             <a class="btn btn-secondary" asp-controller="GPU"
-               asp-action="Update" asp-route-id="@Model.Id"><h4>Update item</h4></a>
+               asp-action="Update" asp-route-id="@gpu.Id"><h4>Update item</h4></a>
         </div>
 
     </div>

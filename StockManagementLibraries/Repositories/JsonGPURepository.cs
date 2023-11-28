@@ -61,6 +61,9 @@ namespace StockManagementLibraries.Repositories
             if (item != null)
             {
                 item.Name = gpu.Name;
+                item.Description = gpu.Description;
+                item.Brand = gpu.Brand;
+                item.ImageThumbnail = gpu.ImageThumbnail;
                 item.Quantity = gpu.Quantity;
                 item.Price = gpu.Price;
                 item.Vram = gpu.Vram;

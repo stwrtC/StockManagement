@@ -1,10 +1,10 @@
-﻿@model Laptop
+﻿@model ItemViewModel<Laptop>
 
 
 <form asp-action="ConfirmDelete" method="Post">
     <h1>Item successfully deleted from repository</h1>
     @{
-        var laptop = ViewBag.item;
+        var laptop = Model.Item;
     }
 
 

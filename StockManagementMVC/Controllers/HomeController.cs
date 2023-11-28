@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StockManagementLibraries.Models;
+using StockManagementMVC.ViewModels;
 
 namespace StockManagementMVC.Controllers
 {
@@ -19,33 +20,33 @@ namespace StockManagementMVC.Controllers
             return View();
         }
 
-        //[Route("Home/Search/{searchBy}/{searchString}")]
         public IActionResult Search(string searchBy, string searchString)
         {
             List<Laptop> laptopResult = new List<Laptop>();
             List<GPU> gpuResult = new List<GPU>();
+            SearchViewModel model = new SearchViewModel(searchBy, searchString, gpuResult, laptopResult);
             switch (searchBy)
             {
                 case "ID":
                     laptopResult = _laptopRepository.GetAll().Where(x => x.Id == int.Parse(searchString)).ToList();
                     gpuResult = _gpuRepository.GetAll().Where(x => x.Id == int.Parse(searchString)).ToList();
-                    ViewBag.laptops = laptopResult;
-                    ViewBag.gpus = gpuResult;
-                    return View();
+                    model.Laptops = laptopResult;
+                    model.GPUs = gpuResult;
+                    return View(model);
 
                 case "Name":
                     laptopResult = _laptopRepository.GetAll().Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
                     gpuResult = _gpuRepository.GetAll().Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
-                    ViewBag.laptops = laptopResult;
-                    ViewBag.gpus = gpuResult;
-                    return View();
+                    model.Laptops = laptopResult;
+                    model.GPUs = gpuResult;
+                    return View(model);
 
                 case "Brand":
                     laptopResult = _laptopRepository.GetAll().Where(x => x.Brand.ToLower().Contains(searchString.ToLower())).ToList();
                     gpuResult = _gpuRepository.GetAll().Where(x => x.Brand.ToLower().Contains(searchString.ToLower())).ToList();
-                    ViewBag.laptops = laptopResult;
-                    ViewBag.gpus = gpuResult;
-                    return View();
+                    model.Laptops = laptopResult;
+                    model.GPUs = gpuResult;
+                    return View(model);
 
             }
             return View();

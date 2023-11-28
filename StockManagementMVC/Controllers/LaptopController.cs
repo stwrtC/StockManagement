@@ -4,6 +4,7 @@ using StockManagementLibraries.Models;
 using log4net;
 using StockManagementLibraries.Logging;
 using StockManagementLibraries.Repositories;
+using System.Net.WebSockets;
 
 namespace StockManagementMVC.Controllers
 {
@@ -83,20 +84,19 @@ namespace StockManagementMVC.Controllers
         public IActionResult Update(int id)
         {
             var item = _laptopRepository.GetById(id);
-            ItemViewModel<Laptop> model = new ItemViewModel<Laptop>(item)
-            {
-                Item = item 
-            };
+            var viewModel = new UpdateViewModel<Laptop>();
+            viewModel.Item = item;
+            viewModel.UpdatedItem = new Laptop();
 
-
-            return View(model);
+            return View(viewModel);
         }
 
         [HttpPost,Route("Laptop/Update/{id}")]
-        public IActionResult Update(int id, Laptop updated)
+        public IActionResult Update(int id,UpdateViewModel<Laptop> model)
         {
 
             var old = _laptopRepository.GetById(id);
+            var updated = model.UpdatedItem;
 
 
             if (!string.IsNullOrEmpty(updated.Name))

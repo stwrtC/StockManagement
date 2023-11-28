@@ -28,8 +28,8 @@ namespace StockManagementMVC.Controllers
             switch (searchBy)
             {
                 case "ID":
-                    laptopResult = _laptopRepository.GetAll().Where(x => x.Id == int.Parse(searchString)).ToList();
-                    gpuResult = _gpuRepository.GetAll().Where(x => x.Id == int.Parse(searchString)).ToList();
+                    laptopResult = _laptopRepository.GetAll().Where(x => x.Id.ToString() == searchString).ToList();
+                    gpuResult = _gpuRepository.GetAll().Where(x => x.Id.ToString() == searchString).ToList();
                     model.Laptops = laptopResult;
                     model.GPUs = gpuResult;
                     return View(model);

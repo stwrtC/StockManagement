@@ -80,50 +80,50 @@ namespace StockManagementMVC.Controllers
         public IActionResult Update(int id)
         {
             var item = _gpuRepository.GetById(id);
-            ItemViewModel<GPU> model = new ItemViewModel<GPU>(item)
-            {
-                Item = item
-            };
+            var viewModel = new UpdateViewModel<GPU>();
+            viewModel.Item = item;
+            viewModel.UpdatedItem = new GPU();
 
-            return View(model);
+            return View(viewModel);
         }
 
         [HttpPost, Route("GPU/Update/{id}")]
-        public IActionResult Update(int id, GPU entity)
+        public IActionResult Update(int id, UpdateViewModel<GPU> model)
         {
             var old = _gpuRepository.GetById(id);
+            var updated = model.UpdatedItem;
 
-            if (!String.IsNullOrEmpty(entity.Name))
+            if (!String.IsNullOrEmpty(updated.Name))
             {
-                old.Name = entity.Name;
+                old.Name = updated.Name;
             }
-            if (!String.IsNullOrEmpty(entity.Brand))
+            if (!String.IsNullOrEmpty(updated.Brand))
             {
-                old.Brand = entity.Brand;
+                old.Brand = updated.Brand;
             }
-            if (!String.IsNullOrEmpty(entity.Description))
+            if (!String.IsNullOrEmpty(updated.Description))
             {
-                old.Description = entity.Description;
+                old.Description = updated.Description;
             }
-            if (entity.Quantity != 0)
+            if (updated.Quantity != 0)
             {
-                old.Quantity = entity.Quantity;
+                old.Quantity = updated.Quantity;
             }
-            if (entity.Price != 0)
+            if (updated.Price != 0)
             {
-                old.Price = entity.Price;
+                old.Price = updated.Price;
             }
-            if (entity.Cuda != 0)
+            if (updated.Cuda != 0)
             {
-                old.Cuda = entity.Cuda;
+                old.Cuda = updated.Cuda;
             }
-            if (entity.Vram != 0)
+            if (updated.Vram != 0)
             {
-                old.Vram = entity.Vram;
+                old.Vram = updated.Vram;
             }
-            if(entity.ImageThumbnail != null)
+            if(updated.ImageThumbnail != null)
             {
-                old.ImageThumbnail = entity.ImageThumbnail;
+                old.ImageThumbnail = updated.ImageThumbnail;
             }
 
 

@@ -6439,7 +6439,19 @@ textarea.form-control-lg {
 }
 
 .carousel {
-    position: relative;
+    position: center;
+}
+
+.carousel .carousel-item{
+}
+
+.carousel-item img{
+    position: absolute;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 200px;
 }
 
     .carousel.pointer-event {
@@ -6447,8 +6459,8 @@ textarea.form-control-lg {
     }
 
 .carousel-inner {
-    position: relative;
-    width: 100%;
+    position: center;
+    width: 50%;
     overflow: hidden;
 }
 
@@ -6459,10 +6471,11 @@ textarea.form-control-lg {
     }
 
 .carousel-item {
-    position: relative;
+    position: absolute;
     display: none;
     float: left;
-    width: 100%;
+    width: 320px;
+    height: 200px;
     margin-right: -100%;
     backface-visibility: hidden;
     transition: transform 0.6s ease-in-out;

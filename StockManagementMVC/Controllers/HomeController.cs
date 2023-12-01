@@ -17,7 +17,13 @@ namespace StockManagementMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var laptops = _laptopRepository.GetAll();
+            var gpus = _gpuRepository.GetAll();
+            int totalQuantity = laptops.Sum(x => x.Quantity) + gpus.Sum(x => x.Quantity);
+            var totalValue = laptops.Sum(x => x.Price * x.Quantity) + gpus.Sum(x => x.Price * x.Quantity);
+            HomeViewModel model = new HomeViewModel(laptops, gpus, totalQuantity, totalValue);
+
+            return View(model);
         }
 
         public IActionResult Search(string searchBy, string searchString)

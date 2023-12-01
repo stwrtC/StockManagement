@@ -64,6 +64,7 @@ namespace StockManagementMVC.Controllers
                 else
                 {
                     check.Quantity += item.Quantity;
+                    item.Id = check.Id;
                 }
             }
             foreach (var item in model.GPUs)
@@ -76,6 +77,7 @@ namespace StockManagementMVC.Controllers
                 else
                 {
                     check.Quantity += item.Quantity;
+                    item.Id = check.Id;
                 }
 
             }

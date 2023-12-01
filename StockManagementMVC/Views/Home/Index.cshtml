@@ -1,18 +1,64 @@
-﻿@model SearchViewModel
+﻿@model HomeViewModel
 
-<form asp-controller="Home" asp-action="Index" method="get">
-    <div>
-        <label for="searchBy"></label>
-        <select asp-for="searchBy">
-            <option value="ID">ID</option>
-            <option value="Name">Name</option>
-            <option value="Brand">Brand</option>
-        </select>
-        <input asp-for="searchString" type="text" name="searchString" />
-        <input type="submit" value="Search" asp-controller="Home" asp-action="Search" />
-    </div>
-</form>
+@{
+    var gpus = Model.GPUs;
+    var laptops = Model.Laptops;
+    List<Stock> allStock = new List<Stock>();
+    allStock.AddRange(laptops);
+    allStock.AddRange(gpus);
+}
+<div style="height:620px; width:400px; display: block; margin-left: auto;  margin-right: auto;" 
+id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://th.bing.com/th/id/R.d43915dd34b59f067a8033166681e0c4?rik=CqfNjiILxCeNAA&riu=http%3a%2f%2fclipart-library.com%2fimages%2fM8TEKopia.jpg&ehk=t02OxfLZUBS33aSvlXu%2f4Bm156y%2byxEa1vRJzNLCnjI%3d&risl=&pid=ImgRaw&r=0" class="d-block w-100" alt="...">
+        </div>
+        @foreach (var stock in allStock){
+            <div class="carousel-item">
+                <img  src="@stock.ImageThumbnail" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>@stock.Name</h5>
+                </div>
 
+            </div>
+        }
+        </div>
 
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Stock Type</th>
+            <th scope="col">Total Stock</th>
+            <th scope="col">Total Stock Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Laptop</th>
+            <td>@laptops.Sum(x => x.Quantity)</td>
+            <td>@laptops.Sum(x => x.Price*x.Quantity).ToString("c")</td>
+        </tr>
+        <tr>
+            <th scope="row">GPU</th>
+            <td>@gpus.Sum(x => x.Quantity)</td>
+            <td>@gpus.Sum(x => x.Price*x.Quantity).ToString("c")</td>
+        </tr>
+        <tr>
+            <th scope="row">Total</th>
+            <td>@Model.StockTotal</td>
+            <td>@Model.PriceTotal.ToString("c")</td>
+        </tr>
 
+    </tbody>
+</table>

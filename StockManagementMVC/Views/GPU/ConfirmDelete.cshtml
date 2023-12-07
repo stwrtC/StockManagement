@@ -1,0 +1,28 @@
+﻿@model ItemViewModel<GPU>
+
+
+<form asp-action="ConfirmDelete" method="Post">
+    <h1>Item successfully deleted from repository</h1>
+    @{
+        var gpu = Model.Item;
+    }
+
+
+    <h2>ID: @gpu.Id</h2>
+    <h2>Product Name: @gpu.Name</h2>
+    <h3>Brand: @gpu.Brand</h3>
+    <h4>Cuda Cores: @gpu.Cuda.ToString()</h4>
+    <h4>VRam: @gpu.Vram.ToString()GB</h4>
+    <h4>Price: @gpu.Price.ToString("c")</h4>
+    <h4>@gpu.Description</h4>
+    <h4>Quantity: @gpu.Quantity</h4>
+
+    <div>
+        <a class="btn btn-secondary" asp-controller="GPU"
+           asp-action="List"><h4>Return to all GPUs</h4></a>
+
+    </div>
+
+
+</form>
+

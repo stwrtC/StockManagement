@@ -19,6 +19,7 @@ namespace StockManagementLibraries.Models
         public string Brand { get; set; }
         [MaxLength(255)]
         public string? Description { get; set; }
+        public string? ImageThumbnail {get; set; }
         public int Quantity { get; set; } = 0;
         [Required]
         public decimal Price { get; set; }

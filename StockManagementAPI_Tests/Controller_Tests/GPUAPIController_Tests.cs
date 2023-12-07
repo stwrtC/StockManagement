@@ -5,11 +5,12 @@ using Moq;
 using StockManagement;
 using StockManagement.API.Controllers;
 using StockManagement.Services;
+using StockManagementLibraries.Test_Helper;
 
 namespace StockManagement_Test.Controller_Tests
 {
 
-    public class GPUController_Tests
+    public class GPUAPIController_Tests
     {
         private static GetObjectResult helper;
         private static Mock<ILogger<GPUController>> logger;

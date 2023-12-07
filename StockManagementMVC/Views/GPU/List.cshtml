@@ -1,12 +1,36 @@
-﻿@model GPUListViewModel
+﻿@model ListViewModel<GPU>
 
 
 <h1>@Model.StockType</h1>
-@foreach (var gpu in Model.GPUs)
-{
-    <div>
-        <h2>@gpu.Name</h2>
-        <h3>@gpu.Brand</h3>
-        <h4>@gpu.Price.ToString("c")</h4>
-    </div>
-}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    @foreach (var gpu in Model.StockList)
+    {
+        <div class="col">
+            <div class="card gpu-card">
+                <img style="max-width: 320px; max-height: 200px" src="@gpu.ImageThumbnail" class="card-img-top" alt="@gpu.Name">
+                <div class="card-body gpu-button">
+                    <h4 class="d-grid">
+                    </h4>
+
+                    <div class="d-flex justify-content-between mt-2">
+                        <h2 class="text-start">
+                            <a class="gpu-link" asp-controller="GPU" asp-action="Details" asp-route-id="@gpu.Id">@gpu.Name</a>
+                        </h2>
+                        <h5 class="text-nowrap">
+                            @gpu.Price.ToString("c")
+                        </h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div>
+    <a class="btn btn-secondary" asp-controller="GPU"
+       asp-action="Create"><h4>Create new GPU</h4></a>
+</div>

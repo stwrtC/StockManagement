@@ -1,0 +1,28 @@
+﻿@model ItemViewModel<Laptop>
+
+
+<a asp-action="Delete" method="GET"></a>
+<h1>Would you like to delete this item from the repository?</h1>
+@{
+    var laptop = Model.Item;
+}
+<div>
+    <h2>ID: @laptop.Id</h2>
+    <h2>Product Name: @laptop.Name</h2>
+    <h3>Brand: @laptop.Brand</h3>
+    <h4>Screen Size: @laptop.ScreenSize.ToString()"</h4>
+    <h4>Ram: @laptop.Ram.ToString()GB</h4>
+    <h4>Storage: @laptop.Storage.ToString()GB</h4>
+    <h4>Price: @laptop.Price.ToString("c")</h4>
+    <h4>@laptop.Description</h4>
+    <h4>Quantity: @laptop.Quantity</h4>
+    <div>
+        <a class="btn btn-secondary" asp-controller="Laptop"
+           asp-action="ConfirmDelete" asp-route-id="@laptop.Id"><h4>Delete item</h4></a>
+    </div>
+    <div>
+        <a class="btn btn-secondary" asp-controller="Laptop"
+           asp-action="List"><h4>Cancel</h4></a>
+
+    </div>
+</div>

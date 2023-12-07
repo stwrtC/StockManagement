@@ -1,0 +1,27 @@
+﻿@model ItemViewModel<GPU>
+
+
+<a asp-action="Delete" method="GET"></a>
+<h1>Would you like to delete this item from the repository?</h1>
+@{
+    var gpu = Model.Item;
+}
+<div>
+    <h2>ID: @gpu.Id</h2>
+    <h2>Product Name: @gpu.Name</h2>
+    <h3>Brand: @gpu.Brand</h3>
+    <h4>Cuda Cores: @gpu.Cuda.ToString()</h4>
+    <h4>VRam: @gpu.Vram.ToString()GB</h4>
+    <h4>Price: @gpu.Price.ToString("c")</h4>
+    <h4>@gpu.Description</h4>
+    <h4>Quantity: @gpu.Quantity</h4>
+    <div>
+        <a class="btn btn-secondary" asp-controller="GPU"
+           asp-action="ConfirmDelete" asp-route-id="@gpu.Id"><h4>Delete item</h4></a>
+    </div>
+    <div>
+        <a class="btn btn-secondary" asp-controller="GPU"
+           asp-action="List"><h4>Cancel</h4></a>
+
+    </div>
+</div>

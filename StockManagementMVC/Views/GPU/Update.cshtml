@@ -1,0 +1,52 @@
+﻿@model UpdateViewModel<GPU>
+
+<form asp-action="Update" method="post" role="form">
+    <h3>Updating GPU</h3>
+    @{
+        var gpu = Model.Item;
+    }
+    <div>
+        <div>
+
+            <div>
+                <label asp-for="UpdatedItem.Name" class="form-label"></label>
+                <input asp-for="UpdatedItem.Name" value=@gpu.Name class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Brand" class="form-label"></label>
+                <input asp-for="UpdatedItem.Brand" value=@gpu.Brand class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Description" class="form-label"></label>
+                <input asp-for="UpdatedItem.Description" value=@gpu.Description class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Vram" class="form-label"></label>
+                <input asp-for="@gpu.Vram" value=@gpu.Vram class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Cuda" class="form-label"></label>
+                <input asp-for="@gpu.Cuda" value=@gpu.Cuda class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Price" class="form-label"></label>
+                <input asp-for="UpdatedItem.Price" value=@gpu.Price class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Quantity" class="form-label"></label>
+                <input asp-for="UpdatedItem.Quantity" value=@gpu.Quantity class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.ImageThumbnail" class="form-label"></label>
+                <input asp-for="UpdatedItem.ImageThumbnail" value=@gpu.ImageThumbnail class="form-control" />
+            </div>
+
+        </div>
+        <div>
+            <div>
+                <input type="submit" class="btn btn-secondary" value="Submit Update" />
+            </div>
+        </div>
+    </div>
+
+</form>

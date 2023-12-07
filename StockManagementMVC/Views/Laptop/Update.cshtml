@@ -1,0 +1,56 @@
+﻿@model UpdateViewModel<Laptop>
+
+<form asp-action="Update" method="post" role="form">
+    <h3>Updating Laptop</h3>
+    @{
+        var laptop = Model.Item;
+    }
+    <div>
+        <div>
+
+            <div>
+                <label asp-for="UpdatedItem.Name" class="form-label"></label>
+                <input asp-for="UpdatedItem.Name" value=@laptop.Name class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Brand" class="form-label"></label>
+                <input asp-for="UpdatedItem.Brand" value=@laptop.Brand class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Description" class="form-label"></label>
+                <input asp-for="UpdatedItem.Description" value=@laptop.Description class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Storage" class="form-label"></label>
+                <input asp-for="UpdatedItem.Storage" value=@laptop.Storage class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Ram" class="form-label"></label>
+                <input asp-for="UpdatedItem.Ram" value=@laptop.Ram class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.ScreenSize" class="form-label"></label>
+                <input asp-for="UpdatedItem.ScreenSize" value=@laptop.ScreenSize class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Price" class="form-label"></label>
+                <input asp-for="UpdatedItem.Price" value=@laptop.Price class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.Quantity" class="form-label"></label>
+                <input asp-for="UpdatedItem.Quantity" value=@laptop.Quantity class="form-control" />
+            </div>
+            <div>
+                <label asp-for="UpdatedItem.ImageThumbnail" class="form-label"></label>
+                <input asp-for="UpdatedItem.ImageThumbnail" value=@laptop.ImageThumbnail class="form-control" />
+            </div>
+
+        </div>
+        <div>
+            <div>
+                <input type="submit" class="btn btn-secondary" value="Submit Update" />
+            </div>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,30 @@
+﻿@model ItemViewModel<Laptop>
+
+
+<form asp-action="ConfirmDelete" method="Post">
+    <h1>Item successfully deleted from repository</h1>
+    @{
+        var laptop = Model.Item;
+    }
+
+
+    <h2>ID: @laptop.Id</h2>
+    <h2>Product Name: @laptop.Name</h2>
+    <h3>Brand: @laptop.Brand</h3>
+    <h4>Screen Size: @laptop.ScreenSize.ToString()"</h4>
+    <h4>Ram: @laptop.Ram.ToString()GB</h4>
+    <h4>Storage: @laptop.Storage.ToString()GB</h4>
+    <h4>Price: @laptop.Price.ToString("c")</h4>
+    <h4>@laptop.Description</h4>
+    <h4>Quantity: @laptop.Quantity</h4>
+
+
+    <div>
+        <a class="btn btn-secondary" asp-controller="Laptop"
+           asp-action="List"><h4>Return to all Laptops</h4></a>
+
+    </div>
+
+
+</form>
+

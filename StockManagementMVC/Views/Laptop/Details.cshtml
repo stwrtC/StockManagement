@@ -1,0 +1,27 @@
+﻿@model ItemViewModel<Laptop>
+@{
+    var laptop = Model.Item;
+}
+
+<h2 class="my-5">@laptop.Name</h2>
+<h3>@laptop.Brand</h3>
+
+<div class="row gx-5">
+    <img alt="@laptop.Name" style="max-width: 500px; max-height: 400px" src="@laptop.ImageThumbnail" class="img-fluid col-5" />
+    <div class="col-7">
+        <h4>@laptop.Description</h4>
+        <h4>Screen Size: @laptop.ScreenSize"</h4>
+        <h4>Storage: @laptop.Storage GB</h4>
+        <h4>Ram: @laptop.Ram GB</h4>
+        <h4>Quantity: @laptop.Quantity</h4>
+        <h5 class="pull-right">@laptop.Price.ToString("c")</h5>
+
+        <div>
+            <a class="btn btn-secondary" asp-controller="Laptop"
+               asp-action="Delete" asp-route-id="@laptop.Id"><h4>Delete item</h4></a>
+            <a class="btn btn-secondary" asp-controller="Laptop"
+               asp-action="Update" asp-route-id="@laptop.Id"><h4>Update item</h4></a>
+        </div>
+
+    </div>
+</div>

@@ -2,6 +2,7 @@ using log4net.Config;
 using Microsoft.AspNetCore.Http.Extensions;
 using StockManagementLibraries.Logging;
 using StockManagementLibraries.Models;
+using StockManagementLibraries.Repositories;
 using StockManagementMVC.Controllers;
 
 internal class Program
@@ -35,7 +36,7 @@ internal class Program
                 return builtInFactory(context);
             };
         });
-        builder.Services.AddSingleton<IStockRepository<GPU>, JsonGPURepository>();
+        builder.Services.AddSingleton<IStockRepository<GPU>, GPURepository>();
         builder.Services.AddSingleton<IStockRepository<Laptop>, JsonLaptopRepository>();
         var app = builder.Build();
 

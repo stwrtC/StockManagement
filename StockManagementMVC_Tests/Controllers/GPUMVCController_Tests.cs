@@ -89,7 +89,7 @@ namespace StockManagementMVC_Tests
 
 
 
-            var result = controller.Update(oldGPU.Id, newGPU);
+            var result = controller.Update(oldGPU.Id);
 
             repository.Verify(x=>x.Update(newGPU), Times.Once);
             Assert.That(result, Is.Not.Null);

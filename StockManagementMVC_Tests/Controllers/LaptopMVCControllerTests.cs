@@ -89,7 +89,7 @@ namespace StockManagementMVC_Tests
 
 
 
-            var result = controller.Update(oldLaptop.Id, newLaptop);
+            var result = controller.Update(oldLaptop.Id);
 
             repository.Verify(x=>x.Update(newLaptop), Times.Once);
             Assert.That(result, Is.Not.Null);

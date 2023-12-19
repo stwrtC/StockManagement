@@ -25,12 +25,14 @@ namespace StockManagementLibraries.Models
         [Required]
         public decimal Price { get; set; }
 
-        private static int UUID = 1;
         
-        public Stock()
-        {
-            Id = UUID++;
-        }
+        //For use when Repository is not Database
+        //private static int UUID = 1;
+
+        //public Stock()
+        //{
+        //    Id = UUID++;
+        //}
 
 
 

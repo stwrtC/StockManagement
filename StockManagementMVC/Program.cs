@@ -1,9 +1,12 @@
 using log4net.Config;
 using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using StockManagementLibraries.Logging;
 using StockManagementLibraries.Models;
 using StockManagementLibraries.Repositories;
 using StockManagementMVC.Controllers;
+
 
 internal class Program
 {
@@ -36,8 +39,10 @@ internal class Program
                 return builtInFactory(context);
             };
         });
-        builder.Services.AddSingleton<IStockRepository<GPU>, GPURepository>();
-        builder.Services.AddSingleton<IStockRepository<Laptop>, JsonLaptopRepository>();
+        builder.Services.AddSingleton<IStockRepository<GPU>, DbGPURepository>();
+        builder.Services.AddSingleton<IStockRepository<Laptop>, DbLaptopRepository>();
+
+        builder.Services.AddDbContext<StockContext>();
         var app = builder.Build();
 
         app.UseStaticFiles();

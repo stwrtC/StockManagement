@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StockManagementLibraries.Models;
 
 namespace StockManagementLibraries
 {
@@ -12,10 +13,18 @@ namespace StockManagementLibraries
         public DbSet<GPU> GPUs { get; set; }
         public DbSet<Laptop> Laptops { get; set; }
 
+        public StockContext()
+        {
+
+        }
+        public StockContext(DbContextOptions<StockContext> options) : base(options) { }
+         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = StockDataBase"
-                );
+            if(!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = StockDataBase");
+            }
         }
     }
 }

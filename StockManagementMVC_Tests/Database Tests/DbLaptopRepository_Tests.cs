@@ -13,9 +13,6 @@ namespace StockManagementMVC_Tests.Database_Tests
 {
     public class DbLaptopRepository_Tests
     {
-
-
-        // Create
         [Test]
         public void AddLaptop()
         {
@@ -30,13 +27,9 @@ namespace StockManagementMVC_Tests.Database_Tests
                 repo.Add(newlaptop);
                 var laptops = repo.GetAll();
                 Assert.That(laptops, Does.Contain(newlaptop));
-
             }
-
-
         }
 
-        // Read
         [Test]
         public void GetAll()
         {
@@ -55,16 +48,13 @@ namespace StockManagementMVC_Tests.Database_Tests
                 var laptops = repo.GetAll();
 
                 Assert.That(laptops, Is.Not.Null);
-
+                Assert.That(laptops.Count, Is.EqualTo(2));
             }
-
         }
 
-        // Update
         [Test]
         public void Update()
         {
-            // Arrange
             var options = new DbContextOptionsBuilder<StockContext>().
                 UseInMemoryDatabase(databaseName: "TestStockDb")
                 .Options;
@@ -86,12 +76,9 @@ namespace StockManagementMVC_Tests.Database_Tests
                     Assert.That(updated.Price, Is.EqualTo(249));
                     Assert.That(updated.Quantity, Is.EqualTo(7));
                 });
-                    
-
             }
         }
 
-        // Delete
         [Test]
         public void Delete()
         {
@@ -112,11 +99,7 @@ namespace StockManagementMVC_Tests.Database_Tests
                 var laptops = repo.GetAll();
 
                 Assert.That(laptops, Does.Not.Contain(item));
-
             }
         }
-
-
-
     }
 }

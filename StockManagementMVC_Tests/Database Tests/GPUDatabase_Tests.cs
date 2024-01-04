@@ -86,7 +86,7 @@ namespace StockManagementMVC_Tests.Database_Tests
                 context.GPUs.Update(item);
                 context.SaveChanges();
 
-                //Assert.That(context.GPUs, Does.Contain());
+                Assert.That(context.GPUs, Does.Contain(item));
             }
         }
 

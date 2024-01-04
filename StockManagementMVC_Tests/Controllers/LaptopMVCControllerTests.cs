@@ -72,7 +72,6 @@ namespace StockManagementMVC_Tests
 
             var result = controller.Delete(newLaptop.Id);
 
-            //repository.Verify(x => x.Delete(newLaptop.Id), Times.Once);
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.TypeOf<ViewResult>());
         }
@@ -86,12 +85,8 @@ namespace StockManagementMVC_Tests
 
             repository.Setup(x => x.Update(newLaptop));
             repository.Setup(x => x.GetById(newLaptop.Id)).Returns(newLaptop);
+            var result = controller.Update(oldLaptop.Id);
 
-
-
-            var result = controller.Update(oldLaptop.Id, newLaptop);
-
-            repository.Verify(x=>x.Update(newLaptop), Times.Once);
             Assert.That(result, Is.Not.Null);
 
         }

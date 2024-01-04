@@ -138,6 +138,7 @@ namespace StockManagementMVC.Controllers
 
 
             _laptopRepository.Update(old);
+            _log.LogInformation($"{LogStrings.RequestSuccessful}{LogStrings.Http204}");
             return RedirectToAction("List");
         }
 
@@ -155,6 +156,7 @@ namespace StockManagementMVC.Controllers
                 Item = item
             };
 
+            _log.LogInformation($"{LogStrings.DefaultMessage}{LogStrings.Http200}");
             return View(model);
         }
 
